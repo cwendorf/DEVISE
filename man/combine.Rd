@@ -1,5 +1,5 @@
 % File man/combine.Rd
-% Part of the EASI package, https://github.com/cwendorf/EASI
+% Part of the DAVISE package, https://github.com/cwendorf/DAVISE
 
 \name{combine}
 \alias{combine}

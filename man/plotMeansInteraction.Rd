@@ -1,5 +1,5 @@
 % File man/plotMeansInteraction.Rd
-% Part of the EASI package, https://github.com/cwendorf/EASI
+% Part of the DAVISE package, https://github.com/cwendorf/DAVISE
 
 \name{plotMeansInteraction}
 \alias{plotMeansInteraction}

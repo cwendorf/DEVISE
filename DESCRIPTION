@@ -1,13 +1,13 @@
-Package: EASI
+Package: DAVISE
 Type: Package
-Title: Estimation Approach to Statistical Inference
-Description: An R package to estimate, test, and plot confidence intervals 
-Version: 6.0.240123
+Title: Data Analysis, Visualization, and Inference for Statistical Estimation
+Description: An R package for estimation statistics and data visualization in a pipe-oriented framework 
+Version: 7.0.250101
 Depends: R (>= 4.1.0)
 Authors@R: person("Craig", "Wendorf", email = "cwendorf@uwsp.edu", role = c("aut", "cre"))
 License: MIT + file LICENSE
-URL: https://github.com/cwendorf/EASI
-BugReports: https://github.com/cwendorf/EASI/issues
+URL: https://github.com/cwendorf/DAVISE
+BugReports: https://github.com/cwendorf/DAVISE/issues
 Encoding: UTF-8
 LazyData: true
 Suggests: knitr, rmarkdown

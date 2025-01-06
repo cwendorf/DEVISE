@@ -1,4 +1,9 @@
 
+## DAVISE 7.0.250101
+
+- Rebranded as DAVISE to focus on all functions of the package
+- Laid framework for future versions and developments
+
 ## EASI 6.1.240413
 
 - Rebuilt diffogram functions for pairwise and posthoc analyses

@@ -1,5 +1,5 @@
 
-# Estimation Approach to Statistical Inference
+# DAVISE
 ## Density
 
 ### Plot

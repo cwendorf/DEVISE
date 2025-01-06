@@ -47,4 +47,4 @@ The package includes a wide variety of materials that demonstrate its use:
 
 ### Citation
 
-Wendorf, C. A. (2022). *DAVISE: Data Analysis, Visualization, and Inference with Statistical Estimation* [R Package]. [https://cwendorf.github.io/DAVISE/](https://cwendorf.github.io/DAVISE/)
+Wendorf, C. A. (2025). *DAVISE: Data Analysis, Visualization, and Inference with Statistical Estimation* [R Package]. [https://cwendorf.github.io/DAVISE/](https://cwendorf.github.io/DAVISE/)

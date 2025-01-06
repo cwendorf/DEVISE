@@ -1,6 +1,6 @@
 # `DAVISE` 
 
-## Data Analysis, Visualization, and Inference for Statistical Estimation
+## Data Analysis, Visualization, and Inference with Statistical Estimation
 
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.6.2-6666ff.svg)](https://cran.r-project.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)

@@ -1,4 +1,4 @@
-# Data Analysis, Visualization, and Inference for Statistical Estimation
+# Data Analysis, Visualization, and Inference with Statistical Estimation
 
 ## Overview
 

@@ -22,7 +22,7 @@ This R package is not currently on CRAN, but the latest version can be installed
 ``` r
 install.packages("remotes")
 remotes::install_github("cwendorf/DAVISE")
-library(EASI)
+library(DAVISE)
 ```
 
 If you do not wish a full install, the latest functions can be made available using these R commands:

@@ -1,6 +1,6 @@
 Package: DAVISE
 Type: Package
-Title: Data Analysis, Visualization, and Inference for Statistical Estimation
+Title: Data Analysis, Visualization, and Inference with Statistical Estimation
 Description: An R package for estimation statistics and data visualization in a pipe-oriented framework 
 Version: 7.0.250101
 Depends: R (>= 4.1.0)

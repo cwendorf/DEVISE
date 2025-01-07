@@ -1,5 +1,5 @@
 
-# DAVISE
+# DEVISE
 ## Density
 
 ### Plot

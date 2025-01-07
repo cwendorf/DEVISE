@@ -10,11 +10,11 @@ knitr::opts_chunk$set(fig.width = 7, fig.height = 7, comment = NA)
 ```
 
 ```{r, include=FALSE}
-if (!require(DAVISE)) {
+if (!require(DEVISE)) {
   if (!require(remotes)) install.packages("remotes")
-  remotes::install_github("cwendorf/DAVISE")
+  remotes::install_github("cwendorf/DEVISE")
 }
-library(DAVISE)
+library(DEVISE)
 ```
 
 This page examines a single-factor between-subjects (one-way) design using raw data input, adding color and plausibility curves to plots of comparisons and contrasts.
@@ -31,7 +31,7 @@ OneWayMoments <- construct(Level1, Level2, Level3, class = "bsm")
 
 ## Analyses of the Means
 
-As shown elsewhere, the standard DAVISE plot includes just the confidence intervals for means plus their values. 
+As shown elsewhere, the standard DEVISE plot includes just the confidence intervals for means plus their values. 
 ```{r, OneWay-Summary-MeansC}
 (OneWayMoments) |> plotMeans()
 ```

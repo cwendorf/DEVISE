@@ -1,5 +1,5 @@
 % File man/describeFrequencies.Rd
-% Part of the DAVISE package, https://github.com/cwendorf/DAVISE
+% Part of the DEVISE package, https://github.com/cwendorf/DEVISE
 
 \name{describeFrequencies}
 \alias{describeFrequencies}

@@ -15,4 +15,4 @@ source.github <- function(username, repo, branch) {
 }
 
 # Call for this Repo
-source.github("cwendorf", "DAVISE", "main")
+source.github("cwendorf", "DEVISE", "main")

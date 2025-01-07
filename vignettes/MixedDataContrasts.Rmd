@@ -10,11 +10,11 @@ knitr::opts_chunk$set(fig.width = 7, fig.height = 7, comment = NA)
 ```
 
 ```{r, include=FALSE}
-if (!require(DAVISE)) {
+if (!require(DEVISE)) {
   if (!require(remotes)) install.packages("remotes")
-  remotes::install_github("cwendorf/DAVISE")
+  remotes::install_github("cwendorf/DEVISE")
 }
-library(DAVISE)
+library(DEVISE)
 ```
 
 This page examines a two-factor mixed design (one between-subjects and one within-subjects factor) using raw data input, focusing on comparisons and contrasts.

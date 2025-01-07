@@ -10,11 +10,11 @@ knitr::opts_chunk$set(fig.width = 7, fig.height = 6, comment = NA)
 ```
 
 ```{r, include=FALSE}
-if (!require(DAVISE)) {
+if (!require(DEVISE)) {
   if (!require(remotes)) install.packages("remotes")
-  remotes::install_github("cwendorf/DAVISE")
+  remotes::install_github("cwendorf/DEVISE")
 }
-library(DAVISE)
+library(DEVISE)
 ```
 
 This page examines a single-factor within-subjects (repeated measures) design using summary statistics input, adding color and plausibility curves to plots of comparisons and contrasts.
@@ -39,7 +39,7 @@ RepeatedCorrs <- construct(Outcome1, Outcome2, Outcome3, class = "cor")
 
 ## Analyses of the Means
 
-As shown elsewhere, the standard DAVISE plot includes just the confidence intervals for means plus their values.
+As shown elsewhere, the standard DEVISE plot includes just the confidence intervals for means plus their values.
 ```{r, Repeated-Summary-MeansC}
 (RepeatedMoments) |> plotMeans()
 ```

@@ -1,5 +1,5 @@
 % File man/estimateCorrelations.Rd
-% Part of the DAVISE package, https://github.com/cwendorf/DAVISE
+% Part of the DEVISE package, https://github.com/cwendorf/DEVISE
 
 \name{estimateCorrelations}
 \alias{estimateCorrelations}

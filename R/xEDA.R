@@ -1,4 +1,4 @@
-# DAVISE
+# DEVISE
 ## Exploratory Data Analysis
 
 ### Plots

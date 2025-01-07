@@ -1,4 +1,4 @@
-# DAVISE
+# DEVISE
 ## Moments Set
 
 ### Describe

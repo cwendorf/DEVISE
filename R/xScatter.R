@@ -1,4 +1,4 @@
-# DAVISE
+# DEVISE
 ## Scatter
 
 ### Scatter Plots

@@ -1,4 +1,4 @@
-# DAVISE
+# DEVISE
 ## Regression Model
 
 ### Describe

@@ -1,4 +1,4 @@
-# DAVISE
+# DEVISE
 ## Grammar
 
 ### Construct

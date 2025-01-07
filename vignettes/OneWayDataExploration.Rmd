@@ -10,11 +10,11 @@ knitr::opts_chunk$set(fig.width = 7, fig.height = 7, comment = NA)
 ```
 
 ```{r, include = FALSE}
-if (!require(DAVISE)) {
+if (!require(DEVISE)) {
   if (!require(remotes)) install.packages("remotes")
-  remotes::install_github("cwendorf/DAVISE")
+  remotes::install_github("cwendorf/DEVISE")
 }
-library(DAVISE)
+library(DEVISE)
 ```
 
 This page examines a single-factor between-subjects (one-way) design using raw data input, focusing on exploratory data analyses.
@@ -80,7 +80,7 @@ As a second example, plot the frequency distributions as histograms and add the 
 
 ## Common Layered Plots
 
-Some forms of exploratory plots are very common (e.g., violin plots, bean plots, and raincloud plots). Though they could each be built using the methods above, specific functions for these are built into DAVISE.
+Some forms of exploratory plots are very common (e.g., violin plots, bean plots, and raincloud plots). Though they could each be built using the methods above, specific functions for these are built into DEVISE.
 
 ### Violin Plots
 

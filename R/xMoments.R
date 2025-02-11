@@ -45,20 +45,13 @@
   y
 }
 
+
 .summarize <- function(frame) {
-  if (typeof(frame) == "double") {
-    data <- data.frame(frame)
-    if (ncol(data) == 1) {
-      colnames(data) <- deparse(substitute(frame))
-    }
-  } else {
-    data <- frame
-  }
-  N <- sapply(data, length)
-  M <- sapply(data, mean, na.rm = TRUE)
-  SD <- sapply(data, sd, na.rm = TRUE)
-  Skew <- sapply(data, .skewness, na.rm = TRUE)
-  Kurt <- sapply(data, .kurtosis, na.rm = TRUE)
+  N <- length(frame)
+  M <- mean(frame, na.rm = TRUE)
+  SD <- sd(frame, na.rm = TRUE)
+  Skew <- .skewness(frame, na.rm = TRUE)
+  Kurt <- .kurtosis(frame, na.rm + TRUE)
   results <- cbind(N = N, M = M, SD = SD, Skew = Skew, Kurt = Kurt)
   return(results)
 }
@@ -80,7 +73,9 @@ describeMomentsSet.wsm <- function(frame, ...) {
 }
 
 describeMomentsSet.data.frame <- function(frame, ...) {
-  results <- .summarize(frame)
+  results <- apply(frame, MARGIN=2, FUN = .summarize)
+  results <- t(results)
+  colnames(results) <- c("N", "M", "SD", "Skew", "Kurt")
   class(results) <- c("wsm", "easi.frame")
   comment(results) <- "Summary Statistics for the Data"
   return(results)
@@ -200,6 +195,12 @@ describeMoments <- function(x, ..., by = NULL) {
 
 plotMoments <- plotMomentsSet <- function(x, ...) {
   UseMethod("plotMomentsSet")
+}
+
+plotMomentsSet.default <- function(variable, add = FALSE, main = NULL, ylab = "Outcome", xlab = "", ylim = NULL, offset = 0, col = "black", values = TRUE, digits = 3, pos = 2, pch = 16) {
+  results <- describeMomentsSet(variable, main = main, digits = digits)
+  .deviations(results, main = main, ylab = ylab, xlab = xlab, ylim = ylim, values = values, digits = digits, pos = pos, pch = pch, add = add, col = col, offset = offset)
+  invisible(eval(variable))
 }
 
 plotMomentsSet.bsm <- plotMomentsSet.wsm <- function(x, add = FALSE, main = NULL, ylab = "Outcome", xlab = "", ylim = NULL, offset = 0, col = "black", values = TRUE, digits = 3, pos = 2, pch = 16) {

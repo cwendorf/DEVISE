@@ -1,7 +1,7 @@
 # DEVISE
 ## Grammar
 
-### Construct
+### Constructing
 
 construct <- function(..., class = "data") {
   if (class == "bsm" || class == "wsm") {
@@ -40,7 +40,7 @@ retain <- function(x, name, where = parent.frame()) {
   invisible(x)
 }
 
-### Focus
+### Focusing and Choosing
 
 focus <- function(x, ...) {
   UseMethod("focus")

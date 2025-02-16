@@ -8,12 +8,15 @@
 \description{Provides a frequency distribution for each group or variable.}
 
 \usage{
+\method{plotFrequencies}{default}(variable, add=FALSE, ylim=NULL, main=NULL, ylab=NULL, xlab="", type="right", offset=.1, col="black")
+
 \method{plotFrequencies}{data.frame}(frame, add=FALSE, ylim=NULL, main=NULL, ylab=NULL, xlab="", type="right", offset=.1, col="black")
 
 \method{plotFrequencies}{formula}(formula, add=FALSE, ylim=NULL, main=NULL, ylab=NULL, xlab="", type="right", offset=.1, col="black")
 }
 
 \arguments{
+\item{variable}{a numeric vector of data values}
 \item{frame}{a set of (non-empty) numeric vectors of data values}
 \item{formula}{a formula of the form \code{lhs ~ rhs} where \code{lhs} is a numeric variable giving the data values and \code{rhs} a factor giving the corresponding groups}
 \item{add}{whether the plot should added to the existing plot}

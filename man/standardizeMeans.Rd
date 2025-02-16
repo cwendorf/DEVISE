@@ -8,6 +8,8 @@
 \description{Provides a standardized effect size and its confidence interval for each group or level mean.}
 
 \usage{
+\method{standardizeMeans}{default}(variable, mu=0, conf.level=.95, ...)
+
 \method{standardizeMeans}{data.frame}(frame, mu=0, conf.level=.95, ...)
 
 \method{standardizeMeans}{formula}(formula, mu=0, conf.level=.95, ...)
@@ -18,6 +20,7 @@
 }
 
 \arguments{
+\item{variable}{a numeric vector of data values}
 \item{frame}{a set of (non-empty) numeric vectors of data values}
 \item{formula}{a formula of the form \code{lhs ~ rhs} where \code{lhs} is a numeric variable giving the data values and \code{rhs} a factor giving the corresponding groups}
 \item{moments}{a matrix/frame of descriptive/summary statistics}

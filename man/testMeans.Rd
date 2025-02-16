@@ -8,6 +8,8 @@
 \description{Provides a statistical significance test for each group or level mean.}
 
 \usage{
+\method{testMeans}{default}(variable, mu=0, ...)
+
 \method{testMeans}{data.frame}(frame, mu=0, ...)
 
 \method{testMeans}{formula}(formula, mu=0, ...)
@@ -18,6 +20,7 @@
 }
 
 \arguments{
+\item{variable}{a numeric vector of data values}
 \item{frame}{a set of (non-empty) numeric vectors of data values}
 \item{formula}{a formula of the form \code{lhs ~ rhs} where \code{lhs} is a numeric variable giving the data values and \code{rhs} a factor giving the corresponding groups}
 \item{moments}{a matrix/frame of descriptive/summary statistics}

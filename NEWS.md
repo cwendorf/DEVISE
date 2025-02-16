@@ -1,8 +1,11 @@
 
+## DEVISE 7.1.250215
+
+- Updated documentation for preferred aliases
+
 ## DEVISE 7.0.250101
 
 - Rebranded as DEVISE to focus on all functions of the package
-- Laid framework for future versions and developments
 
 ## EASI 6.1.240413
 

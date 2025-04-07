@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 description: >
-  This page outlines the general purpose and structure of the DEVISE workflow.
+  This page outlines the general purpose and structure of the DEVISE functions.
 output: rmarkdown::html_vignette
 ---
 
@@ -17,7 +17,7 @@ if (!require(DEVISE)) {
 library(DEVISE)
 ```
 
-This page outlines the general purpose and structure of the DEVISE functions.
+This page outlines the general purpose and structure of the DEVISE functions. The reference documents and included vignettes build on these basics and provide examples.
 
 ## Scope of the Project
 
@@ -29,8 +29,6 @@ DEVISE was designed to offer a simple, intuitive, and consistent way to implemen
 - Output utilizes consistent layouts and labeling across different types of analyses
 
 ## Data Structure
-
-DEVISE can be used to analyze either raw data or summary statistics.
 
 When analyzing raw data, DEVISE assumes a tidy data structure. Simply put: 1) each variable is its own column, 2) each observation is its own row, and 3) each value is its own cell. This is essential for how DEVISE will interpret the commands for analyses. Raw data can be entered in standard vectors and data frames, though DEVISE provides a few functions for creating these structures. In the case of a single-factor design (i.e., where there are multiple groups defined by an existing single variable and there is an outcome variable to be analyzed), the data are structured into a simple two-column frame and, for analyses (see below under Function Calls), a formula can be used to indicate the desire to analyze by groups. In the case of a repeated measures design, the data are arranged in the number of columns matching the number of measurements and, for analyses (again see below), the entire frame is passed to the function call.
 ```{r, eval=FALSE}

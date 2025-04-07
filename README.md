@@ -20,7 +20,7 @@ Other functions extend the analysis capabilities by offering summaries and plots
 This R package is not currently on CRAN, but the latest version can be installed and loaded using these R commands:
 
 ``` r
-install.packages("remotes")
+if (!require(remotes)) install.packages("remotes")
 remotes::install_github("cwendorf/DEVISE")
 library(DEVISE)
 ```

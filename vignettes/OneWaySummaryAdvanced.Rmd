@@ -19,7 +19,7 @@ library(DEVISE)
 
 This page examines a single-factor between-subjects (one-way) design using raw data input, adding color and plausibility curves to plots of comparisons and contrasts.
 
-## Data Management
+## Preliminary Tasks
 
 This code inputs the variable names and creates a viewable data frame.
 ```{r}

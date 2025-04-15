@@ -43,7 +43,7 @@ The package includes a wide variety of materials that demonstrate its use:
 
 - GitHub Issues: [https://github.com/cwendorf/DEVISE/issues](https://github.com/cwendorf/DEVISE/issues) 
 - Author Email: [cwendorf@uwsp.edu](mailto:cwendorf@uwsp.edu)
-- Author Homepage: [https://www.uwsp.edu/directory/profile/craig-wendorf/](https://www.uwsp.edu/directory/profile/craig-wendorf/)
+- Author Homepage: [https://github.com/cwendorf](https://github.com/cwendorf)
 
 ### Citation
 

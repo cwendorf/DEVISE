@@ -1,4 +1,4 @@
-# Estimation Approach to Statistical Inference
+# DEVISE
 ## OneWay Contrasts Data Application
 
 Outcome1 <- rnorm(50, mean = 7, sd = 2.5)

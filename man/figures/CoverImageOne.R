@@ -1,4 +1,4 @@
-# Estimation Approach to Statistical Inference
+# DEVISE
 ## Independent Groups Data Tutorial
 
 Factor <- c(rep(1, 4), rep(2, 4))
@@ -10,6 +10,5 @@ IndependentData <- construct(Factor, Outcome)
 
 (Outcome ~ Factor) |> estimateMeans()
 (Outcome ~ Factor) |> estimateDifference()
-(Outcome ~ Factor) |> testDifference()
 (Outcome ~ Factor) |> standardizeDifference()
 (Outcome ~ Factor) |> plotComparison()

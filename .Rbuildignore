@@ -1,5 +1,4 @@
 ^README.md
-^source-DEVISE.R
-^_pkgdown.yml
+^source-spTools.R
 docs/
 vignettes/

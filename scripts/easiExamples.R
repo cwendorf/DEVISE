@@ -8,35 +8,30 @@ source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
 ### Input Data
 
-y1 <- 10:30
-ny1 <- length(y1)
+Factor <- c(rep(1, 10), rep(2, 10))
+Factor <- factor(Factor, levels = c(1, 2), labels = c("Level1", "Level2"))
+Outcome <- c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11)
+IndependentData <- construct(Factor, Outcome)
 
-y2 <- 1:30
-ny2 <- length(y2)
+### Results
 
-Factor <- c(rep(1, length(y1)), rep(2, length(y2)))
-Factor <- factor(Factor, levels = c(1, 2), labels = c("Group1", "Group2"))
-Outcome <- c(y1, y2)
-Data <- construct(Factor, Outcome)
+(Outcome~Factor) |> estimateMeans()
+(Outcome~Factor) |> estimateMeans() |> format_table() |> style_apa()
 
-y1 <- 10:30
-my1 <- mean(y1)
-sdy1 <- sd(y1)
-ny1 <- length(y1)
+(Outcome~Factor) |> plotComparison()
+(Outcome~Factor) |> estimateComparison() |> plot_comp(main = "Comparison Plot",values=TRUE)
 
-y2 <- 1:30
-my2 <- mean(y2)
-sdy2 <- sd(y2)
-ny2 <- length(y2)
 
-Level1 <- c(N = ny1, M = my1, SD = sdy1)
-Level2 <- c(N = ny2, M = my2, SD = sdy2)
-Moments <- construct(Level1, Level2, class = "bsm")
+### Input Summary
 
-### Examples
+Level1 <- c(N = 10, M = 8.000, SD = 1.414)
+Level2 <- c(N = 10, M = 11.000, SD = 2.211)
+IndependentSummary <- construct(Level1, Level2, class = "bsm")
 
-Moments |> estimateMeans()
-Moments |> estimateMeans() |> format_table() |> style_apa()
+### Results
 
-Moments |> plotComparison()
-Moments |> estimateComparison() |> plot_comp(main = "Comparison Plot",values=TRUE)
+IndependentSummary |> estimateMeans()
+IndependentSummary |> estimateMeans() |> format_table() |> style_apa()
+
+IndependentSummary |> plotComparison()
+IndependentSummary |> estimateComparison() |> plot_comp(main = "Comparison Plot",values=TRUE)

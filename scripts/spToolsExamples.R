@@ -7,31 +7,29 @@ source("https://raw.githubusercontent.com/dgbonett/statpsych/main/R/statpsych1.R
 source("http://raw.githubusercontent.com/cwendorf/spTools/main/source-spTools.R")
 source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
-### Input Data
+### Input Summary
 
-y1 <- 10:30
-my1 <- mean(y1)
-sdy1 <- sd(y1)
-ny1 <- length(y1)
+ci.mean(alpha = .05, m = 8.000, sd = 1.414, n = 10)[,c(1,3,4)] -> Level1
+ci.mean(alpha = .05, m = 11.000, sd = 2.2111, n = 10)[,c(1,3,4)] -> Level2
+ci.mean2(alpha = .05, 11.000, 8.000, 2.211, 1.414, 10, 10)[1,c(1,6,7)] -> Comparison
+results <- rbind(Level1, Level2, Comparison)
+rownames(results) <- c("Group 1", "Group 2", "Comparison")
 
-y2 <- 1:30
-my2 <- mean(y2)
-sdy2 <- sd(y2)
-ny2 <- length(y2)
+### Results
 
-### Examples
-
-ci.mean(alpha = .05, m = my1, sd = sdy1, n = ny1)[,c(1,3,4)] -> group1
-ci.mean(alpha = .05, m = my2, sd = sdy2, n = ny2)[,c(1,3,4)] -> group2
-ci.mean2(alpha = .05, my2, my1, sdy2, sdy1, ny2, ny1)[1,c(1,6,7)] -> compare
-results <- rbind(group1, group2, compare)
 results
-results |> format_table()
+results |> format_table() |> style_apa()
 results |> plot_comp(main = "Comparison Plot", values = TRUE)
 
-ci.mean.vec(alpha = .05, m = c(my1, my2), sd = c(sdy1, sdy2), n = c(ny1, ny2)) -> groups
-ci.mean2.vec(alpha = .05, m = c(my2, my1), sd = c(sdy2, sdy1), n = c(ny2, ny1)) -> compare
-results <- rbind(groups, compare)
+### Input Summary
+
+ci.mean.vec(alpha = .05, m = c(8.000, 11.000), sd = c(1.414, 2.211), n = c(10, 10))[,c(1,4,5)] -> groups
+ci.mean2.vec(alpha = .05, m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10))[1,c(1,6,7)] -> Comparison
+results <- rbind(groups, Comparison)
+rownames(results) <- c("Group 1", "Group 2", "Comparison")
+
+### Results
+
 results
-results |> format_table()
+results |> format_table() |> style_apa()
 results |> plot_comp(main = "Comparison Plot", values = TRUE)

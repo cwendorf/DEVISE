@@ -80,47 +80,25 @@ convert.cint <- function(x, rowname = "Outcome", ...) {
   df
 }
 
+### Input Data
 
+Factor <- c(rep(1, 10), rep(2, 10))
+Factor <- factor(Factor, levels = c(1, 2), labels = c("Level1", "Level2"))
+Outcome <- c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11)
+IndependentData <- data.frame(Factor, Outcome)
+
+y1 <- IndependentData$Outcome[IndependentData$Factor == "Level1"]
+y2 <- IndependentData$Outcome[IndependentData$Factor == "Level2"]
 
 ### Examples
 
-ci_mean(1:100)
-ci_mean(1:100) |> display.cint()
-ci_mean(1:100) |> convert.cint()
-
-ci_mean(1:100) |> convert.cint() |> format_table() |> style_apa()
-ci_mean(1:100) |> convert.cint() |> plot_set(main = "Confidence Interval Plot")
-
-
-
-ci_mean(1:100, type = "bootstrap")
-ci_mean(1:100, type = "bootstrap") |> display.cint()
-ci_mean(1:100, type = "bootstrap") |> convert.cint() |> format_table(digits=3)
-
-y1 <- 10:30
-y2 <- 1:30
-ci_mean_diff(y1, y2)
-ci_mean_diff(y1, y2) |> display.cint()
-ci_mean_diff(y1, y2) |> convert.cint() |> format_table(digits=3)
-
-
-ci_mean(y1) |> convert.cint(rowname="Group 1") -> group1
-ci_mean(y2) |> convert.cint(rowname="Group 2") -> group2
-
-results <- rbind(group1,group2)
-results |> plot_set(main = "Group Means", values=TRUE, col = "red")
-
-
-ci_mean_diff(y2, y1) |> convert.cint(rowname="Comparison") -> compare
-results <- rbind(group1, group2 ,compare)
+ci_mean(y1) |> convert.cint(rowname="Group 1") -> Level1
+ci_mean(y2) |> convert.cint(rowname="Group 2") -> Level2
+ci_mean_diff(y2, y1) |> convert.cint(rowname="Comparison") -> Comparison
+results <- rbind(Level1, Level2, Comparison)
 results
-results |> format_table()
-results |> plot_comp(main = "Comparison Plot",values=TRUE)
-
-ci_mean_diff(y1, y2, type = "bootstrap", R = 999)
-ci_mean_diff(y1, y2, type = "bootstrap", R = 999) |> display.cint()
-ci_mean_diff(y1, y2, type = "bootstrap", R = 999) |> convert.cint() |> format_table(digits=3)
-
+results |> format_table() |> style_apa()
+results |> plot_comp(main = "Comparison Plot", values = TRUE)
 
 
 

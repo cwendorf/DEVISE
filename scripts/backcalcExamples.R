@@ -30,24 +30,17 @@ backcalc_means(m = 25.4, se = 2.1, n = 30, digits=4)
 backcalc_means(m = 25.4, se = 2.1, n = 30) |> format_table(digits = 4)
 
 
-# Plotting
+### Input Summary
 
-backcalc_means(m = 25.4, se = 2.1, n = 30, digits=4)
+backcalc_means(m = 8.000, sd = 1.414, n = 10) -> Level1
+backcalc_means(m = 11.000, sd = 2.2111, n = 10) -> Level2
+backcalc_means(m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) -> Comparison
+results <- rbind(Level1, Level2, Comparison)
+rownames(results) <- c("Level1", "Level2", "Comparison")
 
+### Results
 
-y1 <- 10:30
-my1 <- mean(y1)
-sdy1 <- sd(y1)
-ny1 <- length(y1)
-
-y2 <- 1:30
-my2 <- mean(y2)
-sdy2 <- sd(y2)
-ny2 <- length(y2)
-
-backcalc_means(m = my1, sd = sdy1, n = ny1) -> group1
-backcalc_means(m = my2, sd = sdy2, n = ny2) -> group2
-backcalc_means(m = c(my2, my1), sd = c(sdy2, sdy1), n = c(ny2, ny1)) -> compare
 results
-results |> format_table()
-results |> plot_comp(main = "Comparison Plot",values=TRUE)
+results |> format_table() |> style_apa()
+results |> plot_comp(main = "Comparison Plot", values = TRUE)
+

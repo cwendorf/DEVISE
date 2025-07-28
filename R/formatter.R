@@ -38,32 +38,32 @@ style_md <- function(display_matrix, title = NULL, spacing = 1) {
   header_col_widths <- nchar(col_labels)
   col_widths <- pmax(data_col_widths, header_col_widths)
 
-  # Format column headers (right-justified)
+  # Format column headers (left-align first col, rest right)
   header_cells <- c(
-    format("", width = row_label_width, justify = "right"),
+    format("", width = row_label_width, justify = "left"),
     mapply(format, col_labels, width = col_widths, justify = "right", USE.NAMES = FALSE)
   )
   header_line <- paste0("| ", paste(header_cells, collapse = " | "), " |")
 
-  # Format separator line for right-alignment (---:)
+  # Format separator line (left-align for first, right-align rest)
   separator_cells <- c(
     paste(rep("-", row_label_width), collapse = ""),
     sapply(col_widths, function(w) paste0(paste(rep("-", w - 1), collapse = ""), ":"), USE.NAMES = FALSE)
   )
   separator_line <- paste0("| ", paste(separator_cells, collapse = " | "), " |")
 
-  # Format data rows
+  # Format data rows (left-align first col, rest right)
   data_lines <- sapply(seq_len(nrow(mat)), function(i) {
-    row_name <- format(row_labels[i], width = row_label_width, justify = "right")
+    row_name <- format(row_labels[i], width = row_label_width, justify = "left")
     row_cells <- mapply(format, mat[i, ], width = col_widths, justify = "right", USE.NAMES = FALSE)
     paste0("| ", paste(c(row_name, row_cells), collapse = " | "), " |")
   })
 
-  # Optional left-aligned title lines (split by \n)
+  # Optional title
   title_block <- NULL
   if (!is.null(title)) {
     title_lines <- strsplit(title, "\n", fixed = TRUE)[[1]]
-    title_block <- c(title_lines, "")  # Add one blank line after title
+    title_block <- c(title_lines, "")  # One blank line after title
   }
 
   # Blank lines before and after the table
@@ -97,10 +97,10 @@ style_apa <- function(display_matrix, title = NULL, spacing = 1) {
   header_col_widths <- nchar(col_labels)
   col_widths <- pmax(data_col_widths, header_col_widths)
 
-  # Format header row
+  # Format header row (left-align first, right-align rest)
   header_cells <- mapply(format, col_labels, width = col_widths, justify = "right", USE.NAMES = FALSE)
   header_line <- paste0(
-    format("", width = row_label_width, justify = "right"), " ",
+    format("", width = row_label_width, justify = "left"), " ",
     paste(header_cells, collapse = " ")
   )
 
@@ -108,9 +108,9 @@ style_apa <- function(display_matrix, title = NULL, spacing = 1) {
   total_width <- nchar(header_line)
   horizontal_line <- strrep("-", total_width)
 
-  # Format data rows
+  # Format data rows (left-align first, right-align rest)
   data_lines <- sapply(seq_len(nrow(mat)), function(i) {
-    row_name <- format(row_labels[i], width = row_label_width, justify = "right")
+    row_name <- format(row_labels[i], width = row_label_width, justify = "left")
     row_cells <- mapply(format, mat[i, ], width = col_widths, justify = "right", USE.NAMES = FALSE)
     paste0(row_name, " ", paste(row_cells, collapse = " "))
   })
@@ -154,13 +154,13 @@ style_plain <- function(display_matrix, title = NULL, spacing = 1) {
     max(nchar(c(col_labels[j], mat[, j])))
   })
   
-  # Format header line
+  # Format header line (left-align row label column)
   header_cells <- mapply(format, col_labels, width = col_widths, justify = "right", USE.NAMES = FALSE)
-  header_line <- paste0(format("", width = row_label_width, justify = "right"), " ", paste(header_cells, collapse = " "))
+  header_line <- paste0(format("", width = row_label_width, justify = "left"), " ", paste(header_cells, collapse = " "))
   
-  # Format data rows
+  # Format data rows (left-align row labels)
   data_lines <- sapply(seq_len(nrow(mat)), function(i) {
-    row_name <- format(row_labels[i], width = row_label_width, justify = "right")
+    row_name <- format(row_labels[i], width = row_label_width, justify = "left")
     row_cells <- mapply(format, mat[i, ], width = col_widths, justify = "right", USE.NAMES = FALSE)
     paste0(row_name, " ", paste(row_cells, collapse = " "))
   })

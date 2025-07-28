@@ -35,12 +35,12 @@ backcalc_means(m = 25.4, se = 2.1, n = 30) |> format_table(digits = 4)
 backcalc_means(m = 8.000, sd = 1.414, n = 10) -> Level1
 backcalc_means(m = 11.000, sd = 2.2111, n = 10) -> Level2
 backcalc_means(m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) -> Comparison
-results <- rbind(Level1, Level2, Comparison)
-rownames(results) <- c("Level1", "Level2", "Comparison")
+Results <- rbind(Level1, Level2, Comparison)
+rownames(Results) <- c("Level1", "Level2", "Comparison")
 
 ### Results
 
-results
-results |> format_table() |> style_apa()
-results |> plot_comp(main = "Comparison Plot", values = TRUE)
+Results
+Results |> format_table() |> style_apa()
+Results |> plot_comp(main = "Comparison Plot", values = TRUE)
 

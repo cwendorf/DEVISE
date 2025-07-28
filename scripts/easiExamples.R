@@ -8,8 +8,7 @@ source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
 ### Input Data
 
-Factor <- c(rep(1, 10), rep(2, 10))
-Factor <- factor(Factor, levels = c(1, 2), labels = c("Level1", "Level2"))
+Factor <- gl(2, 10, labels = c("Level1", "Level2"))
 Outcome <- c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11)
 IndependentData <- construct(Factor, Outcome)
 

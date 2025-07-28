@@ -82,8 +82,7 @@ convert.cint <- function(x, rowname = "Outcome", ...) {
 
 ### Input Data
 
-Factor <- c(rep(1, 10), rep(2, 10))
-Factor <- factor(Factor, levels = c(1, 2), labels = c("Level1", "Level2"))
+Factor <- gl(2, 10, labels = c("Level1", "Level2"))
 Outcome <- c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11)
 IndependentData <- data.frame(Factor, Outcome)
 
@@ -92,49 +91,10 @@ y2 <- IndependentData$Outcome[IndependentData$Factor == "Level2"]
 
 ### Examples
 
-ci_mean(y1) |> convert.cint(rowname="Group 1") -> Level1
-ci_mean(y2) |> convert.cint(rowname="Group 2") -> Level2
+ci_mean(y1) |> convert.cint(rowname="Level1") -> Level1
+ci_mean(y2) |> convert.cint(rowname="Level2") -> Level2
 ci_mean_diff(y2, y1) |> convert.cint(rowname="Comparison") -> Comparison
-results <- rbind(Level1, Level2, Comparison)
-results
-results |> format_table() |> style_apa()
-results |> plot_comp(main = "Comparison Plot", values = TRUE)
-
-
-
-
-## Mayer's Examples
-
-# Mean
-ci_mean(1:100)
-
-# Mean using the Bootstrap
-ci_mean(1:100, type = "bootstrap")
-
-# 95% value at risk
-ci_quantile(rexp(1000), q = 0.95)
-
-# Mean difference
-ci_mean_diff(1:100, 2:101)
-ci_mean_diff(1:100, 2:101, type = "bootstrap", seed = 1)
-
-# Correlation
-ci_cor(iris[1:2], method = "spearman", type = "bootstrap")
-
-# Proportions
-ci_proportion(10, n = 100, type = "Wilson")
-ci_proportion(10, n = 100, type = "Clopper-Pearson")
-
-# R-squared
-fit <- lm(Sepal.Length ~ ., data = iris)
-ci_rsquared(fit, probs = c(0.05, 1))
-
-# Kurtosis
-ci_kurtosis(1:100)
-
-# Mean difference
-ci_mean_diff(10:30, 1:15)
-ci_mean_diff(10:30, 1:15, type = "bootstrap")
-
-# Median difference
-ci_median_diff(10:30, 1:15)
+Results <- rbind(Level1, Level2, Comparison)
+Results
+Results |> format_table() |> style_apa()
+Results |> plot_comp(main = "Comparison Plot", values = TRUE)

@@ -89,12 +89,15 @@ IndependentData <- data.frame(Factor, Outcome)
 y1 <- IndependentData$Outcome[IndependentData$Factor == "Level1"]
 y2 <- IndependentData$Outcome[IndependentData$Factor == "Level2"]
 
-### Examples
+### Create Summary
 
 ci_mean(y1) |> convert.cint(rowname="Level1") -> Level1
 ci_mean(y2) |> convert.cint(rowname="Level2") -> Level2
 ci_mean_diff(y2, y1) |> convert.cint(rowname="Comparison") -> Comparison
 Results <- rbind(Level1, Level2, Comparison)
+
+### Results
+
 Results
-Results |> format_table() |> style_apa()
-Results |> plot_comp(main = "Comparison Plot", values = TRUE)
+Results |> print_table()
+Results |> plot_comp(title = "Comparison Plot", values = TRUE)

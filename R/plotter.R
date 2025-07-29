@@ -13,7 +13,7 @@
 #' and the second is the index of the upper limit column.
 #' 
 #' @noRd
-find_interval_columns <- function(colnames) {
+find_intervals <- function(colnames) {
   ll_patterns <- c("ll", "lower", "lowerlimit", "ci_lower", "lcl")
   ul_patterns <- c("ul", "upper", "upperlimit", "ci_upper", "ucl")
   
@@ -78,7 +78,7 @@ plot_set <- function(results,
   if (is.null(title)) title <- comment(results)
   main <- paste(strwrap(title, width = 0.7 * getOption("width")), collapse = "\n")
   
-  cols <- find_interval_columns(colnames(results))
+  cols <- find_intervals(colnames(results))
   results <- results[, c(1, cols), drop = FALSE]
   
   if (is.null(ylim)) {
@@ -173,7 +173,7 @@ plot_comp <- function(results,
   if (is.null(title)) title <- comment(results)
   main <- paste(strwrap(title, width = 0.7 * getOption("width")), collapse = "\n")
   
-  cols <- find_interval_columns(colnames(results))
+  cols <- find_intervals(colnames(results))
   results <- results[, c(1, cols), drop = FALSE]
   
   graph <- results

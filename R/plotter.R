@@ -1,7 +1,18 @@
 # DEVISE
 ## Interval Plots
 
-# Helper function to find LL and UL columns flexibly
+#' Find Confidence Interval Columns by Common Aliases
+#'
+#' Identifies the lower and upper limit columns in a dataset using common naming conventions.
+#' This helper function searches for column names that match typical labels for lower and upper
+#' confidence interval bounds (e.g., "ll", "ul", "lower", "upper", "ci_lower", etc.).
+#'
+#' @param colnames A character vector of column names (e.g., from `colnames(dataframe)`).
+#'
+#' @return An integer vector of length 2. The first element is the index of the lower limit column,
+#' and the second is the index of the upper limit column.
+#' 
+#' @noRd
 find_interval_columns <- function(colnames) {
   ll_patterns <- c("ll", "lower", "lowerlimit", "ci_lower", "lcl")
   ul_patterns <- c("ul", "upper", "upperlimit", "ci_upper", "ucl")
@@ -18,9 +29,36 @@ find_interval_columns <- function(colnames) {
   c(ll_idx, ul_idx)
 }
 
-
+#' Plot Point Estimates with Confidence Intervals
+#'
+#' Creates an interval plot displaying point estimates and their associated lower and upper
+#' confidence bounds for a set of outcomes. Useful for visualizing statistical estimates across
+#' multiple conditions or variables.
+#'
+#' @param results A data frame or matrix containing point estimates in the first column, and
+#' confidence limits in columns that match common naming patterns (e.g., "ll", "ul", "ci_lower", "ci_upper").
+#' @param title Character string for the plot title. If `NULL`, the function uses the `comment()` attribute of `results`.
+#' @param ylab Character label for the Y-axis.
+#' @param xlab Character label for the X-axis.
+#' @param ylim Numeric vector specifying Y-axis limits. If `NULL`, limits are auto-calculated.
+#' @param digits Number of decimal places for value labels if `values = TRUE`.
+#' @param offset Numeric horizontal offset to nudge plotted points (useful for overlapping points).
+#' @param pch Plotting character (point shape).
+#' @param col Color for points and interval lines.
+#' @param points Logical; if `TRUE`, draws point estimates.
+#' @param intervals Logical; if `TRUE`, draws confidence intervals.
+#' @param values Logical; if `TRUE`, displays numeric values beside points and intervals.
+#' @param pos Integer or vector specifying text position relative to points (see `text()`).
+#' @param connect Logical; if `TRUE`, connects adjacent points with arrows.
+#' @param line Numeric; if specified, draws a horizontal reference line at the given Y value.
+#' @param rope Numeric vector of length 2 indicating a "region of practical equivalence" to shade.
+#' @param ... Additional graphical parameters passed to `plot()`.
+#'
+#' @return Invisibly returns the `results` object (modified to include only point and interval columns).
+#'
+#' @export
 plot_set <- function(results, 
-                    main = NULL, 
+                    title = NULL, 
                     ylab = "Outcome", 
                     xlab = "", 
                     ylim = NULL, 
@@ -37,10 +75,9 @@ plot_set <- function(results,
                     rope = NULL,
                     ...) {
 
-  if (is.null(main)) main <- comment(results)
-  main <- paste(strwrap(main, width = 0.7 * getOption("width")), collapse = "\n")
+  if (is.null(title)) title <- comment(results)
+  main <- paste(strwrap(title, width = 0.7 * getOption("width")), collapse = "\n")
   
-  # Keep the first column for point estimates, find LL and UL dynamically
   cols <- find_interval_columns(colnames(results))
   results <- results[, c(1, cols), drop = FALSE]
   
@@ -76,20 +113,46 @@ plot_set <- function(results,
     rect(0, rope[1], nrow(results) + 1, rope[2], col = rgb(0, 0, 0, alpha = 0.1), border = NA)
   }
   
-if (values) {
-  formatted <- apply(results, 2, function(x) format(round(x, digits), trim = TRUE, nsmall = digits, scientific = FALSE))
-  text(seq_len(nrow(results)) + offset, results[, 1], formatted[, 1], cex = 0.8, pos = pos, offset = 0.5, font = 2, col = col)
-  text(seq_len(nrow(results)) + offset, results[, 2], formatted[, 2], cex = 0.8, pos = pos, offset = 0.5, col = col)
-  text(seq_len(nrow(results)) + offset, results[, 3], formatted[, 3], cex = 0.8, pos = pos, offset = 0.5, col = col)
-}
-
+  if (values) {
+    formatted <- apply(results, 2, function(x) format(round(x, digits), trim = TRUE, nsmall = digits, scientific = FALSE))
+    text(seq_len(nrow(results)) + offset, results[, 1], formatted[, 1], cex = 0.8, pos = pos, offset = 0.5, font = 2, col = col)
+    text(seq_len(nrow(results)) + offset, results[, 2], formatted[, 2], cex = 0.8, pos = pos, offset = 0.5, col = col)
+    text(seq_len(nrow(results)) + offset, results[, 3], formatted[, 3], cex = 0.8, pos = pos, offset = 0.5, col = col)
+  }
 
   invisible(results)
 }
 
-
+#' Plot Comparison of Two Groups with Difference Estimate
+#'
+#' Plots two group means and their confidence intervals, along with a third point showing the
+#' estimated difference and its interval. Designed for paired or between-group comparisons.
+#'
+#' @param results A data frame or matrix with three rows: two group estimates and a third row for
+#' the difference (with placeholder values in the first two columns).
+#' @param title Character string for the plot title. If `NULL`, uses the `comment()` attribute of `results`.
+#' @param ylab Character label for the Y-axis.
+#' @param xlab Character label for the X-axis.
+#' @param ylim Numeric vector specifying Y-axis limits. If `NULL`, they are auto-computed.
+#' @param slab Label for the secondary Y-axis (typically "Difference").
+#' @param rope Numeric vector of length 2 defining a shaded region of practical equivalence (on the difference scale).
+#' @param digits Number of decimal places for value labels if `values = TRUE`.
+#' @param values Logical; if `TRUE`, displays numeric values beside points and intervals.
+#' @param connect Logical; if `TRUE`, draws a connecting line between group points.
+#' @param pos Integer vector specifying text positions (used for estimate, lower, upper labels).
+#' @param pch Vector of plotting characters for each point (e.g., group1, group2, diff).
+#' @param col Color for all plotted elements.
+#' @param offset Numeric horizontal offset to avoid overlapping points.
+#' @param points Logical; if `TRUE`, draws the three points.
+#' @param intervals Logical; if `TRUE`, draws confidence intervals.
+#' @param lines Logical; if `TRUE`, adds horizontal dashed lines from group points to difference estimate.
+#' @param ... Additional graphical parameters passed to `plot()`.
+#'
+#' @return Invisibly returns the `results` object (modified to include only point and interval columns).
+#'
+#' @export
 plot_comp <- function(results, 
-                    main = NULL, 
+                    title = NULL, 
                     ylab = "Outcome", 
                     xlab = "", 
                     ylim = NULL, 
@@ -107,8 +170,8 @@ plot_comp <- function(results,
                     lines = TRUE, 
                     ...) {
 
-  if (is.null(main)) main <- comment(results)
-  main <- paste(strwrap(main, width = 0.7 * getOption("width")), collapse = "\n")
+  if (is.null(title)) title <- comment(results)
+  main <- paste(strwrap(title, width = 0.7 * getOption("width")), collapse = "\n")
   
   cols <- find_interval_columns(colnames(results))
   results <- results[, c(1, cols), drop = FALSE]
@@ -167,11 +230,11 @@ plot_comp <- function(results,
   }
   
   if (values) {
-  formatted <- apply(results, 2, function(x) format(round(x, digits), trim = TRUE, nsmall = digits, scientific = FALSE))
+    formatted <- apply(results, 2, function(x) format(round(x, digits), trim = TRUE, nsmall = digits, scientific = FALSE))
     text(1:3 + offset, graph[, 1], formatted[, 1], cex = 0.8, pos = pos, offset = 0.5, font = 2, col = col)
     text(1:3 + offset, graph[, 2], formatted[, 2], cex = 0.8, pos = pos, offset = 0.5, col = col)
     text(1:3 + offset, graph[, 3], formatted[, 3], cex = 0.8, pos = pos, offset = 0.5, col = col)
   }
-  
+
   invisible(results)
 }

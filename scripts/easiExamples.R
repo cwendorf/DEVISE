@@ -15,7 +15,7 @@ IndependentData <- construct(Factor, Outcome)
 ### Results
 
 (Outcome~Factor) |> estimateMeans()
-(Outcome~Factor) |> estimateMeans() |> format_table() |> style_apa()
+(Outcome~Factor) |> estimateMeans() |> style_apa()
 
 (Outcome~Factor) |> plotComparison()
 (Outcome~Factor) |> estimateComparison() |> plot_comp(main = "Comparison Plot",values=TRUE)
@@ -30,7 +30,8 @@ IndependentSummary <- construct(Level1, Level2, class = "bsm")
 ### Results
 
 IndependentSummary |> estimateMeans()
-IndependentSummary |> estimateMeans() |> format_table() |> style_apa()
+IndependentSummary |> estimateMeans() |> print_table(style="md", digits = 4)
+IndependentSummary |> estimateMeans() |> style_apa(digits=5, width=10)
 
 IndependentSummary |> plotComparison()
-IndependentSummary |> estimateComparison() |> plot_comp(main = "Comparison Plot",values=TRUE)
+IndependentSummary |> estimateComparison() |> plot_comp(title = "Comparison Plot",values=TRUE)

@@ -1,7 +1,6 @@
 # DEVISE
 ## Matrix Handling
 
-
 #' Extract Row or Column as Named Vector from Data Frame or Matrix
 #'
 #' This function extracts a single row or column from a matrix or data frame
@@ -71,7 +70,6 @@ extract <- function(data, index) {
   stop("Invalid index: not found in row or column names, or out of bounds.")
 }
 
-
 #' Filter Columns from Data Frame, Matrix, or List
 #'
 #' Filters specified columns from a data frame, matrix, or list of such objects.
@@ -131,7 +129,6 @@ columns <- function(out, cols = c("Estimate", "SE", "df", "LL", "UL")) {
 
   filter_one(out)
 }
-
 
 #' Filter Rows from Data Frame, Matrix, or List
 #'

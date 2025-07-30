@@ -1,7 +1,6 @@
 # spTools
 ## Matrix Computing
 
-
 #' Compute Descriptive Statistics for Numeric Variables
 #'
 #' Calculates basic descriptive statistics (N, mean, and standard deviation) for numeric variables
@@ -68,7 +67,6 @@ describe <- function(data, vars = NULL, formula = NULL) {
   }))
   return(stats)
 }
-
 
 #' Compute Correlation or Covariance Matrices
 #'
@@ -142,7 +140,6 @@ correlate <- function(data, vars = NULL, formula = NULL, type = "cor", method = 
   # No grouping: compute directly
   return(compute_matrix(data[vars]))
 }
-
 
 #' Calculate Additional Metrics for Statistical Estimates
 #'

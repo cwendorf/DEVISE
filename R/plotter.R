@@ -56,6 +56,24 @@ find_intervals <- function(colnames) {
 #'
 #' @return Invisibly returns the `results` object (modified to include only point and interval columns).
 #'
+#' #' @examples
+#' # Create example data frame with estimate and confidence intervals
+#' results <- data.frame(
+#'   estimate = c(0.3, 0.5, 0.7),
+#'   ci_lower = c(0.1, 0.3, 0.5),
+#'   ci_upper = c(0.5, 0.7, 0.9)
+#' )
+#' rownames(results) <- c("A", "B", "C")
+#'
+#' # Basic interval plot
+#' plot_set(results)
+#'
+#' # Add value labels and a horizontal reference line at 0
+#' plot_set(results, values = TRUE, line = 0)
+#'
+#' # Customize point style and add rope
+#' plot_set(results, pch = 19, col = "blue", rope = c(-0.1, 0.1))
+#'
 #' @export
 plot_set <- function(results, 
                     title = NULL, 
@@ -149,6 +167,24 @@ plot_set <- function(results,
 #' @param ... Additional graphical parameters passed to `plot()`.
 #'
 #' @return Invisibly returns the `results` object (modified to include only point and interval columns).
+#'
+#' #' @examples
+#' # Create comparison data for two groups and their difference
+#' comp_data <- data.frame(
+#'   estimate = c(0.6, 0.4, 0.2),
+#'   ci_lower = c(0.4, 0.2, 0.0),
+#'   ci_upper = c(0.8, 0.6, 0.4)
+#' )
+#' rownames(comp_data) <- c("Group 1", "Group 2", "Difference")
+#'
+#' # Basic comparison plot
+#' plot_comp(comp_data)
+#'
+#' # Add ROPE, value labels, and connect groups
+#' plot_comp(comp_data, rope = c(-0.1, 0.1), values = TRUE, connect = TRUE)
+#'
+#' # Customize plotting characters and color
+#' plot_comp(comp_data, pch = c(15, 17, 18), col = "darkgreen", lines = FALSE)
 #'
 #' @export
 plot_comp <- function(results, 

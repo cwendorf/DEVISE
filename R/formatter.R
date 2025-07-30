@@ -29,6 +29,16 @@ unformat_matrix <- function(results) {
 #' @param width Minimum width of each numeric column.
 #'
 #' @return Invisibly returns NULL. Prints the formatted Markdown table to the console.
+#'
+#' @examples
+#' # Create a matrix of means and SDs
+#' results <- matrix(c(0.25, 0.30, 0.10, 0.12), nrow = 2, byrow = TRUE)
+#' rownames(results) <- c("Group A", "Group B")
+#' colnames(results) <- c("Mean", "SD")
+#'
+#' # Print as GitHub-flavored markdown
+#' style_md(results, title = "Descriptive Statistics")
+#'
 #' @export
 style_md <- function(results, title = NULL, spacing = 1, digits = 3, width = 8) {
 
@@ -99,6 +109,16 @@ style_md <- function(results, title = NULL, spacing = 1, digits = 3, width = 8) 
 #' @param width Minimum width of each numeric column.
 #'
 #' @return Invisibly returns NULL. Prints the formatted APA-style table to the console.
+#'
+#' @examples
+#' # Example data with group stats
+#' results <- matrix(c(0.5, 0.8, 0.15, 0.20), nrow = 2, byrow = TRUE)
+#' rownames(results) <- c("Control", "Treatment")
+#' colnames(results) <- c("Mean", "SD")
+#'
+#' # Print as APA-style table
+#' style_apa(results, title = "Group Summary", digits = 2)
+#'
 #' @export
 style_apa <- function(results, title = NULL, spacing = 1, digits = 3, width = 8) {
 
@@ -160,6 +180,15 @@ style_apa <- function(results, title = NULL, spacing = 1, digits = 3, width = 8)
 #' @param width Minimum width of each numeric column.
 #'
 #' @return Invisibly returns NULL. Prints the formatted plain-text table to the console.
+#'
+#' @examples
+#' # Simple plain-text rendering of results
+#' results <- matrix(c(1.234, 2.345, 3.456, 4.567), nrow = 2, byrow = TRUE)
+#' rownames(results) <- c("Pre", "Post")
+#' colnames(results) <- c("Estimate", "SE")
+#'
+#' style_plain(results, title = "Model Output", spacing = 2)
+#'
 #' @export
 style_plain <- function(results, title = NULL, spacing = 1, digits = 3, width = 8) {
 
@@ -216,6 +245,15 @@ style_plain <- function(results, title = NULL, spacing = 1, digits = 3, width = 
 #' @param width Minimum width of each numeric column.
 #'
 #' @return Invisibly returns NULL. Prints the boxed table to the console.
+#'
+#' @examples
+#' # Boxed format for clear visual separation
+#' results <- matrix(c(0.66, 0.72, 0.04, 0.05), nrow = 2, byrow = TRUE)
+#' rownames(results) <- c("Group X", "Group Y")
+#' colnames(results) <- c("Accuracy", "Error")
+#'
+#' style_boxed(results, title = "Performance Metrics")
+#'
 #' @export
 style_boxed <- function(results, title = NULL, spacing = 1, digits = 3, width = 8) {
 
@@ -301,6 +339,22 @@ style_boxed <- function(results, title = NULL, spacing = 1, digits = 3, width = 
 #' }
 #'
 #' @return Invisibly returns \code{NULL}. The table is printed to the console.
+#'
+#' @examples
+#' # Example matrix with group means and SDs
+#' results <- matrix(c(2.5, 3.0, 0.5, 0.6), nrow = 2, byrow = TRUE)
+#' rownames(results) <- c("Condition 1", "Condition 2")
+#' colnames(results) <- c("Mean", "SD")
+#'
+#' # Print using default style
+#' print_table(results)
+#'
+#' # Use boxed format with custom title
+#' print_table(results, style = "boxed", title = "Group Statistics")
+#'
+#' # Output APA-style with 2 decimal digits
+#' print_table(results, style = "apa", digits = 2)
+#'
 #' @export
 print_table <- function(results, digits = 3, width = 8, style = c("plain", "apa", "boxed", "md"), title = NULL, spacing = 1) {
   style <- match.arg(style)

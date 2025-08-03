@@ -1,370 +1,150 @@
 # DEVISE
 ## Matrix Formatting
 
-### Basic Formatting
-
+#' Format a Numeric Matrix for Aligned Printing
+#'
+#' Rounds and formats a matrix for clean, right-aligned display.
+#'
+#' @param results A numeric matrix or data frame.
+#' @param digits Number of decimal places to round to. Default is 3.
+#' @param padding Extra space padding on each side of values. Default is 0.
+#' @param width Fixed width for each column. If NULL, computed from digits and padding.
+#' @param ... Additional arguments passed to `format()`.
+#'
+#' @return A noquote matrix with formatted strings for display.
+#' @noRd
 format_matrix <- function(results, digits = 3, padding = 0, width = 8, ...) {
   if (is.null(width)) width <- digits + (padding * 2)
   colnames(results) <- format(colnames(results), width = width, justify = "right")
   noquote(format(as.matrix(round(results, digits = digits)), width = width, justify = "right", digits = digits, nsmall = digits, trim = TRUE, scientific = FALSE, ...))
 }
 
+#' Convert Formatted Matrix Back to Numeric
+#'
+#' Cleans up a formatted matrix by removing commas, currency symbols, etc., and converts to numeric.
+#'
+#' @param results A character matrix or printed matrix to be converted back to numeric.
+#'
+#' @return A numeric matrix with the same dimensions as input.
+#' @noRd
 unformat_matrix <- function(results) {
   results <- as.matrix(results)
   results_clean <- gsub("[,$]", "", results)
   apply(results_clean, c(1, 2), as.numeric)
 }
 
-### Advanced Formatting and Printing
-
-#' Print Formatted Matrix as Markdown Table
+#' Print Formatted Matrix in Plain Style
 #'
-#' Outputs a matrix or data frame in GitHub-flavored Markdown table format,
-#' with aligned columns, optional row names, and a title header.
+#' Prints a formatted numeric matrix with optional title and vertical spacing.
 #'
-#' @param results A numeric matrix or data frame.
-#' @param title Optional character title to display above the table.
-#' @param spacing Number of blank lines before and after the table.
-#' @param digits Number of decimal digits to display.
-#' @param width Minimum width of each numeric column.
+#' @param results A numeric matrix already formatted.
+#' @param title Optional title printed above the matrix.
+#' @param spacing Number of blank lines above and below the matrix. A single number or a vector of length 2.
 #'
-#' @return Invisibly returns NULL. Prints the formatted Markdown table to the console.
-#'
-#' @examples
-#' # Create a matrix of means and SDs
-#' results <- matrix(c(0.25, 0.30, 0.10, 0.12), nrow = 2, byrow = TRUE)
-#' rownames(results) <- c("Group A", "Group B")
-#' colnames(results) <- c("Mean", "SD")
-#'
-#' # Print as GitHub-flavored markdown
-#' style_md(results, title = "Descriptive Statistics")
-#'
-#' @export
-style_md <- function(results, title = NULL, spacing = 1, digits = 3, width = 8) {
-
-  if (is.null(title)) {
-    title <- comment(results)
+#' @return Invisibly returns the printed matrix.
+#' @noRd
+print_matrix_plain <- function(results, title = NULL, spacing = 0, ...) {
+  if (length(spacing) == 1) {
+    spacing <- rep(spacing, 2)
   }
-
-  mat <- as.matrix(results)
-  row_labels <- rownames(mat)
-  col_labels <- colnames(mat)
-
-  # Format numeric matrix (preserves trailing zeros)
-  mat <- round(mat, digits = digits)
-  mat <- format(mat, digits = digits, nsmall = digits, width = width, justify = "right", trim = TRUE, scientific = FALSE)
-
-  # Calculate widths
-  row_label_width <- if (!is.null(row_labels)) max(nchar(row_labels)) else 0
-  data_col_widths <- apply(mat, 2, function(col) max(nchar(col)))
-  col_labels_formatted <- format(col_labels, width = data_col_widths, justify = "right")
-  col_widths <- pmax(data_col_widths, nchar(col_labels_formatted))  # ensure final alignment
-
-  # Format header row
-  header_cells <- c(
-    if (row_label_width > 0) format("", width = row_label_width, justify = "left") else NULL,
-    mapply(format, col_labels, width = col_widths, MoreArgs = list(justify = "right"))
-  )
-  header_line <- paste0("| ", paste(header_cells, collapse = " | "), " |")
-
-  # Markdown separator line (right-aligned)
-  separator_cells <- c(
-    if (row_label_width > 0) strrep("-", row_label_width) else NULL,
-    sapply(col_widths, function(w) paste0(strrep("-", w - 1), ":"))
-  )
-  separator_line <- paste0("| ", paste(separator_cells, collapse = " | "), " |")
-
-  # Format data rows
-  data_lines <- sapply(seq_len(nrow(mat)), function(i) {
-    row_name <- if (!is.null(row_labels)) format(row_labels[i], width = row_label_width, justify = "left") else NULL
-    row_cells <- mapply(format, mat[i, ], width = col_widths, MoreArgs = list(justify = "right"))
-    paste0("| ", paste(c(row_name, row_cells), collapse = " | "), " |")
-  })
-
-  # Title and spacing
-  title_block <- if (!is.null(title)) c(title, "") else NULL
-  blank_lines <- rep("", spacing)
-
-  md_output <- c(
-    blank_lines,
-    title_block,
-    header_line,
-    separator_line,
-    data_lines,
-    blank_lines
-  )
-
-  cat(paste(md_output, collapse = "\n"), "\n")
+  if (length(spacing) != 2) {
+    stop("spacing must be a numeric vector of length 1 or 2: spacing or c(space_above, space_below)")
+  }
+  if (spacing[1] > 0) cat(rep("\n", spacing[1]), sep = "")
+  if (!is.null(title)) cat(title, "\n\n")
+  print(results)
+  if (spacing[2] > 0) cat(rep("\n", spacing[2]), sep = "")
 }
 
-#' Print Formatted Matrix in APA Style Table
+#' Print Formatted Matrix in APA Style
 #'
-#' Displays a matrix or data frame in a plain-text APA-style format, using
-#' aligned numeric columns, horizontal dividers, and optional row names.
+#' Prints a matrix with APA-style header and border lines.
+#' 
+#' @param results A numeric matrix already formatted.
+#' @param title Optional title printed above the matrix.
+#' @param spacing Number of blank lines above and below the matrix. A single number or a vector of length 2.
 #'
-#' @param results A numeric matrix or data frame.
-#' @param title Optional character title to display above the table.
-#' @param spacing Number of blank lines before and after the table.
-#' @param digits Number of decimal digits to display.
-#' @param width Minimum width of each numeric column.
-#'
-#' @return Invisibly returns NULL. Prints the formatted APA-style table to the console.
-#'
-#' @examples
-#' # Example data with group stats
-#' results <- matrix(c(0.5, 0.8, 0.15, 0.20), nrow = 2, byrow = TRUE)
-#' rownames(results) <- c("Control", "Treatment")
-#' colnames(results) <- c("Mean", "SD")
-#'
-#' # Print as APA-style table
-#' style_apa(results, title = "Group Summary", digits = 2)
-#'
-#' @export
-style_apa <- function(results, title = NULL, spacing = 1, digits = 3, width = 8) {
-
-  if (is.null(title)) {
-    title <- comment(results)
+#' @return Invisibly returns the printed matrix.
+#' @noRd
+print_matrix_apa <- function(results, title = NULL, spacing = 0, ...) {
+  if (length(spacing) == 1) {
+    spacing <- rep(spacing, 2)
   }
-
-  mat <- round(as.matrix(results), digits = digits)
-  mat <- format(mat, digits = digits, nsmall = digits, width = width,
-                justify = "right", trim = TRUE, scientific = FALSE)
-
-  row_labels <- rownames(mat)
-  col_labels <- colnames(mat)
-
-  row_label_width <- if (!is.null(row_labels)) max(nchar(row_labels)) else 0
-  col_widths <- apply(mat, 2, function(col) max(nchar(col)))
-  col_labels_formatted <- format(col_labels, width = col_widths, justify = "right")
-
-  header_line <- paste0(
-    format("", width = row_label_width, justify = "left"), " ",
-    paste(col_labels_formatted, collapse = " ")
-  )
-
-  total_width <- nchar(header_line)
-  horizontal_line <- strrep("-", total_width)
-
-  data_lines <- sapply(seq_len(nrow(mat)), function(i) {
-    row_name <- if (!is.null(row_labels)) format(row_labels[i], width = row_label_width, justify = "left") else ""
-    row_cells <- mapply(format, mat[i, ], width = col_widths, MoreArgs = list(justify = "right"))
-    paste0(row_name, " ", paste(row_cells, collapse = " "))
-  })
-
-  title_block <- if (!is.null(title)) c(title, "") else NULL
-  blank_lines <- rep("", spacing)
-
-  output <- c(
-    blank_lines,
-    title_block,
-    horizontal_line,
-    header_line,
-    horizontal_line,
-    data_lines,
-    horizontal_line,
-    blank_lines
-  )
-
-  cat(paste(output, collapse = "\n"), "\n")
-}
-
-#' Print Formatted Matrix in Plain Text Format
-#'
-#' Outputs a matrix or data frame in plain text format, with aligned numeric
-#' columns and optional row names. Useful for basic console printing.
-#'
-#' @param results A numeric matrix or data frame.
-#' @param title Optional character title to display above the table.
-#' @param spacing Number of blank lines before and after the table.
-#' @param digits Number of decimal digits to display.
-#' @param width Minimum width of each numeric column.
-#'
-#' @return Invisibly returns NULL. Prints the formatted plain-text table to the console.
-#'
-#' @examples
-#' # Simple plain-text rendering of results
-#' results <- matrix(c(1.234, 2.345, 3.456, 4.567), nrow = 2, byrow = TRUE)
-#' rownames(results) <- c("Pre", "Post")
-#' colnames(results) <- c("Estimate", "SE")
-#'
-#' style_plain(results, title = "Model Output", spacing = 2)
-#'
-#' @export
-style_plain <- function(results, title = NULL, spacing = 1, digits = 3, width = 8) {
-
-  if (is.null(title)) {
-    title <- comment(results)
+  if (length(spacing) != 2) {
+    stop("spacing must be a numeric vector of length 1 or 2: spacing or c(space_above, space_below)")
   }
-
-  mat <- round(as.matrix(results), digits = digits)
-  mat <- format(mat, digits = digits, nsmall = digits, width = width,
-                justify = "right", trim = TRUE, scientific = FALSE)
-
-  row_labels <- rownames(mat)
-  col_labels <- colnames(mat)
-
-  row_label_width <- if (!is.null(row_labels)) max(nchar(row_labels)) else 0
-  col_widths <- apply(mat, 2, function(col) max(nchar(col)))
-  col_labels_formatted <- format(col_labels, width = col_widths, justify = "right")
-
-  header_line <- paste0(
-    if (row_label_width > 0) format("", width = row_label_width, justify = "left") else "",
-    " ",
-    paste(col_labels_formatted, collapse = " ")
-  )
-
-  data_lines <- sapply(seq_len(nrow(mat)), function(i) {
-    row_name <- if (!is.null(row_labels)) format(row_labels[i], width = row_label_width, justify = "left") else ""
-    row_cells <- mapply(format, mat[i, ], width = col_widths, MoreArgs = list(justify = "right"))
-    paste0(row_name, " ", paste(row_cells, collapse = " "))
-  })
-
-  title_block <- if (!is.null(title)) c(title, "") else NULL
-  blank_lines <- rep("", spacing)
-
-  output <- c(
-    blank_lines,
-    title_block,
-    header_line,
-    data_lines,
-    blank_lines
-  )
-
-  cat(paste(output, collapse = "\n"), "\n")
-}
-
-#' Print Formatted Matrix in Boxed Table Format
-#'
-#' Outputs a matrix or data frame in a visually distinct boxed format with
-#' borders, aligned numeric columns, and optional row names.
-#'
-#' @param results A numeric matrix or data frame.
-#' @param title Optional character title to display above the table.
-#' @param spacing Number of blank lines before and after the table.
-#' @param digits Number of decimal digits to display.
-#' @param width Minimum width of each numeric column.
-#'
-#' @return Invisibly returns NULL. Prints the boxed table to the console.
-#'
-#' @examples
-#' # Boxed format for clear visual separation
-#' results <- matrix(c(0.66, 0.72, 0.04, 0.05), nrow = 2, byrow = TRUE)
-#' rownames(results) <- c("Group X", "Group Y")
-#' colnames(results) <- c("Accuracy", "Error")
-#'
-#' style_boxed(results, title = "Performance Metrics")
-#'
-#' @export
-style_boxed <- function(results, title = NULL, spacing = 1, digits = 3, width = 8) {
-
-  if (is.null(title)) {
-    title <- comment(results)
-  }
-
-  mat <- round(as.matrix(results), digits = digits)
-  mat <- format(mat, digits = digits, nsmall = digits, width = width,
-                justify = "right", trim = TRUE, scientific = FALSE)
-
-  row_labels <- rownames(mat)
-  col_labels <- colnames(mat)
-
-  row_label_width <- if (!is.null(row_labels)) max(nchar(row_labels)) else 0
-  col_widths <- apply(mat, 2, function(col) max(nchar(col)))
-  col_labels_formatted <- format(col_labels, width = col_widths, justify = "right")
-  full_col_widths <- c(row_label_width, col_widths)
-
-  draw_border <- function(widths, left = "+", mid = "+", right = "+", fill = "-") {
-    parts <- mapply(function(w) strrep(fill, w + 2), widths, SIMPLIFY = TRUE)
-    paste0(left, paste(parts, collapse = mid), right)
-  }
-
-  draw_row <- function(cells, widths) {
-    contents <- mapply(function(cell, w) {
-      paste0(" ", format(cell, width = w, justify = "right"), " ")
-    }, cells, widths, SIMPLIFY = TRUE)
-    paste0("|", paste(contents, collapse = "|"), "|")
-  }
-
-  header_cells <- c("", col_labels_formatted)
-  header_line <- draw_row(header_cells, full_col_widths)
-
-  data_lines <- sapply(seq_len(nrow(mat)), function(i) {
-    row_name <- if (!is.null(row_labels)) format(row_labels[i], width = row_label_width, justify = "left") else ""
-    row_cells <- mapply(format, mat[i, ], width = col_widths, MoreArgs = list(justify = "right"))
-    draw_row(c(row_name, row_cells), full_col_widths)
-  })
-
-  top_border <- draw_border(full_col_widths)
-  mid_border <- draw_border(full_col_widths)
-  bottom_border <- draw_border(full_col_widths)
-
-  title_block <- if (!is.null(title)) c(title, "") else NULL
-  blank_lines <- rep("", spacing)
-
-  boxed_output <- c(
-    blank_lines,
-    title_block,
-    top_border,
-    header_line,
-    mid_border,
-    data_lines,
-    bottom_border,
-    blank_lines
-  )
-
-  cat(paste(boxed_output, collapse = "\n"), "\n")
-}
-
-
-#' Format and Print a Matrix Using a Selected Table Style
-#'
-#' Applies a consistent, formatted style to a numeric matrix or data frame and prints
-#' it to the console. Supports multiple output styles including plain text, APA format,
-#' boxed layout, and Markdown.
-#'
-#' @param results A numeric matrix or data frame to format.
-#' @param digits Number of decimal digits to display in the formatted output.
-#' @param width Minimum column width for numeric values.
-#' @param style A character string specifying the output style. One of `"plain"`, `"apa"`, `"boxed"`, or `"md"`.
-#' @param title Optional title to be displayed above the table.
-#' @param spacing Number of blank lines to include above and below the table.
-#'
-#' @details
-#' This is a convenience wrapper that dispatches to the appropriate table styling function:
-#' \itemize{
-#'   \item \code{style_plain()} - Simple plain-text format
-#'   \item \code{style_apa()} - APA-style layout with rules
-#'   \item \code{style_boxed()} - Boxed ASCII-style table
-#'   \item \code{style_md()} - GitHub-flavored Markdown table
-#' }
-#'
-#' @return Invisibly returns \code{NULL}. The table is printed to the console.
-#'
-#' @examples
-#' # Example matrix with group means and SDs
-#' results <- matrix(c(2.5, 3.0, 0.5, 0.6), nrow = 2, byrow = TRUE)
-#' rownames(results) <- c("Condition 1", "Condition 2")
-#' colnames(results) <- c("Mean", "SD")
-#'
-#' # Print using default style
-#' print_table(results)
-#'
-#' # Use boxed format with custom title
-#' print_table(results, style = "boxed", title = "Group Statistics")
-#'
-#' # Output APA-style with 2 decimal digits
-#' print_table(results, style = "apa", digits = 2)
-#'
-#' @export
-print_table <- function(results, digits = 3, width = 8, style = c("plain", "apa", "boxed", "md"), title = NULL, spacing = 1) {
-  style <- match.arg(style)
   
-  # Dispatch to style function directly, passing results as-is
-  switch(
-    style,
-    plain = style_plain(results, title = title, digits = digits, width = width, spacing = spacing),
-    apa   = style_apa(results, title = title, digits = digits, width = width, spacing = spacing),
-    boxed = style_boxed(results, title = title, digits = digits, width = width, spacing = spacing),
-    md    = style_md(results, title = title, digits = digits, width = width, spacing = spacing)
-  )
+  if (spacing[1] > 0) cat(rep("\n", spacing[1]), sep = "")
+  if (!is.null(title)) cat(title, "\n\n")
+  
+  printed_lines <- capture.output(print(results))
+  max_width <- max(nchar(printed_lines))
+  line <- paste(rep("-", max_width), collapse = "")
+
+  cat(line, "\n")
+  cat(printed_lines[1], "\n")
+  cat(line, "\n")
+
+  if (length(printed_lines) > 1) {
+    cat(paste(printed_lines[-1], collapse = "\n"), "\n")
+  }
+  
+  cat(line, "\n")
+  if (spacing[2] > 0) cat(rep("\n", spacing[2]), sep = "")
+}
+
+#' Format and Print Matrix
+#'
+#' Wrapper function to format and print a matrix using a specified style.
+#'
+#' @param results A numeric matrix.
+#' @param digits Number of decimal places to round to. Default is 3.
+#' @param padding Extra space padding on each side of values. Default is 0.
+#' @param width Fixed width for each column. If \code{NULL}, computed from digits and padding.
+#' @param title Optional character string to print above the matrix. If \code{NULL}, uses the matrix comment.
+#' @param spacing Number of lines before and after the matrix. Either a single number or a vector of length 2.
+#' @param style Character string indicating print style. One of \code{"plain"} (default) or \code{"apa"}.
+#' @param ... Additional arguments passed to \code{format_matrix()}.
+#'
+#' @return Invisibly returns the formatted matrix (as a character matrix).
+#'
+#' @examples
+#' mat <- matrix(c(0.123456, 0.789012, 0.345678,
+#'                 0.901234, 0.567890, 0.123456,
+#'                 0.654321, 0.234567, 0.987654),
+#'               nrow = 3, byrow = TRUE)
+#' colnames(mat) <- c("Var1", "Var2", "Var3")
+#' rownames(mat) <- c("A", "B", "C")
+#'
+#' # Default plain style
+#' print_matrix(mat, title = "Plain Matrix")
+#'
+#' # APA style
+#' print_matrix(mat, title = "APA Style Matrix", style = "apa")
+#'
+#' @export
+print_matrix <- function(results,
+                         digits = 3,
+                         padding = 0,
+                         width = 8,
+                         title = NULL,
+                         spacing = 1,
+                         style = "plain",
+                         ...) {
+  formatted <- format_matrix(results, digits = digits, padding = padding, width = width, ...)
+
+  if (is.null(title)) {
+    title <- comment(results)
+  }
+
+  style <- tolower(style)
+  if (style == "apa") {
+    print_matrix_apa(formatted, title = title, spacing = spacing)
+  } else if (style == "plain") {
+    print_matrix_plain(formatted, title = title, spacing = spacing)
+  } else {
+    stop("Unknown style: must be either 'apa' or 'plain'")
+  }
+
+  invisible(formatted)
 }

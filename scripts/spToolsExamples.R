@@ -3,9 +3,9 @@
 
 ### Source the Functions
 
-source("https://raw.githubusercontent.com/dgbonett/statpsych/title/R/statpsych1.R")
-source("http://raw.githubusercontent.com/cwendorf/spTools/title/source-spTools.R")
-source("http://raw.githubusercontent.com/cwendorf/DEVISE/title/source-DEVISE.R")
+source("https://raw.githubusercontent.com/dgbonett/statpsych/main/R/statpsych1.R")
+source("http://raw.githubusercontent.com/cwendorf/spTools/main/source-spTools.R")
+source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
 ### Input Summary
 
@@ -18,8 +18,7 @@ rownames(Results) <- c("Level1", "Level2", "Comparison")
 ### Results
 
 Results
-Results |> style_apa()
-Results |> print_table(style="apa", digits = 4, width = 10)
+Results |> print_matrix(style="apa", digits = 4, width = 10)
 Results |> plot_comp(title = "Comparison Plot", values = TRUE)
 
 ### Input Summary
@@ -32,5 +31,5 @@ rownames(Results) <- c("Level1", "Level2", "Comparison")
 ### Results
 
 Results
-Results |> print_table(digits=4)
-Results |> plot_comp(title = "Comparison Plot", values = TRUE, digits=4)
+Results |> print_matrix(digits = 2)
+Results |> plot_comp(title = "Comparison Plot", values = TRUE)

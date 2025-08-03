@@ -71,6 +71,24 @@ display.cint <- function(x, digits = getOption("digits"), ...) {
 }
 
 
+#' Convert Confidence Interval Object to a MAtrix
+#'
+#' Converts an object containing an estimate and a confidence interval into a one-row matrix 
+#' with column names "Estimate", "LL" (lower limit), and "UL" (upper limit).
+#'
+#' @param x A list or object with elements `estimate` (numeric) and `interval` (a numeric vector of length 2).
+#' @param rowname A character string specifying the row name of the resulting matrix. Defaults to `"Outcome"`.
+#' @param ... Additional arguments (currently unused).
+#'
+#' @return A 1-row matrix with columns: `Estimate`, `LL`, and `UL`, and row name as specified by `rowname`.
+#'
+#' @examples
+#' ci_obj <- list(estimate = 1.5, interval = c(1.2, 1.8))
+#' convert.cint(ci_obj)
+#'
+#' convert.cint(ci_obj, rowname = "Risk Ratio")
+#'
+#' @export
 convert.cint <- function(x, rowname = "Outcome", ...) {
   df <- matrix(
     c(x$estimate, x$interval[1], x$interval[2]),
@@ -99,5 +117,5 @@ Results <- rbind(Level1, Level2, Comparison)
 ### Results
 
 Results
-Results |> print_table()
+Results |> print_matrix(style = "apa")
 Results |> plot_comp(title = "Comparison Plot", values = TRUE)

@@ -1,33 +1,6 @@
 # DEVISE
 ## Interval Plots
 
-#' Find Confidence Interval Columns by Common Aliases
-#'
-#' Identifies the lower and upper limit columns in a dataset using common naming conventions.
-#' This helper function searches for column names that match typical labels for lower and upper
-#' confidence interval bounds (e.g., "ll", "ul", "lower", "upper", "ci_lower", etc.).
-#'
-#' @param colnames A character vector of column names (e.g., from `colnames(dataframe)`).
-#'
-#' @return An integer vector of length 2. The first element is the index of the lower limit column,
-#' and the second is the index of the upper limit column.
-#' 
-#' @noRd
-find_intervals <- function(colnames) {
-  ll_patterns <- c("ll", "lower", "lowerlimit", "ci_lower", "lcl")
-  ul_patterns <- c("ul", "upper", "upperlimit", "ci_upper", "ucl")
-  
-  find_col <- function(patterns) {
-    idx <- which(tolower(colnames) %in% patterns)
-    if (length(idx) == 0) stop("Could not find LL or UL columns with reasonable aliases.")
-    idx[1]
-  }
-  
-  ll_idx <- find_col(ll_patterns)
-  ul_idx <- find_col(ul_patterns)
-  
-  c(ll_idx, ul_idx)
-}
 
 #' Plot Point Estimates with Confidence Intervals
 #'
@@ -96,8 +69,7 @@ plot_set <- function(results,
   if (is.null(title)) title <- comment(results)
   main <- paste(strwrap(title, width = 0.7 * getOption("width")), collapse = "\n")
   
-  cols <- find_intervals(colnames(results))
-  results <- results[, c(1, cols), drop = FALSE]
+  results <- intervals(results)
   
   if (is.null(ylim)) {
     ylim <- range(pretty(c(floor(min(results[, 2]) - 0.5), ceiling(max(results[, 3]) + 0.5))))
@@ -209,8 +181,7 @@ plot_comp <- function(results,
   if (is.null(title)) title <- comment(results)
   main <- paste(strwrap(title, width = 0.7 * getOption("width")), collapse = "\n")
   
-  cols <- find_intervals(colnames(results))
-  results <- results[, c(1, cols), drop = FALSE]
+  results <- intervals(results)
   
   graph <- results
   graph[3, ] <- results[3, ] + results[1, 1]
@@ -232,10 +203,10 @@ plot_comp <- function(results,
   axis(2)
   axis(2, at = ylim, labels = FALSE, lwd.tick = 0)
   
-  if (results[1, 1] < results[2, 1]) {
-    td <- graph[1, 1] - axTicks(4)[max(which(axTicks(4) < graph[1, 1]))]
+  td <- if (results[1, 1] < results[2, 1]) {
+    graph[1, 1] - axTicks(4)[max(which(axTicks(4) < graph[1, 1]))]
   } else {
-    td <- graph[1, 1] - axTicks(4)[min(which(axTicks(4) > graph[1, 1]))]
+    graph[1, 1] - axTicks(4)[min(which(axTicks(4) > graph[1, 1]))]
   }
   
   val <- axTicks(4) - graph[1, 1] + td

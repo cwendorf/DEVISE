@@ -196,3 +196,29 @@ rows <- function(out, rows = NULL) {
 
   filter_one(out)
 }
+
+
+#' Extract Point Estimate and Confidence Interval Columns
+#'
+#' Selects the point estimate and confidence interval columns from a data frame or matrix.
+#' Recognizes common CI column names such as "lower", "upper", "ci_lower", "ci_upper", etc.
+#'
+#' @param x A data frame or matrix with column names.
+#'
+#' @return A data frame with the first column as point estimate, and the next two as lower and upper bounds.
+#'
+#' @export
+intervals <- function(x) {
+  colnames_x <- tolower(colnames(x))
+  ll_patterns <- c("ll", "lower", "lowerlimit", "ci_lower", "lcl")
+  ul_patterns <- c("ul", "upper", "upperlimit", "ci_upper", "ucl")
+
+  ll_idx <- which(colnames_x %in% ll_patterns)[1]
+  ul_idx <- which(colnames_x %in% ul_patterns)[1]
+
+  if (is.na(ll_idx) || is.na(ul_idx)) {
+    stop("Could not identify lower and upper confidence interval columns.")
+  }
+
+  x[, c(1, ll_idx, ul_idx), drop = FALSE]
+}

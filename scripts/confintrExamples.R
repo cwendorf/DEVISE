@@ -1,5 +1,5 @@
 # DEVISE
-## Interfacing with `confintr`
+## Examples with `confintr`
 
 ### Source the Functions
 
@@ -18,86 +18,6 @@ source.github <- function(username, repo, branch) {
 }
 source.github("mayer79", "confintr", "main")
 
-
-### New Helper Functions
-
-#' Display Confidence Interval Object
-#'
-#' Prints a formatted summary of a confidence interval object created by a custom function.
-#' This includes information on the probabilities, type, and parameter, along with a 
-#' labeled display of the estimate and the confidence interval bounds.
-#'
-#' @param x An object representing a confidence interval, typically containing elements 
-#' like `estimate`, `interval`, `probs`, `type`, `parameter`, and `info`.
-#' @param digits Number of significant digits to use for numeric display. Defaults to `getOption("digits")`.
-#' @param ... Additional arguments passed to `print.data.frame()`.
-#'
-#' @return Invisibly returns the printed data frame with columns for the estimate and confidence interval bounds.
-#' @export
-#'
-#' @seealso \code{\link{convert.cint}}
-display.cint <- function(x, digits = getOption("digits"), ...) {
-  # Print title and info left-aligned with no prefix
-  cat("\n")
-  cat(
-    strwrap(
-      paste(
-        props2text(x$probs),
-        format_p(diff(x$probs), digits = digits),
-        x$type,
-        "confidence interval for the",
-        x$parameter,
-        x$info
-      )
-    ),
-    sep = "\n"
-  )
-  cat("\n")
-
-  # Prepare column names for interval from probs
-  ci_names <- format_p(x$probs, digits = digits)
-
-  # Use helper function to generate data.frame
-  df <- convert.cint(x)
-
-  # Rename CI columns to the formatted probs (like "2.5%", "97.5%")
-  colnames(df)[2:3] <- ci_names
-
-  # Print data.frame right-aligned (right=TRUE) with digits option
-  print(df, digits = digits, right = TRUE, row.names = FALSE)
-
-  cat("\n")
-  invisible(df)
-}
-
-
-#' Convert Confidence Interval Object to a MAtrix
-#'
-#' Converts an object containing an estimate and a confidence interval into a one-row matrix 
-#' with column names "Estimate", "LL" (lower limit), and "UL" (upper limit).
-#'
-#' @param x A list or object with elements `estimate` (numeric) and `interval` (a numeric vector of length 2).
-#' @param rowname A character string specifying the row name of the resulting matrix. Defaults to `"Outcome"`.
-#' @param ... Additional arguments (currently unused).
-#'
-#' @return A 1-row matrix with columns: `Estimate`, `LL`, and `UL`, and row name as specified by `rowname`.
-#'
-#' @examples
-#' ci_obj <- list(estimate = 1.5, interval = c(1.2, 1.8))
-#' convert.cint(ci_obj)
-#'
-#' convert.cint(ci_obj, rowname = "Risk Ratio")
-#'
-#' @export
-convert.cint <- function(x, rowname = "Outcome", ...) {
-  df <- matrix(
-    c(x$estimate, x$interval[1], x$interval[2]),
-    nrow = 1,
-    dimnames = list(rowname, c("Estimate", "LL", "UL"))
-  )
-  df
-}
-
 ### Input Data
 
 Factor <- gl(2, 10, labels = c("Level1", "Level2"))
@@ -109,13 +29,13 @@ y2 <- IndependentData$Outcome[IndependentData$Factor == "Level2"]
 
 ### Create Summary
 
-ci_mean(y1) |> convert.cint(rowname="Level1") -> Level1
-ci_mean(y2) |> convert.cint(rowname="Level2") -> Level2
-ci_mean_diff(y2, y1) |> convert.cint(rowname="Comparison") -> Comparison
+ci_mean(y1) |> intervals() -> Level1
+ci_mean(y2) |> intervals() -> Level2
+ci_mean_diff(y2, y1) |> intervals() -> Comparison
 Results <- rbind(Level1, Level2, Comparison)
+rownames(Results) <- c("Level1", "Level2", "Comparison")
 
 ### Results
 
-Results
-Results |> print_matrix(style = "apa")
-Results |> plot_comp(title = "Comparison Plot", values = TRUE)
+Results |> print_matrix(title = "Table 1: Comparison Confidence Intervals", style = "apa")
+Results |> plot_comp(title = "Figure 1: Comparison Confidence Intervals", values = TRUE)

@@ -1,5 +1,5 @@
 # DEVISE
-## Interfacing with `statpsych` and `spTools`
+## Examples with `statpsych` and `spTools`
 
 ### Source the Functions
 
@@ -9,12 +9,6 @@ source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
 ### Input Summary
 
-ci.mean(alpha = .05, m = 8.000, sd = 1.414, n = 10)[,c(1,3,4)] -> Level1
-ci.mean(alpha = .05, m = 11.000, sd = 2.2111, n = 10)[,c(1,3,4)] -> Level2
-ci.mean2(alpha = .05, 11.000, 8.000, 2.211, 1.414, 10, 10)[1, c(1,6,7)] -> Comparison
-Results <- rbind(Level1, Level2, Comparison)
-rownames(Results) <- c("Level1", "Level2", "Comparison")
-
 ci.mean(alpha = .05, m = 8.000, sd = 1.414, n = 10) |> intervals() -> Level1
 ci.mean(alpha = .05, m = 11.000, sd = 2.2111, n = 10) |> intervals() -> Level2
 ci.mean2(alpha = .05, 11.000, 8.000, 2.211, 1.414, 10, 10) |> intervals() |> rows(1) -> Comparison
@@ -23,9 +17,8 @@ rownames(Results) <- c("Level1", "Level2", "Comparison")
 
 ### Results
 
-Results
-Results |> print_matrix(style="apa", digits = 4, width = 10)
-Results |> plot_comp(title = "Comparison Plot", values = TRUE)
+Results |> print_matrix(title = "Table 1: Comparison Confidence Intervals", style = "apa")
+Results |> plot_comp(title = "Figure 1: Comparison Confidence Intervals", values = TRUE)
 
 ### Input Summary
 
@@ -36,6 +29,5 @@ rownames(Results) <- c("Level1", "Level2", "Comparison")
 
 ### Results
 
-Results
-Results |> print_matrix(digits = 2)
-Results |> plot_comp(title = "Comparison Plot", values = TRUE)
+Results |> print_matrix(title = "Table 2: Comparison Confidence Intervals", style = "apa")
+Results |> plot_comp(title = "Figure 2: Comparison Confidence Intervals", values = TRUE)

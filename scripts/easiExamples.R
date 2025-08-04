@@ -1,5 +1,5 @@
 # DEVISE
-## Interfacing with `EASI`
+## Examples with `EASI`
 
 ### Source the Functions
 
@@ -14,12 +14,8 @@ IndependentData <- construct(Factor, Outcome)
 
 ### Results
 
-(Outcome~Factor) |> estimateMeans()
-(Outcome~Factor) |> estimateMeans() |> print_matrix(style = "apa")
-
-(Outcome~Factor) |> plotComparison()
-(Outcome~Factor) |> estimateComparison() |> plot_comp(main = "Comparison Plot", values = TRUE)
-
+(Outcome~Factor) |> estimateMeans() |> print_matrix(title = "Table 1: Comparison Confidence Intervals", style = "apa")
+(Outcome~Factor) |> estimateComparison() |> plot_comp(title = "Figure 1: Comparison Confidence Intervals", values = TRUE)
 
 ### Input Summary
 
@@ -29,8 +25,5 @@ IndependentSummary <- construct(Level1, Level2, class = "bsm")
 
 ### Results
 
-IndependentSummary |> estimateMeans()
-IndependentSummary |> estimateMeans() |> print_matrix(style = "apa", digits = 2)
-
-IndependentSummary |> plotComparison()
-IndependentSummary |> estimateComparison() |> plot_comp(title = "Comparison Plot", values = TRUE)
+IndependentSummary |> estimateMeans() |> print_matrix(title = "Table 2: Comparison Confidence Intervals", style = "apa")
+IndependentSummary |> estimateComparison() |> plot_comp(title = "Figure 2: Comparison Confidence Intervals", values = TRUE)

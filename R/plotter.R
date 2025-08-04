@@ -1,7 +1,6 @@
 # DEVISE
 ## Interval Plots
 
-
 #' Plot Point Estimates with Confidence Intervals
 #'
 #' Creates an interval plot displaying point estimates and their associated lower and upper

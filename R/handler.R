@@ -84,7 +84,7 @@ extract <- function(data, index) {
 #' columns(df, cols = c("Estimate", "SE"))
 #'
 #' @export
-columns <- function(out, cols = c("Estimate", "SE", "df", "LL", "UL")) {
+columns <- function(out, cols = NULL) {
   filter_one <- function(obj) {
     # Atomic vector → 1-row data frame
     if (is.atomic(obj) && !is.data.frame(obj) && !is.matrix(obj)) {
@@ -100,6 +100,14 @@ columns <- function(out, cols = c("Estimate", "SE", "df", "LL", "UL")) {
     }
 
     if (!is.data.frame(obj)) return(NULL)
+
+    # If cols not provided, try using intervals() to determine them
+    if (is.null(cols)) {
+      try({
+        return(intervals(obj))
+      }, silent = TRUE)
+      return(obj)  # fallback to returning full object if intervals() fails
+    }
 
     # Filter by column number or name
     result <- if (is.numeric(cols)) {
@@ -197,28 +205,50 @@ rows <- function(out, rows = NULL) {
   filter_one(out)
 }
 
-
 #' Extract Point Estimate and Confidence Interval Columns
 #'
-#' Selects the point estimate and confidence interval columns from a data frame or matrix.
-#' Recognizes common CI column names such as "lower", "upper", "ci_lower", "ci_upper", etc.
+#' Selects the point estimate and confidence interval columns from a data frame, matrix, or list.
 #'
-#' @param x A data frame or matrix with column names.
+#' @param x A data frame, matrix, or list with `estimate` and `interval` elements.
 #'
-#' @return A data frame with the first column as point estimate, and the next two as lower and upper bounds.
+#' @return A data frame or matrix with columns: Estimate, LL, UL.
 #'
 #' @export
 intervals <- function(x) {
-  colnames_x <- tolower(colnames(x))
-  ll_patterns <- c("ll", "lower", "lowerlimit", "ci_lower", "lcl")
-  ul_patterns <- c("ul", "upper", "upperlimit", "ci_upper", "ucl")
+  if (is.list(x) && !is.data.frame(x) && !is.matrix(x)) {
+    # Handle 'confintr' list-like objects
+    if (!all(c("estimate", "interval") %in% names(x))) {
+      stop("List object must contain 'estimate' and 'interval' elements.")
+    }
+    if (length(x$interval) != 2) {
+      stop("'interval' element must be a vector of length 2.")
+    }
 
-  ll_idx <- which(colnames_x %in% ll_patterns)[1]
-  ul_idx <- which(colnames_x %in% ul_patterns)[1]
+    return(matrix(
+      c(x$estimate, x$interval[1], x$interval[2]),
+      nrow = 1,
+      dimnames = list(NULL, c("Estimate", "LL", "UL"))
+    ))
+  }
+
+  # Otherwise assume it's a data frame or matrix
+  colnames_x <- tolower(colnames(x))
+  
+  est_patterns <- c("estimate", "est", "beta", "effect", "coef", "coefficient")
+  ll_patterns  <- c("ll", "lower", "lowerlimit", "ci_lower", "lcl")
+  ul_patterns  <- c("ul", "upper", "upperlimit", "ci_upper", "ucl")
+
+  est_idx <- which(colnames_x %in% est_patterns)[1]
+  ll_idx  <- which(colnames_x %in% ll_patterns)[1]
+  ul_idx  <- which(colnames_x %in% ul_patterns)[1]
 
   if (is.na(ll_idx) || is.na(ul_idx)) {
     stop("Could not identify lower and upper confidence interval columns.")
   }
 
-  x[, c(1, ll_idx, ul_idx), drop = FALSE]
+  if (is.na(est_idx)) {
+    est_idx <- 1  # Default to first column if no estimate found
+  }
+
+  x[, c(est_idx, ll_idx, ul_idx), drop = FALSE]
 }

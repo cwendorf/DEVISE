@@ -1,12 +1,20 @@
 # DEVISE
 ## Simple Examples
 
-### Input Data
+### Display Summary Statistics
 
-Level1 <- c(N = 10, M = 8.000, SD = 1.414)
-Level2 <- c(N = 10, M = 11.000, SD = 2.211)
-Results <- rbind(Level1, Level2)
+mtcars |> describe(vars = c("mpg", "hp")) |> print_matrix(title = "Table 1: Descriptive Statistics", style = "apa")
+mtcars |> correlate(vars = c("mpg", "hp"), type = "cov") |> print_matrix(title = "Table 2: Covariance Matrix", style = "apa")
 
-### Results
+### Write to a File
 
-Results |> print_matrix(title = "Table 1: Descriptive Statistics", style = "apa")
+sink("Results.txt") # Create file and start redirecting
+mtcars |> describe(vars = c("mpg", "hp")) |> print_matrix(title = "Table 1: Descriptive Statistics", style = "apa")
+mtcars |> correlate(vars = c("mpg", "hp")) |> print_matrix(title = "Table 2: Corrrelation Matrix", style = "apa")
+sink()  # Stop redirecting
+
+### Extract a Vector
+
+mtcars |> describe(vars = c("mpg", "hp")) |> extract("N")
+mtcars |> describe(vars = c("mpg", "hp")) |> extract("M")
+mtcars |> describe(vars = c("mpg", "hp")) |> extract("SD")

@@ -1,7 +1,7 @@
 Package: DEVISE
 Type: Package
 Title: Data Exploration, Visualization, and Inference with Statistical Estimation
-Description: `DEVISE` is a companion package for working with results from a variety of other statistical packages. Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, `DEVISE` handles the pre-processing of data into the required formats and post-processing the results into more accessible and readable forms.
+Description: DEVISE is a companion package for working with other statistical packages. Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, DEVISE handles the pre-processing of data and post-processing of results into more accessible and readable formats.
 Version: 0.1.0
 Authors@R: person("Craig", "Wendorf", email = "cwendorf@uwsp.edu", role = c("aut", "cre"))
 License: MIT + file LICENSE

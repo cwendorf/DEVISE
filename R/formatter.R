@@ -13,7 +13,7 @@
 #'
 #' @return A noquote matrix with formatted strings for display.
 #' @noRd
-format_matrix <- function(results, digits = 3, padding = 0, width = 8, ...) {
+format_matrix <- function(results, digits = 3, padding = 0, width = 10, ...) {
   if (is.null(width)) width <- digits + (padding * 2)
   colnames(results) <- format(colnames(results), width = width, justify = "right")
   noquote(format(as.matrix(round(results, digits = digits)), width = width, justify = "right", digits = digits, nsmall = digits, trim = TRUE, scientific = FALSE, ...))
@@ -126,7 +126,7 @@ print_matrix_apa <- function(results, title = NULL, spacing = 0, ...) {
 print_matrix <- function(results,
                          digits = 3,
                          padding = 0,
-                         width = 8,
+                         width = 10,
                          title = NULL,
                          spacing = 1,
                          style = "plain",

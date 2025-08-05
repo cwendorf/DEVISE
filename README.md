@@ -8,7 +8,9 @@
 
 ### Overview
 
-`DEVISE` is an R package for confidence interval calculation and visualization. It is under construction.
+**`DEVISE` is under construction.**
 
-Until then, use my other R package:
-[https://github.com/cwendorf/EASI](https://github.com/cwendorf/EASI)
+`DEVISE` is a companion package for working with results from a variety of other statistical packages. 
+Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, 
+`DEVISE` handles the pre-processing of data into the required formats and post-processing 
+the results into more accessible and readable forms.

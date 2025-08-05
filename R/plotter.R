@@ -28,7 +28,7 @@
 #'
 #' @return Invisibly returns the `results` object (modified to include only point and interval columns).
 #'
-#' #' @examples
+#' @examples
 #' # Create example data frame with estimate and confidence intervals
 #' results <- data.frame(
 #'   estimate = c(0.3, 0.5, 0.7),
@@ -139,7 +139,7 @@ plot_set <- function(results,
 #'
 #' @return Invisibly returns the `results` object (modified to include only point and interval columns).
 #'
-#' #' @examples
+#' @examples
 #' # Create comparison data for two groups and their difference
 #' comp_data <- data.frame(
 #'   estimate = c(0.6, 0.4, 0.2),

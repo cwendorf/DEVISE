@@ -93,44 +93,28 @@ print_matrix_apa <- function(results, title = NULL, spacing = 0, ...) {
   if (spacing[2] > 0) cat(rep("\n", spacing[2]), sep = "")
 }
 
-#' Format and Print Matrix
+#' Render a Formatted Matrix
 #'
-#' Wrapper function to format and print a matrix using a specified style.
+#' Render a numeric matrix using a specified formatting style (e.g., plain or APA).
 #'
 #' @param results A numeric matrix.
-#' @param digits Number of decimal places to round to. Default is 3.
-#' @param padding Extra space padding on each side of values. Default is 0.
-#' @param width Fixed width for each column. If \code{NULL}, computed from digits and padding.
-#' @param title Optional character string to print above the matrix. If \code{NULL}, uses the matrix comment.
-#' @param spacing Number of lines before and after the matrix. Either a single number or a vector of length 2.
-#' @param style Character string indicating print style. One of \code{"plain"} (default) or \code{"apa"}.
-#' @param ... Additional arguments passed to \code{format_matrix()}.
-#'
-#' @return Invisibly returns the formatted matrix (as a character matrix).
-#'
-#' @examples
-#' mat <- matrix(c(0.123456, 0.789012, 0.345678,
-#'                 0.901234, 0.567890, 0.123456,
-#'                 0.654321, 0.234567, 0.987654),
-#'               nrow = 3, byrow = TRUE)
-#' colnames(mat) <- c("Var1", "Var2", "Var3")
-#' rownames(mat) <- c("A", "B", "C")
-#'
-#' # Default plain style
-#' print_matrix(mat, title = "Plain Matrix")
-#'
-#' # APA style
-#' print_matrix(mat, title = "APA Style Matrix", style = "apa")
-#'
+#' @param digits Number of decimal places to round to.
+#' @param padding Extra space padding around values.
+#' @param width Fixed width for each column. If \code{NULL}, auto-computed.
+#' @param title Optional title printed above the matrix.
+#' @param spacing Lines of vertical space before/after matrix.
+#' @param style One of \code{"plain"} (default) or \code{"apa"}.
+#' @param ... Additional formatting arguments.
+#' @return Invisibly returns the formatted character matrix.
 #' @export
-print_matrix <- function(results,
-                         digits = 3,
-                         padding = 0,
-                         width = 10,
-                         title = NULL,
-                         spacing = 1,
-                         style = "plain",
-                         ...) {
+render <- function(results,
+                   digits = 3,
+                   padding = 0,
+                   width = 10,
+                   title = NULL,
+                   spacing = 1,
+                   style = "plain",
+                   ...) {
   formatted <- format_matrix(results, digits = digits, padding = padding, width = width, ...)
 
   if (is.null(title)) {

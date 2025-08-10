@@ -3,7 +3,8 @@
 
 ### Source the Functions
 
-source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
+source("https://gist.githubusercontent.com/cwendorf/07d9796a750d8ac7c50aa43f28e06415/raw/df243fec33066a72235dc4596c532ca46f9f8c7b/source_github_folder.R")
+source_github_folder("cwendorf", "DEVISE", "main", "R")
 
 ### Display Summary Statistics
 
@@ -22,3 +23,15 @@ sink()  # Stop redirecting
 mtcars |> describe(vars = c("mpg", "hp")) |> extract("N")
 mtcars |> describe(vars = c("mpg", "hp")) |> extract("M")
 mtcars |> describe(vars = c("mpg", "hp")) |> extract("SD")
+
+
+
+### Direct Input
+
+c(Estimate = 8.000, LL = 6.988, UL = 9.012) -> Level1
+c(Estimate = 11.000, LL = 9.418, UL = 12.582) -> Level2
+c(Estimate = 3.000, LL = 1.234, UL = 4.766) -> Comparison
+rbind(Level1, Level2, Comparison) -> Results
+
+Results |> render(title = "Table 1: Comparison Confidence Intervals", style = "apa")
+Results |> compare(title = "Figure 1: Comparison Confidence Intervals", values = TRUE)

@@ -5,7 +5,7 @@
 
 source("https://gist.githubusercontent.com/cwendorf/07d9796a750d8ac7c50aa43f28e06415/raw/df243fec33066a72235dc4596c532ca46f9f8c7b/source_github_folder.R")
 source_github_folder("mayer79", "confintr", "main", "R")
-source_github_folder("cwendorf", "DEVISE", "main", "R")
+source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
 ### Obtain the Statistics
 

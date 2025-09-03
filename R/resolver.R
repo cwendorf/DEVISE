@@ -14,6 +14,17 @@
 #'   - If a single variable is provided, returns the vector.
 #'   - If a formula is provided, returns the formula object suitable for functions like `lm()`.
 #'
+#' @examples
+#' df <- data.frame(
+#'   group = rep(c("A", "B"), each = 5),
+#'   score = c(5, 6, 7, 5, 6, 8, 9, 7, 8, 9)
+#' )
+#'
+#' df |> resolve(score ~ group) |> t.test()
+#' df |> resolve(score ~ group) |> lm() |> summary()
+#' df |> resolve(score ~ group) |> aov()
+#' df |> resolve(score)
+#'
 #' @export
 resolve <- function(data, formula) {
   formula <- substitute(formula)

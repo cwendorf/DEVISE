@@ -92,10 +92,10 @@ columns <- function(out, cols = NULL) {
       colnames(obj) <- paste0("V", seq_len(ncol(obj)))
     }
 
-    # Matrix → convert to data frame
+    # Matrix → convert to data frame, preserve row names
     is_matrix <- is.matrix(obj)
+    orig_rown <- if (is_matrix) rownames(obj) else NULL
     if (is_matrix) {
-      rown <- rownames(obj)
       obj <- as.data.frame(obj, stringsAsFactors = FALSE)
     }
 
@@ -110,31 +110,31 @@ columns <- function(out, cols = NULL) {
     }
 
     # Filter by column number or name
-    result <- if (is.numeric(cols)) {
+    if (is.numeric(cols)) {
       idx <- cols[cols >= 1 & cols <= ncol(obj)]
-      obj[, idx, drop = FALSE]
+      result <- obj[, idx, drop = FALSE]
     } else if (is.character(cols)) {
-      keep <- intersect(cols, colnames(obj))
-      obj[, keep, drop = FALSE]
+      keep <- cols[cols %in% colnames(obj)]
+      result <- obj[, keep, drop = FALSE]
     } else {
-      obj
+      result <- obj
     }
 
     # Return in original type
     if (is_matrix) {
       result <- as.matrix(result)
-      if (!is.null(rown)) rownames(result) <- rown
+      if (!is.null(orig_rown) && nrow(result) == length(orig_rown)) {
+        rownames(result) <- orig_rown
+      }
     }
 
     result
   }
 
-  if (is.list(out)) {
-    result <- lapply(out, filter_one)
-    names(result) <- names(out)
-    return(result)
+  if (is.null(out)) return(NULL)
+  if (is.list(out) && !is.data.frame(out) && !is.matrix(out)) {
+    return(lapply(out, filter_one))
   }
-
   filter_one(out)
 }
 
@@ -196,13 +196,51 @@ rows <- function(out, rows = NULL) {
     result
   }
 
-  if (is.list(out)) {
-    result <- lapply(out, filter_one)
-    names(result) <- names(out)
-    return(result)
+  if (is.null(out)) return(NULL)
+  if (is.list(out) && !is.data.frame(out) && !is.matrix(out)) {
+    return(lapply(out, filter_one))
   }
-
   filter_one(out)
+}
+
+#' Set Row Names of a Data Frame
+#'
+#' Assign row names to a data frame in a pipe-friendly way.
+#' 
+#' **Note:** This function does **not** modify the original data frame in place.
+#' You must assign the result back to a variable.
+#'
+#' @param x A data frame.
+#' @param names A character vector of row names. Must have length equal to `nrow(x)`.
+#'
+#' @return A data frame identical to `x` but with updated row names.
+#' @examples
+#' df <- data.frame(a = 1:3, b = 4:6)
+#' df <- df |> rownamer(c("A", "B", "C"))  # Must assign back to df
+#' @export
+rownamer <- function(x, names) {
+  rownames(x) <- names
+  x
+}
+
+#' Set Column Names of a Data Frame
+#'
+#' Assign column names to a data frame in a pipe-friendly way.
+#' 
+#' **Note:** This function does **not** modify the original data frame in place.
+#' You must assign the result back to a variable.
+#'
+#' @param x A data frame.
+#' @param names A character vector of column names. Must have length equal to `ncol(x)`.
+#'
+#' @return A data frame identical to `x` but with updated column names.
+#' @examples
+#' df <- data.frame(a = 1:3, b = 4:6)
+#' df <- df |> colnamer(c("First", "Second"))  # Must assign back to df
+#' @export
+colnamer <- function(x, names) {
+  colnames(x) <- names
+  x
 }
 
 #' Extract Point Estimate and Confidence Interval Columns

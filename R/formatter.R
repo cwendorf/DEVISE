@@ -1,5 +1,5 @@
 # DEVISE
-## Matrix Formatting
+## Formatting Matrices
 
 #' Format a Numeric Matrix for Aligned Printing
 #'
@@ -43,7 +43,7 @@ unformat_matrix <- function(results) {
 #'
 #' @return Invisibly returns the printed matrix.
 #' @noRd
-print_matrix_plain <- function(results, title = NULL, spacing = 0, ...) {
+style_plain <- function(results, title = NULL, spacing = 0, ...) {
   if (length(spacing) == 1) {
     spacing <- rep(spacing, 2)
   }
@@ -59,14 +59,14 @@ print_matrix_plain <- function(results, title = NULL, spacing = 0, ...) {
 #' Print Formatted Matrix in APA Style
 #'
 #' Prints a matrix with APA-style header and border lines.
-#' 
+#'
 #' @param results A numeric matrix already formatted.
 #' @param title Optional title printed above the matrix.
 #' @param spacing Number of blank lines above and below the matrix. A single number or a vector of length 2.
 #'
 #' @return Invisibly returns the printed matrix.
 #' @noRd
-print_matrix_apa <- function(results, title = NULL, spacing = 0, ...) {
+style_apa <- function(results, title = NULL, spacing = 0, ...) {
   if (length(spacing) == 1) {
     spacing <- rep(spacing, 2)
   }
@@ -93,28 +93,28 @@ print_matrix_apa <- function(results, title = NULL, spacing = 0, ...) {
   if (spacing[2] > 0) cat(rep("\n", spacing[2]), sep = "")
 }
 
-#' Render a Formatted Matrix
+#' Style and Print a Formatted Matrix
 #'
-#' Render a numeric matrix using a specified formatting style (e.g., plain or APA).
+#' Style and print a numeric matrix using a specified formatting style (plain or APA).
 #'
 #' @param results A numeric matrix.
 #' @param digits Number of decimal places to round to.
 #' @param padding Extra space padding around values.
-#' @param width Fixed width for each column. If \code{NULL}, auto-computed.
+#' @param width Fixed width for each column. If NULL, auto-computed.
 #' @param title Optional title printed above the matrix.
 #' @param spacing Lines of vertical space before/after matrix.
-#' @param style One of \code{"plain"} (default) or \code{"apa"}.
+#' @param style One of "plain" (default) or "apa".
 #' @param ... Additional formatting arguments.
 #' @return Invisibly returns the formatted character matrix.
 #' @export
-render <- function(results,
-                   digits = 3,
-                   padding = 0,
-                   width = 10,
-                   title = NULL,
-                   spacing = 1,
-                   style = "plain",
-                   ...) {
+style_matrix <- function(results,
+                        digits = 3,
+                        padding = 0,
+                        width = 10,
+                        title = NULL,
+                        spacing = 1,
+                        style = "plain",
+                        ...) {
   formatted <- format_matrix(results, digits = digits, padding = padding, width = width, ...)
 
   if (is.null(title)) {
@@ -123,9 +123,9 @@ render <- function(results,
 
   style <- tolower(style)
   if (style == "apa") {
-    print_matrix_apa(formatted, title = title, spacing = spacing)
+    style_apa(formatted, title = title, spacing = spacing)
   } else if (style == "plain") {
-    print_matrix_plain(formatted, title = title, spacing = spacing)
+    style_plain(formatted, title = title, spacing = spacing)
   } else {
     stop("Unknown style: must be either 'apa' or 'plain'")
   }

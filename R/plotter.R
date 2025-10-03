@@ -1,13 +1,12 @@
 # DEVISE
-## Interval Plots
+## Plotting Statistics
 
-#' Display Point Estimates with Confidence Intervals
+#' Plot Point Estimates with Confidence Intervals
 #'
-#' Displays a set of point estimates and their confidence intervals.
-#' Useful for visualizing statistical estimates across multiple conditions or outcomes.
+#' Plots a set of point estimates and their confidence intervals for multiple conditions or outcomes.
 #'
 #' @param results A data frame or matrix with point estimates in the first column,
-#' and confidence limits in columns named like "ll", "ul", "ci_lower", "ci_upper".
+#'   and confidence limits in columns named like "ll", "ul", "ci_lower", "ci_upper".
 #' @param title Plot title. If `NULL`, uses the `comment()` attribute of `results`.
 #' @param ylab Label for the Y-axis.
 #' @param xlab Label for the X-axis.
@@ -27,7 +26,7 @@
 #'
 #' @return Invisibly returns the modified `results` object.
 #' @export
-display <- function(results, 
+plot_conditions <- function(results, 
                     title = NULL, 
                     ylab = "Outcome", 
                     xlab = "", 
@@ -92,7 +91,7 @@ display <- function(results,
   invisible(results)
 }
 
-#' Compare Two Groups with Confidence Intervals
+#' Plot Comparison of Two Groups with Confidence Intervals
 #'
 #' Plots two group means and their confidence intervals, along with their difference estimate.
 #' Designed for paired or between-group comparisons.
@@ -103,7 +102,7 @@ display <- function(results,
 #' @param xlab Label for the X-axis.
 #' @param ylim Numeric Y-axis limits. If `NULL`, auto-calculated.
 #' @param slab Label for the secondary Y-axis (typically for difference).
-#' @param rope Region of practical equivalence for the difference.
+#' @param rope Length-2 numeric vector for shading a region of practical equivalence for the difference.
 #' @param digits Decimal places for numeric labels.
 #' @param values Logical; display numeric values next to points and intervals.
 #' @param connect Logical; connect the group estimates.
@@ -111,14 +110,14 @@ display <- function(results,
 #' @param pch Plotting characters for each point.
 #' @param col Color for plot elements.
 #' @param offset Horizontal offset to avoid overlap.
-#' @param points Draw points?
-#' @param intervals Draw confidence intervals?
-#' @param lines Draw lines from group points to the difference?
+#' @param points Logical; draw points?
+#' @param intervals Logical; draw confidence intervals?
+#' @param lines Logical; draw lines from group points to the difference?
 #' @param ... Additional graphical parameters.
 #'
 #' @return Invisibly returns the modified `results` object.
 #' @export
-compare <- function(results, 
+plot_comparison <- function(results, 
                     title = NULL, 
                     ylab = "Outcome", 
                     xlab = "", 
@@ -140,7 +139,7 @@ compare <- function(results,
   if (is.null(title)) title <- comment(results)
   main <- paste(strwrap(title, width = 0.7 * getOption("width")), collapse = "\n")
 
-  results <- intervals(results)
+  results <- extract_intervals(results)
   graph <- results
   graph[3, ] <- results[3, ] + results[1, 1]
 

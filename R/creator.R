@@ -1,7 +1,7 @@
 # DEVISE
-## Creator
+## Creating Variables and Matrices
 
-#' Create Factor Groups
+#' Create Groups
 #'
 #' Generate a factor with `k` groups and a specified number of observations.
 #' Groups can be balanced (equal size) if `n` is a single integer, or weighted
@@ -16,23 +16,17 @@
 #' @return A factor of length `sum(n)` with `k` groups in sequence.
 #'
 #' @examples
-#' # Example 1: Balanced groups (total n = 10, k = 2 → 5 per group)
-#' create(k = 2, n = 10, labels = c("A", "B"))
+#' # Example 1: Balanced groups (n = 12, k = 3 → 4 per group)
+#' create_groups(k = 3, n = 12, labels = c("GroupA", "GroupB", "GroupC"))
 #'
-#' # Example 2: Balanced groups (n = 12, k = 3 → 4 per group)
-#' create(k = 3, n = 12, labels = c("X", "Y", "Z"))
+#' # Example 2: Weighted groups (sizes 2, 5, 5)
+#' create_groups(k = 3, n = c(2, 5, 5), labels = c("GroupA", "GroupB", "GroupC"))
 #'
-#' # Example 3: Weighted groups (sizes 3 and 7)
-#' create(k = 2, n = c(3, 7), labels = c("A", "B"))
-#'
-#' # Example 4: Weighted groups (sizes 2, 5, 5)
-#' create(k = 3, n = c(2, 5, 5), labels = c("X", "Y", "Z"))
-#'
-#' # Example 5: Default labels when none supplied
-#' create(k = 3, n = c(4, 6, 2))
+#' # Example 3: Default labels when none supplied
+#' create_groups(k = 3, n = c(4, 6, 2))
 #'
 #' @export
-create <- function(k, n, labels = seq_len(k)) {
+create_groups <- function(k, n, labels = seq_len(k)) {
   # Weighted case: n is a vector
   if (length(n) > 1L) {
     if (length(n) != k) stop("Length of `n` must equal `k` when using group sizes.")

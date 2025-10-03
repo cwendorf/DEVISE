@@ -1,19 +1,21 @@
 # DEVISE
 ## Method Handler
 
+
+
 ### Argument Handling
 
-arg_map <- list(
+map_args <- list(
   "confintr::ci_mean_t" = c(x = "x", conf_level = "conf_level"),
   "statpsych::CImean"  = c(mean = "mean", sd = "sd", n = "n", conf_level = "level")
 )
 
-translate_args <- function(args, method_name, arg_map) {
-  if (!method_name %in% names(arg_map)) {
+translate_args <- function(args, method_name, map_args) {
+  if (!method_name %in% names(map_args)) {
     stop("No argument map defined for method: ", method_name)
   }
 
-  map <- arg_map[[method_name]]
+  map <- map_args[[method_name]]
   translated_args <- list()
 
   for (standard_name in names(map)) {
@@ -26,7 +28,7 @@ translate_args <- function(args, method_name, arg_map) {
   return(translated_args)
 }
 
-match_args_to_method <- function(args, method_name) {
+match_args <- function(args, method_name) {
   if (grepl("::", method_name)) {
     parts <- strsplit(method_name, "::")[[1]]
     pkg <- parts[1]
@@ -41,9 +43,9 @@ match_args_to_method <- function(args, method_name) {
   return(matched_args)
 }
 
-### Main CI Function
+### Main Confidence Interval Handler
 
-ci <- function(
+compute_intervals <- function(
   x = NULL,
   y = NULL,
   mean = NULL,
@@ -64,10 +66,10 @@ ci <- function(
   )
 
   # Step 2: translate standardized args to method-specific names
-  translated_args <- translate_args(args, method, arg_map)
+  translated_args <- translate_args(args, method, map_args)
 
   # Step 3: filter only valid args
-  safe_args <- match_args_to_method(translated_args, method)
+  safe_args <- match_args(translated_args, method)
 
   # Step 4: evaluate the method dynamically
   if (grepl("::", method)) {

@@ -1,90 +1,66 @@
 # DEVISE
-## Matrix Filtering
+## Filtering Matrices
 
-#' Extract Row or Column as Named Vector from Data Frame or Matrix
+#' Set Row Names of a Data Frame
 #'
-#' This function extracts a single row or column from a matrix or data frame
-#' by name or index. It automatically detects whether the input corresponds to
-#' a row or a column and returns the result as a named vector. The names are
-#' preserved from the opposite dimension (column names for rows, row names for columns).
+#' Assign row names to a data frame in a pipe-friendly way.
 #'
-#' @param data A matrix or data frame from which to extract data.
-#' @param index A character or numeric value specifying the row or column to extract.
-#'   If character, it is matched against row names first, then column names.
-#'   If numeric, it is interpreted as a row index first, then a column index.
+#' Note: This function does not modify the original data frame in place. You must assign the result back to a variable.
 #'
-#' @return A named vector containing the extracted row or column values.
+#' @param x A data frame.
+#' @param names A character vector of row names. Must have length equal to `nrow(x)`.
 #'
+#' @return A data frame identical to `x` but with updated row names.
 #' @examples
-#' input <- data.frame(
-#'   m = c(1.1, 2.2, 3.3),
-#'   sd = c(0.1, 0.2, 0.3),
-#'   n = c(10, 20, 30),
-#'   row.names = c("group1", "group2", "group3")
-#' )
+#' # Basic usage
+#' df <- data.frame(a = 1:3, b = 4:6)
+#' df <- df |> name_rows(c("A", "B", "C"))  # Must assign back to df
 #'
-#' # Extract column "m" as named vector (names are row names)
-#' extract(input, "m")
-#'
-#' # Extract row "group2" as named vector (names are column names)
-#' extract(input, "group2")
-#'
+#' # Within-pipe renaming
+#' df <- data.frame(c(10, 0, 5), c(8, -1, 4), c(12, 1, 6))
+#' df |> name_rows(c("Group1", "Group2", "Group3")) -> Results
 #' @export
-extract <- function(data, index) {
-  if (is.character(index) && index %in% rownames(data)) {
-    vec <- data[index, ]           # drop=TRUE by default → atomic vector
-    nms <- colnames(data)
-    if (!is.null(nms) && length(vec) == length(nms)) {
-      names(vec) <- nms
-    }
-    return(vec)
-  }
-  
-  if (is.character(index) && index %in% colnames(data)) {
-    vec <- data[, index]           # drop=TRUE by default
-    nms <- rownames(data)
-    if (!is.null(nms) && length(vec) == length(nms)) {
-      names(vec) <- nms
-    }
-    return(vec)
-  }
-  
-  if (is.numeric(index)) {
-    if (index <= nrow(data)) {
-      vec <- data[index, ]         # drop=TRUE by default
-      nms <- colnames(data)
-      if (!is.null(nms) && length(vec) == length(nms)) {
-        names(vec) <- nms
-      }
-      return(vec)
-    } else if (index <= ncol(data)) {
-      vec <- data[, index]         # drop=TRUE by default
-      nms <- rownames(data)
-      if (!is.null(nms) && length(vec) == length(nms)) {
-        names(vec) <- nms
-      }
-      return(vec)
-    }
-  }
-  
-  stop("Invalid index: not found in row or column names, or out of bounds.")
+name_rows <- function(x, names) {
+  rownames(x) <- names
+  x
 }
 
-#' Filter Columns from Data Frame, Matrix, or List
+#' Set Column Names of a Data Frame
 #'
-#' Filters specified columns from a data frame, matrix, or list of such objects.
+#' Assign column names to a data frame in a pipe-friendly way.
+#'
+#' Note: This function does not modify the original data frame in place. You must assign the result back to a variable if using outside of a pipe.
+#'
+#' @param x A data frame.
+#' @param names A character vector of column names. Must have length equal to `ncol(x)`.
+#'
+#' @return A data frame identical to `x` but with updated column names.
+#' @examples
+#' # Basic usage
+#' df <- data.frame(a = 1:3, b = 4:6)
+#' df <- df |> name_columns(c("First", "Second"))  # Must assign back to df
+#'
+#' # Within-pipe renaming
+#' df <- data.frame(c(10, 0, 5), c(8, -1, 4), c(12, 1, 6))
+#' df |> name_columns(c("Estimate", "LL", "UL")) -> Results
+#' @export
+name_columns <- function(x, names) {
+  colnames(x) <- names
+  x
+}
+
+#' Extract Columns from Data Frame, Matrix, or List
+#'
+#' Extract specified columns from a data frame, matrix, or list of such objects.
 #'
 #' @param out A data frame, matrix, atomic vector, or a list of such objects.
-#' @param cols A numeric vector of column indices or a character vector of column names to keep.
-#'
-#' @return A filtered object with only the specified columns. The output will match the input type (matrix, data frame, or list).
-#'
+#' @param cols A numeric vector of column indices or a character vector of column names to keep. If NULL, all columns are returned or selected by intervals() if available.
+#' @return The filtered object with only the specified columns. The output type matches the input (matrix, data frame, or list).
 #' @examples
-#' df <- data.frame(Estimate = 1:3, SE = 0.1, Extra = 4:6)
-#' columns(df, cols = c("Estimate", "SE"))
-#'
+#' data.frame(Estimate = 1:3, SE = 0.1, Extra = 4:6) -> df
+#' df |> extract_columns(c("Estimate", "SE"))
 #' @export
-columns <- function(out, cols = NULL) {
+extract_columns <- function(out, cols = NULL) {
   filter_one <- function(obj) {
     # Atomic vector → 1-row data frame
     if (is.atomic(obj) && !is.data.frame(obj) && !is.matrix(obj)) {
@@ -101,12 +77,12 @@ columns <- function(out, cols = NULL) {
 
     if (!is.data.frame(obj)) return(NULL)
 
-    # If cols not provided, try using intervals() to determine them
+    # If cols not provided, try using extract_intervals() to determine them
     if (is.null(cols)) {
       try({
-        return(intervals(obj))
+        return(extract_intervals(obj))
       }, silent = TRUE)
-      return(obj)  # fallback to returning full object if intervals() fails
+      return(obj)  # fallback to returning full object if extract_intervals() fails
     }
 
     # Filter by column number or name
@@ -138,21 +114,18 @@ columns <- function(out, cols = NULL) {
   filter_one(out)
 }
 
-#' Filter Rows from Data Frame, Matrix, or List
+#' Extract Rows from Data Frame, Matrix, or List
 #'
-#' Filters specified rows from a data frame, matrix, or list of such objects.
+#' Extract specified rows from a data frame, matrix, or list of such objects.
 #'
 #' @param out A data frame, matrix, atomic vector, or a list of such objects.
-#' @param rows A numeric vector of row indices or a character vector of row names to retain. If `NULL`, all rows are returned.
-#'
-#' @return A filtered object with only the specified rows. The output will match the input type (matrix, data frame, or list).
-#'
+#' @param rows A numeric vector of row indices or a character vector of row names to retain. If NULL, all rows are returned.
+#' @return The filtered object with only the specified rows. The output type matches the input (matrix, data frame, or list).
 #' @examples
-#' df <- data.frame(A = 1:5, B = letters[1:5])
-#' rows(df, rows = c(1, 3))
-#'
+#' data.frame(A = 1:5, B = letters[1:5]) -> df
+#' df |> extract_rows(c(1, 3))
 #' @export
-rows <- function(out, rows = NULL) {
+extract_rows <- function(out, rows = NULL) {
   filter_one <- function(obj) {
     # Atomic vector → data frame
     if (is.atomic(obj) && !is.data.frame(obj) && !is.matrix(obj)) {
@@ -203,56 +176,77 @@ rows <- function(out, rows = NULL) {
   filter_one(out)
 }
 
-#' Set Row Names of a Data Frame
+#' Extract Row or Column as Named Vector from Data Frame or Matrix
 #'
-#' Assign row names to a data frame in a pipe-friendly way.
-#' 
-#' **Note:** This function does **not** modify the original data frame in place.
-#' You must assign the result back to a variable.
+#' Extract a single row or column from a matrix or data frame as a named vector.
 #'
-#' @param x A data frame.
-#' @param names A character vector of row names. Must have length equal to `nrow(x)`.
+#' This function automatically detects whether the input corresponds to a row or a column and returns the result as a named vector. Names are preserved from the opposite dimension (column names for rows, row names for columns).
 #'
-#' @return A data frame identical to `x` but with updated row names.
+#' @param data A matrix or data frame from which to extract data.
+#' @param index A character or numeric value specifying the row or column to extract. If character, it is matched against row names first, then column names. If numeric, it is interpreted as a row index first, then a column index.
+#' @return A named vector containing the extracted row or column values.
 #' @examples
-#' df <- data.frame(a = 1:3, b = 4:6)
-#' df <- df |> rownamer(c("A", "B", "C"))  # Must assign back to df
+#' data.frame(
+#'   M = c(1.1, 2.2, 3.3),
+#'   SD = c(0.1, 0.2, 0.3),
+#'   N = c(10, 20, 30),
+#'   row.names = c("Group1", "Group2", "Group3")
+#' ) -> df
+#' df |> extract_vector("M")
+#' df |> extract_vector("Group2")
 #' @export
-rownamer <- function(x, names) {
-  rownames(x) <- names
-  x
-}
-
-#' Set Column Names of a Data Frame
-#'
-#' Assign column names to a data frame in a pipe-friendly way.
-#' 
-#' **Note:** This function does **not** modify the original data frame in place.
-#' You must assign the result back to a variable.
-#'
-#' @param x A data frame.
-#' @param names A character vector of column names. Must have length equal to `ncol(x)`.
-#'
-#' @return A data frame identical to `x` but with updated column names.
-#' @examples
-#' df <- data.frame(a = 1:3, b = 4:6)
-#' df <- df |> colnamer(c("First", "Second"))  # Must assign back to df
-#' @export
-colnamer <- function(x, names) {
-  colnames(x) <- names
-  x
+extract_vector <- function(data, index) {
+  if (is.character(index) && index %in% rownames(data)) {
+    vec <- data[index, ]           # drop=TRUE by default → atomic vector
+    nms <- colnames(data)
+    if (!is.null(nms) && length(vec) == length(nms)) {
+      names(vec) <- nms
+    }
+    return(vec)
+  }
+  
+  if (is.character(index) && index %in% colnames(data)) {
+    vec <- data[, index]           # drop=TRUE by default
+    nms <- rownames(data)
+    if (!is.null(nms) && length(vec) == length(nms)) {
+      names(vec) <- nms
+    }
+    return(vec)
+  }
+  
+  if (is.numeric(index)) {
+    if (index <= nrow(data)) {
+      vec <- data[index, ]         # drop=TRUE by default
+      nms <- colnames(data)
+      if (!is.null(nms) && length(vec) == length(nms)) {
+        names(vec) <- nms
+      }
+      return(vec)
+    } else if (index <= ncol(data)) {
+      vec <- data[, index]         # drop=TRUE by default
+      nms <- rownames(data)
+      if (!is.null(nms) && length(vec) == length(nms)) {
+        names(vec) <- nms
+      }
+      return(vec)
+    }
+  }
+  
+  stop("Invalid index: not found in row or column names, or out of bounds.")
 }
 
 #' Extract Point Estimate and Confidence Interval Columns
 #'
-#' Selects the point estimate and confidence interval columns from a data frame, matrix, or list.
+#' Extract the point estimate and confidence interval columns from a data frame, matrix, or list.
 #'
-#' @param x A data frame, matrix, or list with `estimate` and `interval` elements.
-#'
+#' @param x A data frame, matrix, or list with 'estimate' and 'interval' elements, or columns named for estimate and confidence limits.
 #' @return A data frame or matrix with columns: Estimate, LL, UL.
-#'
+#' @examples
+#' cbind(Estimate = c(10, 0, 5), LL = c(8, -1, 4), UL = c(12, 1, 6)) -> df
+#' c("A", "B", "C") -> rownames(df)
+#' df |> extract_intervals()
 #' @export
-intervals <- function(x) {
+extract_intervals <- function(x) {
   if (is.list(x) && !is.data.frame(x) && !is.matrix(x)) {
     # Handle 'confintr' list-like objects
     if (!all(c("estimate", "interval") %in% names(x))) {
@@ -271,7 +265,7 @@ intervals <- function(x) {
 
   # Otherwise assume it's a data frame or matrix
   colnames_x <- tolower(colnames(x))
-  
+
   est_patterns <- c("estimate", "est", "beta", "effect", "coef", "coefficient")
   ll_patterns  <- c("ll", "lower", "lowerlimit", "ci_lower", "lcl")
   ul_patterns  <- c("ul", "upper", "upperlimit", "ci_upper", "ucl")

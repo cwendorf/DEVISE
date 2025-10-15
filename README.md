@@ -9,8 +9,7 @@
 ### Overview
 
 `DEVISE` is a companion package for working with other statistical packages. 
-Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, 
-`DEVISE` handles the pre-processing of data and post-processing of 
+Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, `DEVISE` handles the pre-processing of data and post-processing of 
 results into more accessible and readable formats.
 
 ### Installation

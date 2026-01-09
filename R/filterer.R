@@ -237,27 +237,48 @@ extract_vector <- function(data, index) {
 
 #' Extract Point Estimate and Confidence Interval Columns
 #'
-#' Extract the point estimate and confidence interval columns from a data frame, matrix, or list.
+#' Extract the point estimate and confidence interval columns from a data frame, matrix, list, or t.test result.
 #'
-#' @param x A data frame, matrix, or list with 'estimate' and 'interval' elements, or columns named for estimate and confidence limits.
-#' @return A data frame or matrix with columns: Estimate, LL, UL.
+#' @param x A data frame, matrix, list with 'estimate' and 'interval' (or 'conf.int') elements, or a t.test (htest) result.
+#' @return A matrix with columns: Estimate, LL, UL.
 #' @examples
 #' cbind(Estimate = c(10, 0, 5), LL = c(8, -1, 4), UL = c(12, 1, 6)) -> df
 #' c("A", "B", "C") -> rownames(df)
 #' df |> extract_intervals()
+#'
+#' # t.test result
+#' set.seed(1); x <- rnorm(20, 10, 2)
+#' t.test(x) |> extract_intervals()
 #' @export
 extract_intervals <- function(x) {
   if (is.list(x) && !is.data.frame(x) && !is.matrix(x)) {
-    # Handle 'confintr' list-like objects
-    if (!all(c("estimate", "interval") %in% names(x))) {
-      stop("List object must contain 'estimate' and 'interval' elements.")
+    # Handle 'confintr' or t.test list-like objects
+    has_estimate <- "estimate" %in% names(x)
+    has_interval <- "interval" %in% names(x)
+    has_conf_int <- "conf.int" %in% names(x)
+    
+    if (!has_estimate || !(has_interval || has_conf_int)) {
+      stop("List object must contain 'estimate' and either 'interval' or 'conf.int' elements.")
     }
-    if (length(x$interval) != 2) {
-      stop("'interval' element must be a vector of length 2.")
+    
+    ci <- if (has_interval) x$interval else x$conf.int
+    if (length(ci) != 2) {
+      stop("Interval element must be a vector of length 2.")
+    }
+    
+    # Handle estimate: single value or two-sample difference
+    if (length(x$estimate) == 1L) {
+      est <- unname(x$estimate)
+    } else if (length(x$estimate) == 2L) {
+      # Two-sample t.test: compute second - first and flip CI
+      est <- unname(x$estimate[2] - x$estimate[1])
+      ci <- -rev(ci)
+    } else {
+      est <- unname(x$estimate[1])  # Fallback: use first element
     }
 
     return(matrix(
-      c(x$estimate, x$interval[1], x$interval[2]),
+      c(est, ci[1], ci[2]),
       nrow = 1,
       dimnames = list(NULL, c("Estimate", "LL", "UL"))
     ))

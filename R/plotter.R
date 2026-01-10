@@ -47,7 +47,7 @@ plot_conditions <- function(results,
   if (is.null(title)) title <- comment(results)
   main <- paste(strwrap(title, width = 0.7 * getOption("width")), collapse = "\n")
 
-  results <- intervals(results)
+  results <- extract_intervals(results)
 
   if (is.null(ylim)) {
     ylim <- range(pretty(c(floor(min(results[, 2]) - 0.5), ceiling(max(results[, 3]) + 0.5))))

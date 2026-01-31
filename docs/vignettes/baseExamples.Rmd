@@ -1,0 +1,80 @@
+---
+title: "Comparison Examples with Base R"
+output:
+  github_document:
+    preserve_yaml: FALSE
+vignette: >
+  %\VignetteIndexEntry{Comparison Examples with Base R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(comment = NA)
+devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
+```
+
+```{r, include=FALSE}
+if (!require(DEVISE)) {
+  if (!require(remotes)) install.packages("remotes")
+  remotes::install_github("cwendorf/DEVISE")
+}
+library(DEVISE)
+```
+
+## Comparison Examples with Base R
+
+```{r toc, echo=FALSE}
+thisfile <- knitr::current_input()
+revised_toc(thisfile, base_level = 3, toc_depth = 4)
+```
+
+---
+
+### Data Entry
+
+```{r}
+gl(3, 10, labels = c("Level1", "Level2", "Level3")) -> Factor
+c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10) -> Outcome
+```
+
+### Obtain the Statistics for Each Condition
+
+```{r}
+Outcome[Factor == "Level1"] |> t.test() |> extract_intervals() -> Level1
+Outcome[Factor == "Level2"] |> t.test() |> extract_intervals() -> Level2
+Outcome[Factor == "Level3"] |> t.test() |> extract_intervals() -> Level3
+
+rbind(Level1, Level2, Level3) -> Conditions
+c("Level1", "Level2", "Level3") -> rownames(Conditions)
+```
+
+### Display the Conditions
+
+```{r}
+Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", style = "apa")
+Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
+```
+
+### Subset the Data
+
+```{r}
+Outcome_Sub <- Outcome[Factor %in% c("Level1", "Level2")]
+Factor_Sub <- Factor[Factor %in% c("Level1", "Level2")]
+```
+
+### Obtain the Comparison Statistics
+
+```{r}
+(Outcome_Sub ~ Factor_Sub) |> t.test() |> extract_intervals() -> Difference
+
+rbind(Level1, Level2, Difference) -> Comparison
+c("Level1", "Level2", "Difference") -> rownames(Comparison)
+```
+
+### Display the Comparison
+
+```{r}
+Comparison |> style_matrix(title = "Table 2: Means, Confidence Intervals, and Comparison", style = "apa")
+Comparison |> plot_comparison(title = "Figure 2: Comparison Confidence Intervals", values = TRUE)
+```

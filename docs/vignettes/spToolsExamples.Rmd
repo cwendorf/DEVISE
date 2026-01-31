@@ -1,0 +1,102 @@
+---
+title: "Comparison Examples with statpsych and spTools"
+output:
+  github_document:
+    preserve_yaml: FALSE
+vignette: >
+  %\VignetteIndexEntry{Comparison Examples with statpsych and spTools}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(comment = NA)
+devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
+```
+
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+
+if (!require(statpsych)) {
+  remotes::install_github("dgbonett/statpsych")
+}
+library(statpsych)
+
+if (!require(DEVISE)) {
+  remotes::install_github("cwendorf/DEVISE")
+}
+library(DEVISE)
+```
+
+## Comparison Examples with statpsych and spTools
+
+```{r toc, echo=FALSE}
+thisfile <- knitr::current_input()
+revised_toc(thisfile, base_level = 3, toc_depth = 4)
+```
+
+---
+
+### Obtain the Statistics for Each Condition ('statpsych' only)
+
+```{r}
+ci.mean(alpha = .05, m = 8.000, sd = 1.414, n = 10) |> extract_intervals() -> Level1
+ci.mean(alpha = .05, m = 11.000, sd = 2.211, n = 10) |> extract_intervals() -> Level2
+ci.mean(alpha = .05, m = 12.000, sd = 2.449, n = 10) |> extract_intervals() -> Level3
+
+rbind(Level1, Level2, Level3) -> Conditions
+c("Level1", "Level2", "Level3") -> rownames(Conditions)
+```
+
+### Display the Conditions
+
+```{r}
+Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", style = "apa")
+Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
+```
+
+### Obtain the Comparison Statistics
+
+```{r}
+ci.mean2(alpha = .05, 11.000, 8.000, 2.211, 1.414, 10, 10) |> extract_intervals() |> extract_rows(1) -> Difference
+
+rbind(Level1, Level2, Difference) -> Comparison
+c("Level1", "Level2", "Difference") -> rownames(Comparison)
+```
+
+### Display the Comparison
+
+```{r}
+Comparison |> style_matrix(title = "Table 2: Means, Confidence Intervals, and Comparison", style = "apa")
+Comparison |> plot_comparison(title = "Figure 2: Comparison Confidence Intervals", values = TRUE)
+```
+
+### Obtain the Statistics for Each Condition ('statpsych' and 'spTools')
+
+```{r}
+ci.mean.vec(alpha = .05, m = c(8.000, 11.000, 12.000), sd = c(1.414, 2.211, 2.449), n = c(10, 10, 10)) |> extract_intervals() -> Conditions
+c("Level1", "Level2", "Level3") -> rownames(Conditions)
+```
+
+### Display the Conditions
+
+```{r}
+Conditions |> style_matrix(title = "Table 3: Means and Confidence Intervals", style = "apa")
+Conditions |> plot_conditions(title = "Figure 3: Conditions Confidence Intervals", values = TRUE)
+```
+
+### Obtain the Comparison Statistics
+
+```{r}
+ci.mean2.vec(alpha = .05, m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() |> extract_rows(1) -> Difference
+
+rbind(Conditions[1,], Conditions[2,], Difference) -> Comparison
+c("Level1", "Level2", "Difference") -> rownames(Comparison)
+```
+
+### Display the Comparison
+
+```{r}
+Comparison |> style_matrix(title = "Table 4: Means, Confidence Intervals, and Comparison", style = "apa")
+Comparison |> plot_comparison(title = "Figure 4: Comparison Confidence Intervals", values = TRUE)
+```

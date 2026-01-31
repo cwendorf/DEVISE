@@ -1,0 +1,83 @@
+---
+title: "Comparison Examples with confintr"
+output:
+  github_document:
+    preserve_yaml: FALSE
+vignette: >
+  %\VignetteIndexEntry{Comparison Examples with confintr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(comment = NA)
+devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
+```
+
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+
+if (!require(confintr)) {
+  remotes::install_github("mayer79/confintr")
+}
+library(confintr)
+
+if (!require(DEVISE)) {
+  remotes::install_github("cwendorf/DEVISE")
+}
+library(DEVISE)
+```
+
+## Comparison Examples with confintr
+
+```{r toc, echo=FALSE}
+thisfile <- knitr::current_input()
+revised_toc(thisfile, base_level = 3, toc_depth = 4)
+```
+
+---
+
+### Data Entry
+
+```{r}
+create_groups(k = 3, n = c(10,10,10), labels = c("Level1", "Level2", "Level3")) -> Factor
+c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10) -> Outcome
+data.frame(Factor, Outcome) -> Data
+Data$Outcome[Data$Factor == "Level1"] -> y1
+Data$Outcome[Data$Factor == "Level2"] -> y2
+Data$Outcome[Data$Factor == "Level3"] -> y3
+```
+
+### Obtain the Statistics for Each Condition
+
+```{r}
+ci_mean(y1) |> extract_intervals() -> Level1
+ci_mean(y2) |> extract_intervals() -> Level2
+ci_mean(y3) |> extract_intervals() -> Level3
+
+rbind(Level1, Level2, Level3) -> Conditions
+c("Level1", "Level2", "Level3") -> rownames(Conditions)
+```
+
+### Display the Conditions
+
+```{r}
+Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", style = "apa")
+Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
+```
+
+### Obtain the Comparison Statistics
+
+```{r}
+ci_mean_diff(y2, y1) |> extract_intervals() -> Difference
+
+rbind(Level1, Level2, Difference) -> Comparison
+c("Level1", "Level2", "Difference") -> rownames(Comparison)
+```
+
+### Display the Comparison
+
+```{r}
+Comparison |> style_matrix(title = "Table 2: Means, Confidence Intervals, and Comparison", style = "apa")
+Comparison |> plot_comparison(title = "Figure 2: Comparison Confidence Intervals", values = TRUE)
+```

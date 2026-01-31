@@ -8,10 +8,43 @@
 
 ### Overview
 
-`DEVISE` is a companion package for working with other statistical packages. 
-Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, `DEVISE` handles the pre-processing of data and post-processing of 
-results into more accessible and readable formats.
+`DEVISE` is a companion package for working with other statistical packages. Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, `DEVISE` handles the pre-processing of data and post-processing of results into more accessible and readable formats such as summary tables and comparison plots.
+
 
 ### Installation
 
-`DEVISE` is under construction.
+This package is not currently on CRAN, but can be installed and loaded using these R commands
+
+``` r
+if (!require(remotes)) install.packages("remotes")
+remotes::install_github("cwendorf/DEVISE")
+library(DEVISE)
+```
+
+If you do not wish a full install, the latest functions can be made available using this R command:
+
+```r
+source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
+```
+
+### Usage
+
+This package contains a set of examples to demonstrate its use:
+
+- [Direct Examples](./docs/directExamples.md) - Using direct input of statistics
+- [Base Examples](./docs/baseExamples.md) - Using Base R for input and calculations
+- [confintr Examples](./docs/confintrExamples.md) - Using `confintr` for input and calculations
+- [statpsych Examples](./docs/spToolsExamples.md) - Using `statpsych` for input and calculations
+- [backcalc Examples](./docs/backcalcExamples.md) - Using `backcalc` for input and calculations
+- [EASI Examples](./docs/easiExamples.md) - Using `EASI` for input and calculations
+
+### Contact Me
+
+- GitHub Issues: [https://github.com/cwendorf/DEVISE/issues](https://github.com/cwendorf/DEVISE/issues) 
+- Author Email: [cwendorf@uwsp.edu](mailto:cwendorf@uwsp.edu)
+- Author Homepage: [https://github.com/cwendorf](https://github.com/cwendorf)
+
+### Citation
+
+Wendorf, C.A. (2025). *DEVISE: Data Exploration, Visualization, and Inference with Statistical Estimation* [R Package]. [https://github.com/cwendorf/DEVISE](https://github.com/cwendorf/DEVISE)
+

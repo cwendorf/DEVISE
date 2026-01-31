@@ -13,46 +13,6 @@ df <- data.frame(
   Exam = c(8, 7, 9, 6, 7, 10, 9, 9, 8, 10)
 )
 
-### Compute Summary Statistics
-
-# 1) Multiple variables, no grouping
-df |> compute_descriptives()
-df |> compute_descriptives(Quiz, Exam) |> style_matrix(title = "Table 1: Descriptive Statistics", style = "apa")
-
-# 2) Grouped, one variable
-df |> compute_descriptives(Quiz ~ Group)
-df |> compute_descriptives(Quiz ~ Group) |> style_matrix(title = "Table 1: Descriptive Statistics by Group", style = "apa")
-
-# 3) Grouped, multiple variables
-df |> compute_descriptives(c(Quiz, Exam) ~ Group)
-
-# Multiple variables
-df |> compute_correlations()
-df |> compute_correlations(Quiz, Exam) |> style_matrix(title = "Table 2: Correlation Matrix", style = "apa")
-
-# Grouped, multiple variables
-df |> compute_correlations(c(Quiz, Exam) ~ Group)
-
-# Covariance matrix
-df |> compute_correlations(Quiz, Exam, type = "cov") |> style_matrix(title = "Table 3: Covariance Matrix", style = "apa")
-
-
-
-### Write to a File
-
-sink("Results.txt") # Create file and start redirecting
-iris |> compute_descriptives(Sepal.Length, Petal.Length) |> style_matrix(title = "Table 1: Descriptive Statistics", style = "apa")
-iris |> compute_correlations(Sepal.Length, Petal.Length) |> style_matrix(title = "Table 2: Correlation Matrix", style = "apa")
-sink()  # Stop redirecting
-
-
-### Extract a Vector
-
-df |> compute_descriptives(Quiz, Exam) |> extract_vector("N")
-df |> compute_descriptives(Quiz, Exam) |> extract_vector("M")
-df |> compute_descriptives(Quiz, Exam) |> extract_vector("SD")
-
-
 ### Evaluate a Formula or Variables in a Data Frame
 
 # single variable
@@ -91,9 +51,35 @@ df |>
   summary()
 model_fit
 
-# Save an intermediate step for debugging
+# Use retained model for further analysis
+model_fit |> anova()
+model_fit |> coef()
+
+# Save transformed data for comparison
+df |>
+  transform(Total = Quiz + Exam) |>
+  retain(df_with_total) |>
+  compute_descriptives(Total)
+df_with_total
+
+# Compare original and transformed data
+df |> compute_descriptives(Quiz, Exam)
+df_with_total |> compute_descriptives(Quiz, Exam, Total)
+
+# Save multiple intermediate steps
 df |>
   subset(Group == "Group1") |>
-  retain(group1_only) |>
-  summary()
-group1_only
+  retain(step1_filtered) |>
+  compute_descriptives() |>
+  retain(step2_descriptives) |>
+  extract_vector("M")
+step1_filtered  # Filtered data
+step2_descriptives  # Descriptive statistics
+
+# Retain for later use in separate analyses
+df |>
+  subset(Quiz > 6) |>
+  retain(high_performers) |>
+  nrow()
+high_performers |> compute_descriptives()
+high_performers |> use_vars(Quiz, Exam) |> cor()

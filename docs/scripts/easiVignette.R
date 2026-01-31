@@ -1,5 +1,5 @@
 # DEVISE
-## Comparison Examples with EASI
+## Comparison Vignettes with EASI
 
 ### Source the Functions
 

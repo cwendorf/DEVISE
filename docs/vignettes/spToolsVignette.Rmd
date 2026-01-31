@@ -1,10 +1,10 @@
 ---
-title: "Comparison Examples with statpsych and spTools"
+title: "Comparison Vignette with statpsych and spTools"
 output:
   github_document:
     preserve_yaml: FALSE
 vignette: >
-  %\VignetteIndexEntry{Comparison Examples with statpsych and spTools}
+  %\VignetteIndexEntry{Comparison Vignette with statpsych and spTools}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -28,7 +28,7 @@ if (!require(DEVISE)) {
 library(DEVISE)
 ```
 
-## Comparison Examples with statpsych and spTools
+## Comparison Vignette with statpsych and spTools
 
 ```{r toc, echo=FALSE}
 thisfile <- knitr::current_input()

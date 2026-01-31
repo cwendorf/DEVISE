@@ -1,72 +1,33 @@
----
-title: "Comparison Examples with backcalc"
-output:
-  github_document:
-    preserve_yaml: FALSE
-vignette: >
-  %\VignetteIndexEntry{Comparison Examples with backcalc}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
+# DEVISE
+## Comparison Vignette with backcalc
 
-```{r, include=FALSE}
-knitr::opts_chunk$set(comment = NA)
-devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
-```
+### Source the Functions
 
-```{r, include=FALSE}
-if (!require(remotes)) install.packages("remotes")
-
-if (!require(backcalc)) {
-  remotes::install_github("cwendorf/backcalc")
-}
-library(backcalc)
-
-if (!require(DEVISE)) {
-  remotes::install_github("cwendorf/DEVISE")
-}
-library(DEVISE)
-```
-
-## Comparison Examples with backcalc
-
-```{r toc, echo=FALSE}
-thisfile <- knitr::current_input()
-revised_toc(thisfile, base_level = 3, toc_depth = 4)
-```
-
----
+source("http://raw.githubusercontent.com/cwendorf/backcalc/main/source-backcalc.R")
+source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
 ### Obtain the Statistics (using Summary Statistics Input)
 
-```{r}
 backcalc_means(m = 8.000, sd = 1.414, n = 10) -> Level1
 backcalc_means(m = 11.000, sd = 2.211, n = 10) -> Level2
 backcalc_means(m = 12.000, sd = 2.162, n = 10) -> Level3
 
 rbind(Level1, Level2, Level3) |> extract_intervals() -> Conditions
 c("Level1", "Level2", "Level3") -> rownames(Conditions)
-```
 
 ### Display the Conditions
 
-```{r}
 Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", style = "apa")
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
-```
 
 ### Obtain the Comparison Statistics (Level1 vs Level2)
 
-```{r}
 backcalc_means(m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() -> Difference
 
 rbind(Level1, Level2, Difference) -> Comparison
 c("Level1", "Level2", "Difference") -> rownames(Comparison)
-```
 
 ### Display the Comparison
 
-```{r}
 Comparison |> style_matrix(title = "Table 2: Means, Confidence Intervals, and Comparison", style = "apa")
 Comparison |> plot_comparison(title = "Figure 2: Comparison Confidence Intervals", values = TRUE)
-```

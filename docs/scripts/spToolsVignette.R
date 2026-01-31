@@ -1,5 +1,5 @@
 # DEVISE
-## Comparison Examples with statpsych and spTools
+## Comparison Vignettes with statpsych and spTools
 
 ### Source the Functions
 

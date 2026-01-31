@@ -1,18 +1,17 @@
 # DEVISE
-## Comparison Examples with backcalc
+## Comparison Vignettes with Direct Input
 
 ### Source the Functions
 
-source("http://raw.githubusercontent.com/cwendorf/backcalc/main/source-backcalc.R")
 source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
-### Obtain the Statistics (using Summary Statistics Input)
+### Input the Statistics for Each Condition
 
-backcalc_means(m = 8.000, sd = 1.414, n = 10) -> Level1
-backcalc_means(m = 11.000, sd = 2.211, n = 10) -> Level2
-backcalc_means(m = 12.000, sd = 2.162, n = 10) -> Level3
+c(Estimate = 8.000, LL = 6.988, UL = 9.012) -> Level1
+c(Estimate = 11.000, LL = 9.418, UL = 12.582) -> Level2
+c(Estimate = 12.000, LL = 10.248, UL = 13.752) -> Level3
 
-rbind(Level1, Level2, Level3) |> extract_intervals() -> Conditions
+rbind(Level1, Level2, Level3) -> Conditions
 c("Level1", "Level2", "Level3") -> rownames(Conditions)
 
 ### Display the Conditions
@@ -20,9 +19,9 @@ c("Level1", "Level2", "Level3") -> rownames(Conditions)
 Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", style = "apa")
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
 
-### Obtain the Comparison Statistics (Level1 vs Level2)
+### Input the Comparison Statistics
 
-backcalc_means(m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() -> Difference
+c(Estimate = 3.000, LL = 1.234, UL = 4.766) -> Difference
 
 rbind(Level1, Level2, Difference) -> Comparison
 c("Level1", "Level2", "Difference") -> rownames(Comparison)

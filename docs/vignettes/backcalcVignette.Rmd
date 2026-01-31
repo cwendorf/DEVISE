@@ -1,10 +1,10 @@
 ---
-title: "Comparison Examples with Direct Input"
+title: "Comparison Vignette with backcalc"
 output:
   github_document:
     preserve_yaml: FALSE
 vignette: >
-  %\VignetteIndexEntry{Comparison Examples with Direct Input}
+  %\VignetteIndexEntry{Comparison Vignette with backcalc}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,14 +15,20 @@ devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_to
 ```
 
 ```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+
+if (!require(backcalc)) {
+  remotes::install_github("cwendorf/backcalc")
+}
+library(backcalc)
+
 if (!require(DEVISE)) {
-  if (!require(remotes)) install.packages("remotes")
   remotes::install_github("cwendorf/DEVISE")
 }
 library(DEVISE)
 ```
 
-## Comparison Examples with Direct Input
+## Comparison Vignette with backcalc
 
 ```{r toc, echo=FALSE}
 thisfile <- knitr::current_input()
@@ -31,14 +37,14 @@ revised_toc(thisfile, base_level = 3, toc_depth = 4)
 
 ---
 
-### Input the Statistics for Each Condition
+### Obtain the Statistics (using Summary Statistics Input)
 
 ```{r}
-c(Estimate = 8.000, LL = 6.988, UL = 9.012) -> Level1
-c(Estimate = 11.000, LL = 9.418, UL = 12.582) -> Level2
-c(Estimate = 12.000, LL = 10.248, UL = 13.752) -> Level3
+backcalc_means(m = 8.000, sd = 1.414, n = 10) -> Level1
+backcalc_means(m = 11.000, sd = 2.211, n = 10) -> Level2
+backcalc_means(m = 12.000, sd = 2.162, n = 10) -> Level3
 
-rbind(Level1, Level2, Level3) -> Conditions
+rbind(Level1, Level2, Level3) |> extract_intervals() -> Conditions
 c("Level1", "Level2", "Level3") -> rownames(Conditions)
 ```
 
@@ -49,10 +55,10 @@ Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", st
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
 ```
 
-### Input the Comparison Statistics
+### Obtain the Comparison Statistics (Level1 vs Level2)
 
 ```{r}
-c(Estimate = 3.000, LL = 1.234, UL = 4.766) -> Difference
+backcalc_means(m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() -> Difference
 
 rbind(Level1, Level2, Difference) -> Comparison
 c("Level1", "Level2", "Difference") -> rownames(Comparison)

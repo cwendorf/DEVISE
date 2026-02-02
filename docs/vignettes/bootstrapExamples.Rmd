@@ -1,10 +1,10 @@
 ---
-title: "Bootstrapped Intervals"
+title: "Bootstrapped Intervals Examples"
 output:
   github_document:
     preserve_yaml: FALSE
 vignette: >
-  %\VignetteIndexEntry{Bootstrapped Intervals}
+  %\VignetteIndexEntry{Bootstrapped Intervals Examples}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,9 +14,9 @@ knitr::opts_chunk$set(comment = NA)
 devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
 ```
 
-## Bootstrapped Intervals
+## Bootstrapped Intervals Examples
 
-This vignette demonstrates how to use the `confintr` package for parametric and bootstrap confidence intervals. Confintr supports both distribution-based confidence intervals for normally-distributed data and bootstrap methods that provide distribution-free intervals without relying on parametric assumptions.
+In conjunction with `DEVISE`, this  vignette demonstrates how to use the `confintr` package for parametric and bootstrap confidence intervals. `confintr` supports both distribution-based confidence intervals for normally-distributed data and bootstrap methods that provide distribution-free intervals without relying on parametric assumptions.
 
 ```{r toc, echo=FALSE}
 knitr::current_input() -> thisfile
@@ -39,7 +39,7 @@ library(confintr)
 
 #### Input the Data
 
-Create a dataset for confidence interval analysis using confintr.
+Create a dataset for confidence interval analysis.
 
 ```{r}
 gl(3, 10, labels = c("Level1", "Level2", "Level3")) -> Factor
@@ -48,9 +48,9 @@ c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 1
 data.frame(Factor, Outcome) -> df
 ```
 
-#### Compute Confidence Intervals
+#### Examine the Conditions
 
-Use confintr's ci_mean function with the default parametric method for each condition.
+Use `confintr` with the default parametric method for each condition.
 
 ```{r}
 ci_mean(df$Outcome[df$Factor == "Level1"]) |> extract_intervals() -> Level1_Param
@@ -61,18 +61,18 @@ rbind(Level1_Param, Level2_Param, Level3_Param) -> ParamConditions
 c("Level1", "Level2", "Level3") -> rownames(ParamConditions)
 ```
 
-#### Display Confidence Intervals
+#### Display the Conditions
 
 Format and visualize the parametric confidence intervals.
 
-```{r}
-ParamConditions |> style_matrix(title = "Table 1: Parametric Condition Means and Confidence Intervals", style = "apa")
-ParamConditions |> plot_conditions(title = "Figure 1: Parametric Condition Estimates", values = TRUE)
+```{r,parametric-conditions}
+ParamConditions |> style_matrix(title = "Table 1: Means and Parametric Confidence Intervals for Conditions", style = "apa")
+ParamConditions |> plot_conditions(title = "Figure 1: Means and Parametric Confidence Intervals for Conditions", values = TRUE)
 ```
 
-#### Compute Confidence Interval for Comparison
+#### Examine a Comparison
 
-Use confintr's ci_mean_diff for the parametric method to compare conditions.
+Use the parametric method to compare conditions.
 
 ```{r}
 ci_mean_diff(df$Outcome[df$Factor == "Level2"], 
@@ -82,20 +82,20 @@ rbind(Level1_Param, Level2_Param, Difference_Param) -> ParamComparison
 c("Level1", "Level2", "Difference") -> rownames(ParamComparison)
 ```
 
-#### Display Confidence Interval for Comparison
+#### Display a Comparison
 
 Present the parametric comparison results in tables and plots.
 
-```{r}
-ParamComparison |> style_matrix(title = "Table 2: Parametric Means, Confidence Intervals, and Comparison", style = "apa")
-ParamComparison |> plot_comparison(title = "Figure 2: Parametric Comparison Results", values = TRUE)
+```{r,parametric-comparison}
+ParamComparison |> style_matrix(title = "Table 2: Means and Parametric Confidence Intervals for a Comparison", style = "apa")
+ParamComparison |> plot_comparison(title = "Figure 2: Means and Parametric Confidence Intervals for a Comparison", values = TRUE)
 ```
 
 ### Case 2: Bootstrap Confidence Intervals
 
-#### Compute Confidence Intervals
+#### Examine the Conditions
 
-Use confintr's ci_mean function with bootstrap methods for each condition.
+Use `confintr` with bootstrap methods for each condition.
 
 ```{r}
 ci_mean(df$Outcome[df$Factor == "Level1"], type = "bootstrap", R = 10000) |> extract_intervals() -> Level1_Boot
@@ -106,18 +106,18 @@ rbind(Level1_Boot, Level2_Boot, Level3_Boot) -> BootConditions
 c("Level1", "Level2", "Level3") -> rownames(BootConditions)
 ```
 
-#### Display Confidence Intervals
+#### Display the Conditions
 
 Format and visualize the bootstrap confidence intervals.
 
-```{r}
-BootConditions |> style_matrix(title = "Table 3: Bootstrap Condition Means and Confidence Intervals", style = "apa")
-BootConditions |> plot_conditions(title = "Figure 3: Bootstrap Condition Estimates", values = TRUE)
+```{r,bootstrap-conditions}
+BootConditions |> style_matrix(title = "Table 3: Means and Bootstrap Confidence Intervals for Conditions", style = "apa")
+BootConditions |> plot_conditions(title = "Figure 3: Means and Bootstrap Confidence Intervals for Conditions", values = TRUE)
 ```
 
-#### Compute Confidence Intervals for Comparison
+#### Examine a Comparison
 
-Use confintr's ci_mean_diff with bootstrap method to compare conditions.
+Use the bootstrap method to compare conditions.
 
 ```{r}
 ci_mean_diff(df$Outcome[df$Factor == "Level2"], 
@@ -129,11 +129,11 @@ rbind(Level1_Boot, Level2_Boot, Difference_Boot) -> BootComparison
 c("Level1", "Level2", "Difference") -> rownames(BootComparison)
 ```
 
-#### Display Confidence Intervals for Comparison
+#### Display a Comparison
 
 Present the bootstrap comparison results in tables and plots.
 
-```{r}
-BootComparison |> style_matrix(title = "Table 4: Bootstrap Means, Confidence Intervals, and Comparison", style = "apa")
-BootComparison |> plot_comparison(title = "Figure 4: Bootstrap Comparison Results", values = TRUE)
+```{r,bootstrap-comparison}
+BootComparison |> style_matrix(title = "Table 4: Means and Bootstrap Confidence Intervals for a Comparison", style = "apa")
+BootComparison |> plot_comparison(title = "Figure 4: Means and Bootstrap Confidence Intervals for a Comparison", values = TRUE)
 ```

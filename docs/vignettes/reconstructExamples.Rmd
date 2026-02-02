@@ -1,10 +1,10 @@
 ---
-title: "Mean Comparisons with backcalc"
+title: "Reconstructed Information Examples"
 output:
   github_document:
     preserve_yaml: FALSE
 vignette: >
-  %\VignetteIndexEntry{Mean Comparisons with backcalc}
+  %\VignetteIndexEntry{Reconstructed Information Examples}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,9 +14,9 @@ knitr::opts_chunk$set(comment = NA)
 devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
 ```
 
-## Mean Comparisons with `backcalc`
+## Reconstructed Information Examples
 
-This vignette demonstrates a full mean comparison workflow using `backcalc` to derive summary statistics and DEVISE to format and plot the results. The steps progress from computing condition intervals to a final comparison.
+In conjunction with `DEVISE`, this vignette demonstrates how to use `backcalc` to reconstruct and compute confidence intervals for statistics beyond simple means. When published studies report summary statistics or test results, backcalc can reconstruct the full inferential statistics for various types of analyses.
 
 ```{r toc, echo=FALSE}
 knitr::current_input() -> thisfile
@@ -35,7 +35,7 @@ if (!require(backcalc)) {remotes::install_github("cwendorf/backcalc")}
 library(backcalc)
 ```
 
-### Case 1: Summary Statistics Input
+### Case 1: Calculate Confidence Intervals
 
 #### Examine the Conditions
 
@@ -54,9 +54,9 @@ c("Level1", "Level2", "Level3") -> rownames(Conditions)
 
 Format and visualize the condition intervals.
 
-```{r}
-Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", style = "apa")
-Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
+```{r,complete-conditions}
+Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals for Conditions", style = "apa")
+Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals for Conditions", values = TRUE)
 ```
 
 #### Examine a Comparison
@@ -74,7 +74,8 @@ c("Level1", "Level2", "Difference") -> rownames(Comparison)
 
 Present the comparison in a formatted table and plot.
 
-```{r}
-Comparison |> style_matrix(title = "Table 2: Means, Confidence Intervals, and Comparison", style = "apa")
-Comparison |> plot_comparison(title = "Figure 2: Comparison Confidence Intervals", values = TRUE)
+```{r,complete-comparison}
+Comparison |> style_matrix(title = "Table 2: Means and Confidence Intervals for a Comparison", style = "apa")
+Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals for a Comparison", values = TRUE)
 ```
+

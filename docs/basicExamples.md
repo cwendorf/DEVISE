@@ -1,0 +1,142 @@
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+## Direct and Basic Examples
+
+In conjunction with `DEVISE`, this vignette demonstrates how to directly input reported statistics from published or secondary sources to present estimation results. DEVISE handles the assembly, formatting, and visualization of these externally-sourced values without any computation. It also shows how to use Base R to calculate confidence intervals and display them using DEVISE.
+
+### Load the Packages
+
+```r
+if (!require(remotes)) install.packages("remotes")
+if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
+library(DEVISE)
+```
+
+### Case 1: Estimates from a Single Source
+
+#### Examine the Conditions
+
+When working with published studies or secondary data sources, you can directly input the reported estimates and confidence intervals. This approach is useful for meta-analyses, literature reviews, or when reconstructing results from research reports.
+
+```r
+c(Estimate = 8.000, LL = 6.988, UL = 9.012) -> Level1
+c(Estimate = 11.000, LL = 9.418, UL = 12.582) -> Level2
+c(Estimate = 12.000, LL = 10.248, UL = 13.752) -> Level3
+
+rbind(Level1, Level2, Level3) -> Conditions
+c("Level1", "Level2", "Level3") -> rownames(Conditions)
+```
+
+#### Display the Conditions
+
+Format the condition matrix and visualize the intervals.
+
+```r
+Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals for Conditions", style = "apa")
+Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals for Conditions", values = TRUE)
+```
+
+#### Examine a Comparison
+
+In addition to condition-level estimates, you can directly input comparison results reported in published studies.
+
+```r
+c(Estimate = 3.000, LL = 1.234, UL = 4.766) -> Difference
+
+rbind(Level1, Level2, Difference) -> Comparison
+c("Level1", "Level2", "Difference") -> rownames(Comparison)
+```
+
+#### Display a Comparison
+
+Present the comparison in a formatted table and plot.
+
+```r
+Comparison |> style_matrix(title = "Table 2: Reported Means and Confidence Intervals for a Comparison", style = "apa")
+Comparison |> plot_comparison(title = "Figure 2: Reported Means and Confidence Intervals for a Comparison", values = TRUE)
+```
+
+### Case 2: Estimates from Multiple Sources
+
+#### Examine the Studies
+
+When synthesizing results from multiple publications, DEVISE makes it easy to organize and present findings from different sources.
+
+```r
+c(Estimate = 11.000, LL = 9.418, UL = 12.582) -> Study1
+c(Estimate = 10.800, LL = 9.234, UL = 12.366) -> Study2
+c(Estimate = 11.200, LL = 9.654, UL = 12.746) -> Study3
+
+rbind(Study1, Study2, Study3) -> MultiSource
+c("Study 1", "Study 2", "Study 3") -> rownames(MultiSource)
+```
+
+#### Display the Studies
+
+Format and visualize results from multiple sources for comparison.
+
+```r
+MultiSource |> style_matrix(title = "Table 3: Means and Confidence Intervals Across Studies", style = "apa")
+MultiSource |> plot_conditions(title = "Figure 3: Means and Confidence Intervals Across Studies", values = TRUE)
+```
+
+### Case 3: Raw Data Input
+
+#### Input the Data
+
+Create a simple factor and outcome vector that will be used to compute condition-specific statistics.
+
+```r
+gl(3, 10, labels = c("Level1", "Level2", "Level3")) -> Factor
+c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10) -> Outcome
+```
+
+#### Examine the Conditions
+
+Compute confidence intervals for each level and assemble them into a conditions matrix.
+
+```r
+Outcome[Factor == "Level1"] |> t.test() |> extract_intervals() -> Level1
+Outcome[Factor == "Level2"] |> t.test() |> extract_intervals() -> Level2
+Outcome[Factor == "Level3"] |> t.test() |> extract_intervals() -> Level3
+
+rbind(Level1, Level2, Level3) -> Conditions
+c("Level1", "Level2", "Level3") -> rownames(Conditions)
+```
+
+#### Display the Conditions
+
+Format the conditions matrix and visualize the confidence intervals.
+
+```r
+Conditions |> style_matrix(title = "Table 4: Means and Confidence Intervals for Conditions", style = "apa")
+Conditions |> plot_conditions(title = "Figure 4: Means and Confidence Intervals for Conditions", values = TRUE)
+```
+
+#### Make a Comparison
+
+Subset the data to the two conditions that will be compared directly.
+
+```r
+Outcome[Factor %in% c("Level1", "Level2")] -> Outcome_Sub
+Factor[Factor %in% c("Level1", "Level2")] -> Factor_Sub
+```
+
+#### Examine a Comparison
+
+Compute the comparison interval between the two selected conditions.
+
+```r
+(Outcome_Sub ~ Factor_Sub) |> t.test() |> extract_intervals() -> Difference
+
+rbind(Level1, Level2, Difference) -> Comparison
+c("Level1", "Level2", "Difference") -> rownames(Comparison)
+```
+
+#### Display a Comparison
+
+Present the comparison in a formatted table and plot.
+
+```r
+Comparison |> style_matrix(title = "Table 5: Means and Confidence Intervals for a Comparison", style = "apa")
+Comparison |> plot_comparison(title = "Figure 5: Means and Confidence Intervals for a Comparison", values = TRUE)
+```

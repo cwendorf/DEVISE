@@ -1,9 +1,9 @@
-title: "Comparison Vignette with Direct Input"
+title: "Mean Comparisons with Direct Input"
 output:
   github_document:
     preserve_yaml: FALSE
 vignette: >
-  %\VignetteIndexEntry{Comparison Vignette with Direct Input}
+  %\VignetteIndexEntry{Mean Comparisons with Direct Input}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -13,24 +13,31 @@ knitr::opts_chunk$set(comment = NA)
 devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
 ```
 
-```{r, include=FALSE}
-if (!require(DEVISE)) {
-  if (!require(remotes)) install.packages("remotes")
-  remotes::install_github("cwendorf/DEVISE")
-}
-library(DEVISE)
-```
+## Mean Comparisons with Direct Input
 
-## Comparison Vignette with Direct Input
+This vignette shows how to supply confidence interval inputs directly and use DEVISE to assemble, format, and visualize conditions and comparisons.
 
 ```{r toc, echo=FALSE}
-thisfile <- knitr::current_input()
+knitr::current_input() -> thisfile
 revised_toc(thisfile, base_level = 3, toc_depth = 4)
 ```
 
 ---
 
-### Input the Statistics for Each Condition
+### Load the Packages
+
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+
+if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
+library(DEVISE)
+```
+
+### Examine the Conditions (Direct Input)
+
+#### Input the Statistics
+
+Enter the condition-level estimates and confidence limits directly.
 
 ```{r}
 c(Estimate = 8.000, LL = 6.988, UL = 9.012) -> Level1
@@ -41,14 +48,20 @@ rbind(Level1, Level2, Level3) -> Conditions
 c("Level1", "Level2", "Level3") -> rownames(Conditions)
 ```
 
-### Display the Conditions
+#### Display the Conditions
+
+Format the condition matrix and visualize the intervals.
 
 ```{r}
 Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", style = "apa")
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
 ```
 
-### Input the Comparison Statistics
+### Make a Comparison (Direct Input)
+
+#### Input the Statistics
+
+Enter the comparison statistics for the selected conditions.
 
 ```{r}
 c(Estimate = 3.000, LL = 1.234, UL = 4.766) -> Difference
@@ -57,7 +70,9 @@ rbind(Level1, Level2, Difference) -> Comparison
 c("Level1", "Level2", "Difference") -> rownames(Comparison)
 ```
 
-### Display the Comparison
+#### Display the Comparison
+
+Present the comparison in a formatted table and plot.
 
 ```{r}
 Comparison |> style_matrix(title = "Table 2: Means, Confidence Intervals, and Comparison", style = "apa")

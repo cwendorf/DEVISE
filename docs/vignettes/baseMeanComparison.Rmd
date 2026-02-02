@@ -1,10 +1,10 @@
 ---
-title: "Comparison Vignette with Base R"
+title: "Mean Comparisons with Base R"
 output:
   github_document:
     preserve_yaml: FALSE
 vignette: >
-  %\VignetteIndexEntry{Comparison Vignette with Base R}
+  %\VignetteIndexEntry{Mean Comparisons with Base R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,31 +14,40 @@ knitr::opts_chunk$set(comment = NA)
 devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
 ```
 
-```{r, include=FALSE}
-if (!require(DEVISE)) {
-  if (!require(remotes)) install.packages("remotes")
-  remotes::install_github("cwendorf/DEVISE")
-}
-library(DEVISE)
-```
+## Mean Comparisons with Base R
 
-## Comparison Vignette with Base R
+This vignette walks through a complete mean comparison workflow using Base R for data entry and DEVISE for interval extraction and visualization. Each step builds on the previous one, ending with a comparison table and plot.
 
 ```{r toc, echo=FALSE}
-thisfile <- knitr::current_input()
+knitr::current_input() -> thisfile
 revised_toc(thisfile, base_level = 3, toc_depth = 4)
 ```
 
 ---
 
-### Data Entry
+### Load the Packages
+
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+
+if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
+library(DEVISE)
+```
+
+### Examine the Conditions (Raw Data Input)
+
+#### Input the Data
+
+Create a simple factor and outcome vector that will be used to compute condition-specific statistics.
 
 ```{r}
 gl(3, 10, labels = c("Level1", "Level2", "Level3")) -> Factor
 c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10) -> Outcome
 ```
 
-### Obtain the Statistics for Each Condition
+#### Obtain the Statistics
+
+Compute confidence intervals for each level and assemble them into a conditions matrix.
 
 ```{r}
 Outcome[Factor == "Level1"] |> t.test() |> extract_intervals() -> Level1
@@ -49,21 +58,29 @@ rbind(Level1, Level2, Level3) -> Conditions
 c("Level1", "Level2", "Level3") -> rownames(Conditions)
 ```
 
-### Display the Conditions
+#### Display the Conditions
+
+Format the conditions matrix and visualize the confidence intervals.
 
 ```{r}
 Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", style = "apa")
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
 ```
 
-### Subset the Data
+### Make a Comparison (Raw Data Input)
+
+#### Subset the Data
+
+Subset the data to the two conditions that will be compared directly.
 
 ```{r}
-Outcome_Sub <- Outcome[Factor %in% c("Level1", "Level2")]
-Factor_Sub <- Factor[Factor %in% c("Level1", "Level2")]
+Outcome[Factor %in% c("Level1", "Level2")] -> Outcome_Sub
+Factor[Factor %in% c("Level1", "Level2")] -> Factor_Sub
 ```
 
-### Obtain the Comparison Statistics
+#### Obtain the Statistics
+
+Compute the comparison interval between the two selected conditions.
 
 ```{r}
 (Outcome_Sub ~ Factor_Sub) |> t.test() |> extract_intervals() -> Difference
@@ -72,7 +89,9 @@ rbind(Level1, Level2, Difference) -> Comparison
 c("Level1", "Level2", "Difference") -> rownames(Comparison)
 ```
 
-### Display the Comparison
+#### Display the Comparison
+
+Present the comparison in a formatted table and plot.
 
 ```{r}
 Comparison |> style_matrix(title = "Table 2: Means, Confidence Intervals, and Comparison", style = "apa")

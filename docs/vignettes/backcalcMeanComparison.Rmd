@@ -1,10 +1,10 @@
 ---
-title: "Comparison Vignette with backcalc"
+title: "Mean Comparisons with backcalc"
 output:
   github_document:
     preserve_yaml: FALSE
 vignette: >
-  %\VignetteIndexEntry{Comparison Vignette with backcalc}
+  %\VignetteIndexEntry{Mean Comparisons with backcalc}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,30 +14,34 @@ knitr::opts_chunk$set(comment = NA)
 devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
 ```
 
-```{r, include=FALSE}
-if (!require(remotes)) install.packages("remotes")
+## Mean Comparisons with `backcalc`
 
-if (!require(backcalc)) {
-  remotes::install_github("cwendorf/backcalc")
-}
-library(backcalc)
-
-if (!require(DEVISE)) {
-  remotes::install_github("cwendorf/DEVISE")
-}
-library(DEVISE)
-```
-
-## Comparison Vignette with backcalc
+This vignette demonstrates a full mean comparison workflow using `backcalc` to derive summary statistics and DEVISE to format and plot the results. The steps progress from computing condition intervals to a final comparison.
 
 ```{r toc, echo=FALSE}
-thisfile <- knitr::current_input()
+knitr::current_input() -> thisfile
 revised_toc(thisfile, base_level = 3, toc_depth = 4)
 ```
 
 ---
 
-### Obtain the Statistics (using Summary Statistics Input)
+### Load the Packages
+
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+
+if (!require(backcalc)) {remotes::install_github("cwendorf/backcalc")}
+library(backcalc)
+
+if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
+library(DEVISE)
+```
+
+### Examine the Conditions (Summary Statistics Input)
+
+#### Obtain the Statistics
+
+Use backcalc to compute confidence intervals for each condition from summary statistics.
 
 ```{r}
 backcalc_means(m = 8.000, sd = 1.414, n = 10) -> Level1
@@ -48,14 +52,20 @@ rbind(Level1, Level2, Level3) |> extract_intervals() -> Conditions
 c("Level1", "Level2", "Level3") -> rownames(Conditions)
 ```
 
-### Display the Conditions
+#### Display the Conditions
+
+Format and visualize the condition intervals.
 
 ```{r}
 Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", style = "apa")
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
 ```
 
-### Obtain the Comparison Statistics (Level1 vs Level2)
+### Make a Comparison (Summary Statistics Input)
+
+#### Obtain the Statistics
+
+Compute the comparison interval between the two selected conditions.
 
 ```{r}
 backcalc_means(m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() -> Difference
@@ -64,7 +74,9 @@ rbind(Level1, Level2, Difference) -> Comparison
 c("Level1", "Level2", "Difference") -> rownames(Comparison)
 ```
 
-### Display the Comparison
+#### Display the Comparison
+
+Present the comparison in a formatted table and plot.
 
 ```{r}
 Comparison |> style_matrix(title = "Table 2: Means, Confidence Intervals, and Comparison", style = "apa")

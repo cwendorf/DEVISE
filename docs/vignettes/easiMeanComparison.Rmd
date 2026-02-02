@@ -1,10 +1,10 @@
 ---
-title: "Comparison Vignette with EASI"
+title: "Mean Comparisons with EASI"
 output:
   github_document:
     preserve_yaml: FALSE
 vignette: >
-  %\VignetteIndexEntry{Comparison Vignette with EASI}
+  %\VignetteIndexEntry{Mean Comparisons with EASI}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,70 +14,90 @@ knitr::opts_chunk$set(comment = NA)
 devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
 ```
 
-```{r, include=FALSE}
-if (!require(remotes)) install.packages("remotes")
+## Mean Comparisons with `EASI`
 
-if (!require(EASI)) {
-  remotes::install_github("cwendorf/EASI")
-}
-library(EASI)
-
-if (!require(DEVISE)) {
-  remotes::install_github("cwendorf/DEVISE")
-}
-library(DEVISE)
-```
-
-## Comparison Vignette with EASI
+This vignette demonstrates two workflows with EASI: one using raw data and one using summary statistics. Each workflow follows the same pattern of building condition intervals, then generating a comparison.
 
 ```{r toc, echo=FALSE}
-thisfile <- knitr::current_input()
+knitr::current_input() -> thisfile
 revised_toc(thisfile, base_level = 3, toc_depth = 4)
 ```
 
 ---
 
-### Data Entry
+### Load the Packages
+
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+
+if (!require(EASI)) {remotes::install_github("cwendorf/EASI")}
+library(EASI)
+
+if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
+library(DEVISE)
+```
+
+### Examine the Conditions (Raw Data Input)
+
+#### Input the Data
+
+Create a factor and outcome vector for the raw-data workflow.
 
 ```{r}
 gl(3, 10, labels = c("Level1", "Level2", "Level3")) -> Factor
 c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10) -> Outcome
 ```
 
-### Obtain the Statistics for Each Condition
+#### Obtain the Statistics
+
+Estimate condition means and intervals from the raw data.
 
 ```{r}
 (Outcome~Factor) |> estimateMeans() -> Conditions
 ```
 
-### Display the Conditions
+#### Display the Conditions
+
+Format and visualize the condition intervals.
 
 ```{r}
 Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", style = "apa")
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
 ```
 
-### Subset the Data
+### Make a Comparison (Raw Data Input)
+
+#### Subset the Data
+
+Subset to the two conditions that will be compared directly.
 
 ```{r}
-Outcome_Sub <- Outcome[Factor %in% c("Level1", "Level2")]
-Factor_Sub <- Factor[Factor %in% c("Level1", "Level2")]
+Outcome[Factor %in% c("Level1", "Level2")] -> Outcome_Sub
+Factor[Factor %in% c("Level1", "Level2")] -> Factor_Sub
 ```
 
-### Obtain the Comparison Statistics
+#### Obtain the Statistics
+
+Estimate the comparison interval for the selected conditions.
 
 ```{r}
 (Outcome_Sub~Factor_Sub) |> estimateComparison() -> Comparison
 ```
 
-### Display the Comparison
+#### Display the Comparison
+
+Present the comparison in a formatted table and plot.
 
 ```{r}
 Comparison |> style_matrix(title = "Table 2: Means, Confidence Intervals, and Comparison", style = "apa")
 Comparison |> plot_comparison(title = "Figure 2: Comparison Confidence Intervals", values = TRUE)
 ```
 
-### Input the Statistics for Each Condition
+### Examine the Conditions (Summary Statistics Input)
+
+#### Input the Statistics
+
+Provide summary statistics to demonstrate the summary-input workflow.
 
 ```{r}
 c(N = 10, M = 8.000, SD = 1.414) -> Level1
@@ -86,26 +106,36 @@ c(N = 10, M = 12.000, SD = 2.449) -> Level3
 construct(Level1, Level2, Level3, class = "bsm") -> IndependentSummary
 ```
 
-### Obtain the Statistics for Each Condition
+#### Obtain the Statistics
+
+Estimate condition intervals from summary statistics.
 
 ```{r}
 IndependentSummary |> estimateMeans() -> Conditions
 ```
 
-### Display the Conditions
+#### Display the Conditions
+
+Format and visualize the condition intervals.
 
 ```{r}
 Conditions |> style_matrix(title = "Table 3: Means and Confidence Intervals", style = "apa")
 Conditions |> plot_conditions(title = "Figure 3: Conditions Confidence Intervals", values = TRUE)
 ```
 
-### Calculate the Comparison Statistics
+### Make a Comparison (Summary Statistics Input)
+
+#### Calculate the Statistics
+
+Compute the comparison interval for the summary-input workflow.
 
 ```{r}
 construct(Level1, Level2, class = "bsm") |> estimateComparison() -> Comparison
 ```
 
-### Display the Comparison
+#### Display the Comparison
+
+Present the comparison in a formatted table and plot.
 
 ```{r}
 Comparison |> style_matrix(title = "Table 4: Means, Confidence Intervals, and Comparison", style = "apa")

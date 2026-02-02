@@ -10,11 +10,11 @@ source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
 #### Obtain the Statistics
 
-backcalc_means(m = 8.000, sd = 1.414, n = 10) -> Level1
-backcalc_means(m = 11.000, sd = 2.211, n = 10) -> Level2
-backcalc_means(m = 12.000, sd = 2.162, n = 10) -> Level3
+backcalc_means(m = 8.000, sd = 1.414, n = 10) |> extract_intervals() -> Level1
+backcalc_means(m = 11.000, sd = 2.211, n = 10) |> extract_intervals() -> Level2
+backcalc_means(m = 12.000, sd = 2.162, n = 10) |> extract_intervals() -> Level3
 
-rbind(Level1, Level2, Level3) |> extract_intervals() -> Conditions
+rbind(Level1, Level2, Level3) -> Conditions
 c("Level1", "Level2", "Level3") -> rownames(Conditions)
 
 #### Display the Conditions

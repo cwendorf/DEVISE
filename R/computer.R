@@ -18,11 +18,11 @@
 #'   `c(x,y) ~ Group`, or `~ Group`). If omitted, all numeric variables are used.
 #' @return matrix (ungrouped), matrix (grouped + single var), or list of matrices (grouped + multiple vars)
 #' @examples
-#' df <- data.frame(
+#' data.frame(
 #'   Group = rep(c("A","B"), each = 5),
 #'   x = c(1,2,3,4,5, 2,3,4,5,6),
 #'   y = c(5,4,3,2,1, 6,7,8,9,10)
-#' )
+#' ) -> df
 #' df |> compute_descriptives()
 #' df |> compute_descriptives(x, y)
 #' df |> compute_descriptives(x ~ Group)

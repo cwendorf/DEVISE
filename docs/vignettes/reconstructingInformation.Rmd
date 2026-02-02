@@ -1,0 +1,128 @@
+---
+title: "Reconstructing Information"
+output:
+  github_document:
+    preserve_yaml: FALSE
+vignette: >
+  %\VignetteIndexEntry{Reconstructing Information}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(comment = NA)
+devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
+```
+
+## Reconstructing Information
+
+This vignette demonstrates how to use backcalc to reconstruct and compute confidence intervals for statistics beyond simple means. When published studies report summary statistics or test results, backcalc can reconstruct the full inferential statistics for various types of analyses.
+
+```{r toc, echo=FALSE}
+knitr::current_input() -> thisfile
+revised_toc(thisfile, base_level = 3, toc_depth = 4)
+```
+
+---
+
+### Load the Packages
+
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+
+if (!require(backcalc)) {remotes::install_github("cwendorf/backcalc")}
+library(backcalc)
+
+if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
+library(DEVISE)
+```
+
+### Reconstruct Confidence Intervals from Test Statistics
+
+#### Input Available Test Information
+
+Studies often report test statistics (e.g., t-values, F-statistics) and sample sizes. Use backcalc to reconstruct estimates and confidence intervals from these values.
+
+```{r}
+t_statistic <- 2.345
+df <- 18
+```
+
+#### Reconstruct from t-test Statistics
+
+Use backcalc to derive confidence intervals from test statistics.
+
+```{r}
+backcalc_from_t(t = t_statistic, df = df) |> extract_intervals() -> ReconstructedFromT
+c("Difference") -> rownames(ReconstructedFromT)
+```
+
+#### Display the Reconstructed Results
+
+Format and visualize the reconstructed estimate from test statistics.
+
+```{r}
+ReconstructedFromT |> style_matrix(title = "Table 1: Reconstructed Estimates from t-test", style = "apa")
+ReconstructedFromT |> plot_conditions(title = "Figure 1: Reconstructed t-test Estimate", values = TRUE)
+```
+
+### Reconstruct Correlation Confidence Intervals
+
+#### Input Reported Correlation Statistics
+
+When studies report correlation coefficients and sample sizes, backcalc can compute confidence intervals.
+
+```{r}
+r_value <- 0.65
+n_correlation <- 50
+```
+
+#### Compute Correlation Intervals
+
+Use backcalc to derive confidence intervals for correlations.
+
+```{r}
+backcalc_correlation(r = r_value, n = n_correlation) |> extract_intervals() -> CorrelationInterval
+c("r") -> rownames(CorrelationInterval)
+```
+
+#### Display the Reconstructed Correlation
+
+Format and visualize the correlation confidence interval.
+
+```{r}
+CorrelationInterval |> style_matrix(title = "Table 2: Reconstructed Correlation Confidence Interval", style = "apa")
+CorrelationInterval |> plot_conditions(title = "Figure 2: Reconstructed Correlation Interval", values = TRUE)
+```
+
+### Reconstruct Effect Size Confidence Intervals
+
+#### Input Reported Effect Sizes
+
+Effect sizes reported in published studies can be used to reconstruct confidence intervals around the estimates.
+
+```{r}
+cohens_d <- 0.85
+n1 <- 30
+n2 <- 30
+```
+
+#### Compute Effect Size Intervals
+
+Use backcalc to derive confidence intervals for effect sizes.
+
+```{r}
+backcalc_cohens_d(d = cohens_d, n1 = n1, n2 = n2) |> extract_intervals() -> EffectSizeInterval
+c("Cohen's d") -> rownames(EffectSizeInterval)
+```
+
+#### Display the Reconstructed Effect Size
+
+Format and visualize the effect size confidence interval.
+
+```{r}
+EffectSizeInterval |> style_matrix(title = "Table 3: Reconstructed Effect Size Confidence Interval", style = "apa")
+EffectSizeInterval |> plot_conditions(title = "Figure 3: Reconstructed Effect Size Interval", values = TRUE)
+```
+
+

@@ -29,15 +29,13 @@ revised_toc(thisfile, base_level = 3, toc_depth = 4)
 
 ```{r, include=FALSE}
 if (!require(remotes)) install.packages("remotes")
-
-if (!require(confintr)) {remotes::install_github("mayer79/confintr")}
-library(confintr)
-
 if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
 library(DEVISE)
+if (!require(confintr)) {remotes::install_github("mayer79/confintr")}
+library(confintr)
 ```
 
-### Examine the Conditions (Raw Data Input)
+### Case 1: Raw Data Input
 
 #### Input the Data
 
@@ -52,7 +50,7 @@ Data$Outcome[Data$Factor == "Level2"] -> y2
 Data$Outcome[Data$Factor == "Level3"] -> y3
 ```
 
-#### Obtain the Statistics
+#### Examine the Conditions
 
 Use confintr to compute confidence intervals for each condition.
 
@@ -74,9 +72,7 @@ Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", st
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
 ```
 
-### Make a Comparison (Raw Data Input)
-
-#### Obtain the Statistics
+#### Examine a Comparison
 
 Compute the comparison interval between the two selected conditions.
 
@@ -87,7 +83,7 @@ rbind(Level1, Level2, Difference) -> Comparison
 c("Level1", "Level2", "Difference") -> rownames(Comparison)
 ```
 
-#### Display the Comparison
+#### Display a Comparison
 
 Present the comparison in a formatted table and plot.
 

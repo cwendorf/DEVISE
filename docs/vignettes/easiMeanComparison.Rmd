@@ -29,15 +29,13 @@ revised_toc(thisfile, base_level = 3, toc_depth = 4)
 
 ```{r, include=FALSE}
 if (!require(remotes)) install.packages("remotes")
-
-if (!require(EASI)) {remotes::install_github("cwendorf/EASI")}
-library(EASI)
-
 if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
 library(DEVISE)
+if (!require(EASI)) {remotes::install_github("cwendorf/EASI")}
+library(EASI)
 ```
 
-### Examine the Conditions (Raw Data Input)
+### Case 1: Raw Data Input
 
 #### Input the Data
 
@@ -48,7 +46,7 @@ gl(3, 10, labels = c("Level1", "Level2", "Level3")) -> Factor
 c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10) -> Outcome
 ```
 
-#### Obtain the Statistics
+#### Examine the Conditions
 
 Estimate condition means and intervals from the raw data.
 
@@ -65,9 +63,7 @@ Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", st
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
 ```
 
-### Make a Comparison (Raw Data Input)
-
-#### Subset the Data
+### Make a Comparison
 
 Subset to the two conditions that will be compared directly.
 
@@ -76,7 +72,7 @@ Outcome[Factor %in% c("Level1", "Level2")] -> Outcome_Sub
 Factor[Factor %in% c("Level1", "Level2")] -> Factor_Sub
 ```
 
-#### Obtain the Statistics
+#### Examine a Comparison
 
 Estimate the comparison interval for the selected conditions.
 
@@ -84,7 +80,7 @@ Estimate the comparison interval for the selected conditions.
 (Outcome_Sub~Factor_Sub) |> estimateComparison() -> Comparison
 ```
 
-#### Display the Comparison
+#### Display a Comparison
 
 Present the comparison in a formatted table and plot.
 
@@ -93,7 +89,7 @@ Comparison |> style_matrix(title = "Table 2: Means, Confidence Intervals, and Co
 Comparison |> plot_comparison(title = "Figure 2: Comparison Confidence Intervals", values = TRUE)
 ```
 
-### Examine the Conditions (Summary Statistics Input)
+### Case 2: Summary Statistics Input
 
 #### Input the Statistics
 
@@ -106,7 +102,7 @@ c(N = 10, M = 12.000, SD = 2.449) -> Level3
 construct(Level1, Level2, Level3, class = "bsm") -> IndependentSummary
 ```
 
-#### Obtain the Statistics
+#### Examine the Conditions
 
 Estimate condition intervals from summary statistics.
 
@@ -123,9 +119,7 @@ Conditions |> style_matrix(title = "Table 3: Means and Confidence Intervals", st
 Conditions |> plot_conditions(title = "Figure 3: Conditions Confidence Intervals", values = TRUE)
 ```
 
-### Make a Comparison (Summary Statistics Input)
-
-#### Calculate the Statistics
+#### Examine a Comparison
 
 Compute the comparison interval for the summary-input workflow.
 
@@ -133,7 +127,7 @@ Compute the comparison interval for the summary-input workflow.
 construct(Level1, Level2, class = "bsm") |> estimateComparison() -> Comparison
 ```
 
-#### Display the Comparison
+#### Display a Comparison
 
 Present the comparison in a formatted table and plot.
 

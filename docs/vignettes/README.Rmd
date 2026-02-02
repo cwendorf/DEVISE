@@ -10,8 +10,8 @@ vignette: >
 ---
 
 ```{r, include=FALSE}
-compute_descriptives(df, Quiz, Exam) -> descriptives
-style_matrix(descriptives, title = "Table 1: Descriptive Statistics", style = "apa")
+knitr::opts_chunk$set(comment = NA)
+devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
 ```
 
 ## Coding Style in DEVISE
@@ -29,7 +29,6 @@ revised_toc(thisfile, base_level = 3, toc_depth = 4)
 
 ```{r, include=FALSE}
 if (!require(remotes)) install.packages("remotes")
-
 if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
 library(DEVISE)
 ```

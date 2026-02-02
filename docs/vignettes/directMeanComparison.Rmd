@@ -28,14 +28,13 @@ revised_toc(thisfile, base_level = 3, toc_depth = 4)
 
 ```{r, include=FALSE}
 if (!require(remotes)) install.packages("remotes")
-
 if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
 library(DEVISE)
 ```
 
-### Examine the Conditions (Direct Input)
+### Case 1: Direct Input
 
-#### Input the Statistics
+#### Examine the Conditions
 
 Enter the condition-level estimates and confidence limits directly.
 
@@ -57,9 +56,7 @@ Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", st
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
 ```
 
-### Make a Comparison (Direct Input)
-
-#### Input the Statistics
+#### Examine a Comparison
 
 Enter the comparison statistics for the selected conditions.
 
@@ -70,7 +67,7 @@ rbind(Level1, Level2, Difference) -> Comparison
 c("Level1", "Level2", "Difference") -> rownames(Comparison)
 ```
 
-#### Display the Comparison
+#### Display a Comparison
 
 Present the comparison in a formatted table and plot.
 

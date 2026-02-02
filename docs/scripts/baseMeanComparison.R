@@ -5,14 +5,14 @@
 
 source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
-### Examine the Conditions (Raw Data Input)
+### Case 1: Raw Data Input
 
 #### Input the Data
 
 gl(3, 10, labels = c("Level1", "Level2", "Level3")) -> Factor
 c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10) -> Outcome
 
-#### Obtain the Statistics
+#### Examine the Conditions
 
 Outcome[Factor == "Level1"] |> t.test() |> extract_intervals() -> Level1
 Outcome[Factor == "Level2"] |> t.test() |> extract_intervals() -> Level2
@@ -26,21 +26,19 @@ c("Level1", "Level2", "Level3") -> rownames(Conditions)
 Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", style = "apa")
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
 
-### Make a Comparison (Raw Data Input)
-
-#### Subset the Data
+#### Make a Comparison
 
 Outcome[Factor %in% c("Level1", "Level2")] -> Outcome_Sub
 Factor[Factor %in% c("Level1", "Level2")] -> Factor_Sub
 
-#### Obtain the Statistics
+#### Examine a Comparison
 
 (Outcome_Sub ~ Factor_Sub) |> t.test() |> extract_intervals() -> Difference
 
 rbind(Level1, Level2, Difference) -> Comparison
 c("Level1", "Level2", "Difference") -> rownames(Comparison)
 
-#### Display the Comparison
+#### Display a Comparison
 
 Comparison |> style_matrix(title = "Table 2: Means, Confidence Intervals, and Comparison", style = "apa")
 Comparison |> plot_comparison(title = "Figure 2: Comparison Confidence Intervals", values = TRUE)

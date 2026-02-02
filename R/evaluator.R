@@ -21,12 +21,12 @@
 #'     like `lm()`, `glm()`, or `t.test()`.
 #'
 #' @examples
-#' df <- data.frame(
+#' data.frame(
 #'   y = 1:5,
 #'   x1 = c(1,1,1,2,2),
 #'   x2 = c(5,4,3,2,1),
 #'   x3 = c(10,20,30,40,50)
-#' )
+#' ) -> df
 #'
 #' # Use a formula for modeling
 #' df |> use_vars(y ~ x1) |> t.test()

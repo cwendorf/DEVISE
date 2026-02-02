@@ -13,11 +13,11 @@
 #' @return A data frame identical to `x` but with updated row names.
 #' @examples
 #' # Basic usage
-#' df <- data.frame(a = 1:3, b = 4:6)
-#' df <- df |> name_rows(c("A", "B", "C"))  # Must assign back to df
+#' data.frame(a = 1:3, b = 4:6) -> df
+#' df |> name_rows(c("A", "B", "C")) -> df  # Must assign back to df
 #'
 #' # Within-pipe renaming
-#' df <- data.frame(c(10, 0, 5), c(8, -1, 4), c(12, 1, 6))
+#' data.frame(c(10, 0, 5), c(8, -1, 4), c(12, 1, 6)) -> df
 #' df |> name_rows(c("Group1", "Group2", "Group3")) -> Results
 #' @export
 name_rows <- function(x, names) {
@@ -37,11 +37,11 @@ name_rows <- function(x, names) {
 #' @return A data frame identical to `x` but with updated column names.
 #' @examples
 #' # Basic usage
-#' df <- data.frame(a = 1:3, b = 4:6)
-#' df <- df |> name_columns(c("First", "Second"))  # Must assign back to df
+#' data.frame(a = 1:3, b = 4:6) -> df
+#' df |> name_columns(c("First", "Second")) -> df  # Must assign back to df
 #'
 #' # Within-pipe renaming
-#' df <- data.frame(c(10, 0, 5), c(8, -1, 4), c(12, 1, 6))
+#' data.frame(c(10, 0, 5), c(8, -1, 4), c(12, 1, 6)) -> df
 #' df |> name_columns(c("Estimate", "LL", "UL")) -> Results
 #' @export
 name_columns <- function(x, names) {
@@ -247,7 +247,7 @@ extract_vector <- function(data, index) {
 #' df |> extract_intervals()
 #'
 #' # t.test result
-#' set.seed(1); x <- rnorm(20, 10, 2)
+#' set.seed(1); rnorm(20, 10, 2) -> x
 #' t.test(x) |> extract_intervals()
 #' @export
 extract_intervals <- function(x) {

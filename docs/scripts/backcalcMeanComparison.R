@@ -3,12 +3,12 @@
 
 ### Source the Functions
 
-source("http://raw.githubusercontent.com/cwendorf/backcalc/main/source-backcalc.R")
 source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
+source("http://raw.githubusercontent.com/cwendorf/backcalc/main/source-backcalc.R")
 
-### Examine the Conditions (Summary Statistics Input)
+### Case 1: Summary Statistics Input
 
-#### Obtain the Statistics
+#### Examine the Conditions
 
 backcalc_means(m = 8.000, sd = 1.414, n = 10) |> extract_intervals() -> Level1
 backcalc_means(m = 11.000, sd = 2.211, n = 10) |> extract_intervals() -> Level2
@@ -22,16 +22,14 @@ c("Level1", "Level2", "Level3") -> rownames(Conditions)
 Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", style = "apa")
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
 
-### Make a Comparison (Summary Statistics Input)
-
-#### Obtain the Statistics
+#### Examine a Comparison
 
 backcalc_means(m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() -> Difference
 
 rbind(Level1, Level2, Difference) -> Comparison
 c("Level1", "Level2", "Difference") -> rownames(Comparison)
 
-#### Display the Comparison
+#### Display a Comparison
 
 Comparison |> style_matrix(title = "Table 2: Means, Confidence Intervals, and Comparison", style = "apa")
 Comparison |> plot_comparison(title = "Figure 2: Comparison Confidence Intervals", values = TRUE)

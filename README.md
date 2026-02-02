@@ -10,7 +10,6 @@
 
 `DEVISE` is a companion package for working with other statistical packages. Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, `DEVISE` handles the pre-processing of data and post-processing of results into more accessible and readable formats such as summary tables and comparison plots.
 
-
 ### Installation
 
 This package is not currently on CRAN, but can be installed and loaded using these R commands
@@ -26,6 +25,14 @@ If you do not wish a full install, the latest functions can be made available us
 ```r
 source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 ```
+
+### Usage
+
+This package contains a set of examples to demonstrate its use:
+
+- Direct Input Cases – Directly input reported statistics from published or secondary sources to present confidence intervals.
+- Reconstructing Information – Start from incomplete reported information to reconstruct and present confidence intervals for various statistics.
+- Bootstrapped Intervals – Use external packages to obtain parametric and bootstrapped confidence intervals for various statistics.
 
 ### Contact Me
 

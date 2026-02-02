@@ -29,17 +29,15 @@ revised_toc(thisfile, base_level = 3, toc_depth = 4)
 
 ```{r, include=FALSE}
 if (!require(remotes)) install.packages("remotes")
-
-if (!require(backcalc)) {remotes::install_github("cwendorf/backcalc")}
-library(backcalc)
-
 if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
 library(DEVISE)
+if (!require(backcalc)) {remotes::install_github("cwendorf/backcalc")}
+library(backcalc)
 ```
 
-### Examine the Conditions (Summary Statistics Input)
+### Case 1: Summary Statistics Input
 
-#### Obtain the Statistics
+#### Examine the Conditions
 
 Use backcalc to compute confidence intervals for each condition from summary statistics.
 
@@ -61,9 +59,7 @@ Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals", st
 Conditions |> plot_conditions(title = "Figure 1: Conditions Confidence Intervals", values = TRUE)
 ```
 
-### Make a Comparison (Summary Statistics Input)
-
-#### Obtain the Statistics
+#### Examine a Comparison
 
 Compute the comparison interval between the two selected conditions.
 
@@ -74,7 +70,7 @@ rbind(Level1, Level2, Difference) -> Comparison
 c("Level1", "Level2", "Difference") -> rownames(Comparison)
 ```
 
-#### Display the Comparison
+#### Display a Comparison
 
 Present the comparison in a formatted table and plot.
 

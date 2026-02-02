@@ -1,4 +1,5 @@
-## Coding Style in DEVISE
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+## The DEVISE Workflow
 
 This vignette explains the project-wide convention of using forward assignment (`->`) and pipe operators (`|>`) to keep examples readable and consistent. The goal is to read code left-to-right, from data creation to analysis to output.
 

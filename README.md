@@ -30,6 +30,7 @@ source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
 This package contains a set of examples to demonstrate its use:
 
+- [The DEVISE Workflow](./docs/README.md) - Use forward assignment and pipe operators to improve the workflow.
 - [Direct and Basic Examples](./docs/basicExamples.md) – Use reported confidence intervals from published sources or use Base R to calculate the confidence intervals.
 - [Reconstructed Information Examples](./docs/reconstructExamples.md) – Start from incomplete sumamry information to reconstruct the confidence intervals for various statistics.
 - [Bootstrapped Intervals Examples](./docs/bootstrapExamples) – Use external packages to obtain parametric and bootstrapped confidence intervals for various statistics.

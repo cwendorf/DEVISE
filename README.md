@@ -27,17 +27,6 @@ If you do not wish a full install, the latest functions can be made available us
 source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 ```
 
-### Usage
-
-This package contains a set of examples to demonstrate its use:
-
-- [Direct Examples](./docs/directExamples.md) - Using direct input of statistics
-- [Base Examples](./docs/baseExamples.md) - Using Base R for input and calculations
-- [confintr Examples](./docs/confintrExamples.md) - Using `confintr` for input and calculations
-- [statpsych Examples](./docs/spToolsExamples.md) - Using `statpsych` for input and calculations
-- [backcalc Examples](./docs/backcalcExamples.md) - Using `backcalc` for input and calculations
-- [EASI Examples](./docs/easiExamples.md) - Using `EASI` for input and calculations
-
 ### Contact Me
 
 - GitHub Issues: [https://github.com/cwendorf/DEVISE/issues](https://github.com/cwendorf/DEVISE/issues) 

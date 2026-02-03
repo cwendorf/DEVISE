@@ -1,7 +1,9 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
-## The DEVISE Workflow
+## Overview of DEVISE
 
-This vignette explains the project-wide convention of using forward assignment (`->`) and pipe operators (`|>`) to keep examples readable and consistent. The goal is to read code left-to-right, from data creation to analysis to output.
+`DEVISE` is a companion package for working with other statistical packages. Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, `DEVISE` handles the pre-processing of data and post-processing of results into more accessible and readable formats such as summary tables and comparison plots.
+
+This vignette explains the use of `DEVISE`, particularly the project-wide convention of using forward assignment (`->`) and pipe operators (`|>`) to keep examples readable and consistent. The goal is to read code left-to-right, from data creation to analysis to output.
 
 ### Load the Packages
 
@@ -39,3 +41,11 @@ df |> compute_descriptives(Quiz ~ Group) |> style_matrix(title = "Table 1: Descr
 df |> compute_correlations(Quiz, Exam)
 df |> compute_correlations(Quiz, Exam) |> style_matrix(title = "Table 2: Correlation Matrix", style = "apa")
 ```
+
+### Examples
+
+This package contains a set of examples to demonstrate its use:
+
+- [Direct Input Examples](./basicExamples.md) – Use reported confidence intervals from published sources.
+- [Reconstructed Information Examples](./reconstructExamples.md) – Use summary information to reconstruct the confidence intervals.
+- [Bootstrapped Intervals Examples](./bootstrapExamples.md) – Use external packages to obtain parametric and bootstrapped confidence intervals.

@@ -1,15 +1,7 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
-## Direct and Basic Examples
+## Direct Input Examples
 
-In conjunction with `DEVISE`, this vignette demonstrates how to directly input reported statistics from published or secondary sources to present estimation results. DEVISE handles the assembly, formatting, and visualization of these externally-sourced values without any computation. It also shows how to use Base R to calculate confidence intervals and display them using DEVISE.
-
-### Load the Packages
-
-```r
-if (!require(remotes)) install.packages("remotes")
-if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
-library(DEVISE)
-```
+In conjunction with `DEVISE`, this vignette demonstrates how to directly input reported statistics from published or secondary sources to present estimation results. DEVISE handles the assembly, formatting, and visualization of these externally-sourced values without any computation.
 
 ### Case 1: Estimates from a Single Source
 

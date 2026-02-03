@@ -5,6 +5,8 @@ This vignette explains the project-wide convention of using forward assignment (
 
 ### Load the Packages
 
+Of course, when using DEVISE, you need to load it first. This also applies to any other packages you may be using.
+
 ```r
 if (!require(remotes)) install.packages("remotes")
 if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}

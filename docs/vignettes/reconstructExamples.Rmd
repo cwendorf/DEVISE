@@ -14,6 +14,14 @@ knitr::opts_chunk$set(comment = NA)
 devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
 ```
 
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
+library(DEVISE)
+if (!require(backcalc)) {remotes::install_github("cwendorf/backcalc")}
+library(backcalc)
+```
+
 ## Reconstructed Information Examples
 
 In conjunction with `DEVISE`, this vignette demonstrates how to use `backcalc` to reconstruct and compute confidence intervals for statistics beyond simple means. When published studies report summary statistics or test results, backcalc can reconstruct the full inferential statistics for various types of analyses.
@@ -24,16 +32,6 @@ revised_toc(thisfile, base_level = 3, toc_depth = 4)
 ```
 
 ---
-
-### Load the Packages
-
-```{r, include=FALSE}
-if (!require(remotes)) install.packages("remotes")
-if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
-library(DEVISE)
-if (!require(backcalc)) {remotes::install_github("cwendorf/backcalc")}
-library(backcalc)
-```
 
 ### Case 1: Calculate Confidence Intervals
 

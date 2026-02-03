@@ -3,16 +3,6 @@
 
 In conjunction with `DEVISE`, this vignette demonstrates how to use the `confintr` package for parametric and bootstrap confidence intervals. `confintr` supports both distribution-based confidence intervals for normally-distributed data and bootstrap methods that provide distribution-free intervals without relying on parametric assumptions.
 
-### Load the Packages
-
-```r
-if (!require(remotes)) install.packages("remotes")
-if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
-library(DEVISE)
-if (!require(confintr)) {remotes::install_github("mayer79/confintr")}
-library(confintr)
-```
-
 ### Case 1: Parametric Confidence Intervals
 
 #### Input the Data

@@ -3,16 +3,6 @@
 
 In conjunction with `DEVISE`, this vignette demonstrates how to use `backcalc` to reconstruct and compute confidence intervals for statistics beyond simple means. When published studies report summary statistics or test results, backcalc can reconstruct the full inferential statistics for various types of analyses.
 
-### Load the Packages
-
-```r
-if (!require(remotes)) install.packages("remotes")
-if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
-library(DEVISE)
-if (!require(backcalc)) {remotes::install_github("cwendorf/backcalc")}
-library(backcalc)
-```
-
 ### Case 1: Calculate Confidence Intervals
 
 #### Examine the Conditions

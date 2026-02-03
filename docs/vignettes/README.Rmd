@@ -27,7 +27,9 @@ revised_toc(thisfile, base_level = 3, toc_depth = 4)
 
 ### Load the Packages
 
-```{r, include=FALSE}
+Of course, when using DEVISE, you need to load it first. This also applies to any other packages you may be using.
+
+```{r}
 if (!require(remotes)) install.packages("remotes")
 if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
 library(DEVISE)

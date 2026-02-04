@@ -8,7 +8,7 @@
 
 ### Overview
 
-`DEVISE` is a companion package for working with other statistical packages. Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, `DEVISE` handles the pre-processing of data and post-processing of results into more accessible and readable formats such as summary tables and comparison plots.
+`DEVISE` is a companion package for working with other statistical packages. Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, `DEVISE` handles the pre-processing of data (extraction of data, calculation of descriptives) and post-processing of results into more accessible and readable formats (such as summary tables and comparison plots).
 
 ### Installation
 
@@ -30,7 +30,7 @@ source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
 This package contains a set of examples to demonstrate its use:
 
-- [Overview of DEVISE](./docs/README.md) - Use forward assignment and pipe operators to improve the workflow.
+- [Working with DEVISE](./docs/README.md) - Use the package to organize confidence interval workflow.
 - [Direct Input Examples](./docs/basicExamples.md) – Use reported confidence intervals from published sources.
 - [Reconstructed Information Examples](./docs/reconstructExamples.md) – Use summary information to reconstruct the confidence intervals.
 - [Bootstrapped Intervals Examples](./docs/bootstrapExamples.md) – Use external packages to obtain parametric and bootstrapped confidence intervals.

@@ -1,17 +1,16 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
-## Overview of DEVISE
+## Working with DEVISE
 
-`DEVISE` is a companion package for working with other statistical packages. Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, `DEVISE` handles the pre-processing of data and post-processing of results into more accessible and readable formats such as summary tables and comparison plots.
+### Overview
 
-### Load the Packages
+`DEVISE` is a companion package for working with other statistical packages. Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, `DEVISE` handles the pre-processing of data (extraction of data, calculation of descriptives) and post-processing of results into more accessible and readable formats (such as summary tables and comparison plots).
 
-Of course, when using DEVISE, you need to load it first. This also applies to any other packages you may be using.
+Though it works with base R and all packages, `DEVISE` works particularly well in conjunction with:
 
-```r
-if (!require(remotes)) install.packages("remotes")
-if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
-library(DEVISE)
-```
+- [`backcalc`](https://github.com/cwendorf/backcalc)
+- [`EASI`](https://github.com/cwendorf/EASI)
+- [`confintr`](https://github.com/cran/confintr) 
+- [`statpsych`](https://github.com/cran/statpsych)
 
 ### The Workflow
 

@@ -44,5 +44,5 @@ df |> compute_correlations(Quiz, Exam) |> style_matrix(title = "Table 2: Correla
 This package contains a set of examples to demonstrate its use:
 
 - [Direct Input Examples](./basicExamples.md) – Use reported confidence intervals from published sources.
-- [Reconstructed Information Examples](./reconstructExamples.md) – Use summary information to reconstruct the confidence intervals.
+- [Reconstructed Information Examples](./reconstructExamples.md) – Use external packages to reconstruct confidence intervals.
 - [Bootstrapped Intervals Examples](./bootstrapExamples.md) – Use external packages to obtain parametric and bootstrapped confidence intervals.

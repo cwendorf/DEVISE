@@ -3,8 +3,6 @@
 
 `DEVISE` is a companion package for working with other statistical packages. Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, `DEVISE` handles the pre-processing of data and post-processing of results into more accessible and readable formats such as summary tables and comparison plots.
 
-This vignette explains the use of `DEVISE`, particularly the project-wide convention of using forward assignment (`->`) and pipe operators (`|>`) to keep examples readable and consistent. The goal is to read code left-to-right, from data creation to analysis to output.
-
 ### Load the Packages
 
 Of course, when using DEVISE, you need to load it first. This also applies to any other packages you may be using.
@@ -15,7 +13,9 @@ if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
 library(DEVISE)
 ```
 
-### Forward Assignment
+### The Workflow
+
+`DEVISE` utilizes forward assignment (`->`) and pipe operators (`|>`) to keep examples readable and consistent. The goal is to read code left-to-right, from data creation to analysis to output.
 
 To minimize visual backtracking, avoid left assignment (`<-`). Instead, use `->` to store objects after they are computed. This keeps the focus on the computation itself.
 
@@ -29,8 +29,6 @@ data.frame(
 compute_descriptives(df, Quiz ~ Group) -> descriptives
 descriptives
 ```
-
-### Pipe-First Workflow
 
 To keep data flowing, pipes (`|>`) show step-by-step transformations. They help express a sequence of operations without temporary assignment.
 

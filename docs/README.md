@@ -7,10 +7,10 @@
 
 Though it works with base R and all packages, `DEVISE` is designed to work particularly well in conjunction with:
 
-- [`backcalc`](https://github.com/cwendorf/backcalc)
-- [`EASI`](https://github.com/cwendorf/EASI)
-- [`confintr`](https://github.com/mayer79/confintr) 
-- [`statpsych`](https://github.com/dgbonett/statpsych/)
+- [`backcalc`](https://github.com/cwendorf/backcalc) - Reconstructs missing inferential statistics from incomplete summary data.
+- [`EASI`](https://github.com/cwendorf/EASI) - Implements estimation statistics and effect size computation in a direct fashion.
+- [`confintr`](https://github.com/mayer79/confintr) - Provides classic and bootstrap confidence intervals for various parameters.
+- [`statpsych`](https://github.com/dgbonett/statpsych/) - Offers methods across multiple reseach designs and parameters.
 
 ### The Workflow
 

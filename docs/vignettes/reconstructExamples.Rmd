@@ -27,8 +27,7 @@ library(backcalc)
 In conjunction with `DEVISE`, this vignette demonstrates how to use `backcalc` to reconstruct and compute confidence intervals for statistics beyond simple means. When published studies report summary statistics or test results, `backcalc` can reconstruct the full inferential statistics for various types of analyses.
 
 ```{r toc, echo=FALSE}
-knitr::current_input() -> thisfile
-revised_toc(thisfile, base_level = 3, toc_depth = 4)
+knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 4)
 ```
 
 ---

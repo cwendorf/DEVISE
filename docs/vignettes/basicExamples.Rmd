@@ -25,8 +25,7 @@ library(DEVISE)
 Tjhis vignette demonstrates how to directly input reported statistics from published or secondary sources to present estimation results. `DEVISE` handles the assembly, formatting, and visualization of these externally-sourced values without any computation. 
 
 ```{r toc, echo=FALSE}
-knitr::current_input() -> thisfile
-revised_toc(thisfile, base_level = 3, toc_depth = 4)
+knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 4)
 ```
 
 ---

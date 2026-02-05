@@ -45,4 +45,4 @@ This package contains a set of examples to demonstrate its use:
 
 - [Direct Input Examples](./basicExamples.md) – Use reported confidence intervals from published sources.
 - [Reconstructed Information Examples](./reconstructExamples.md) – Use external packages to reconstruct confidence intervals.
-- [Bootstrapped Intervals Examples](./bootstrapExamples.md) – Use external packages to obtain parametric and bootstrapped confidence intervals.
+- [Bootstrapped Intervals Examples](./bootstrapExamples.md) – Use external packages to obtain bootstrapped confidence intervals.

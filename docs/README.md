@@ -1,5 +1,5 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
-## Working with DEVISE
+## Introduction
 
 ### Overview
 

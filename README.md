@@ -35,7 +35,7 @@ This package contains a set of examples to demonstrate its use:
 - [Reconstructed Information Examples](./docs/reconstructExamples.md): Use external packages to reconstruct confidence intervals.
 - [Bootstrapped Intervals Examples](./docs/bootstrapExamples.md): Use external packages to obtain bootstrapped confidence intervals.
 
-### Contact Me
+### Contact
 
 - GitHub Issues: [https://github.com/cwendorf/DEVISE/issues](https://github.com/cwendorf/DEVISE/issues) 
 - Author Email: [cwendorf@uwsp.edu](mailto:cwendorf@uwsp.edu)

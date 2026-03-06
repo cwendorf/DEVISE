@@ -94,7 +94,7 @@ c("Level1", "Level2") -> rownames(Conditions)
 
 Format and visualize the condition intervals.
 
-```{r}
+```{r,reconstruct-conditions}
 Conditions |> style_matrix(title = "Table 3: Means and Confidence Intervals for the Conditions", style = "apa")
 Conditions |> plot_conditions(title = "Figure 3: Means and Confidence Intervals for the Conditions", values = TRUE)
 ```
@@ -114,7 +114,7 @@ c("Level1", "Level2", "Difference") -> rownames(Comparison)
 
 Present the comparison in a formatted table and plot.
 
-```{r}
+```{r,reconstruct-comparison}
 Comparison |> style_matrix(title = "Table 4: Means and Confidence Intervals for the Comparison", style = "apa")
 Comparison |> plot_comparison(title = "Figure 4: Means and Confidence Intervals for the Comparison", values = TRUE)
 ```

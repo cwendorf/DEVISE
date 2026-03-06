@@ -8,14 +8,12 @@ statistics beyond simple means. When published studies report summary
 statistics or test results, `backcalc` can reconstruct the full
 inferential statistics for various types of analyses.
 
-- [Case 1: Calculate Confidence Intervals from Summary
-  Statistics](#case-1:-calculate-confidence-intervals-from-summary-statistics)
+- [Case 1: Calculate Confidence Intervals from Summary Statistics](#case-1:-calculate-confidence-intervals-from-summary-statistics)
   - [Examine the Conditions](#examine-the-conditions)
   - [Display the Conditions](#display-the-conditions)
   - [Examine a Comparison](#examine-a-comparison)
   - [Display a Comparison](#display-a-comparison)
-- [Case 2: Reconstruct Confidence Intervals from t
-  Tests](#case-2:-reconstruct-confidence-intervals-from-t-tests)
+- [Case 2: Reconstruct Confidence Intervals from t Tests](#case-2:-reconstruct-confidence-intervals-from-t-tests)
   - [Examine the Conditions](#examine-the-conditions)
   - [Display the Conditions](#display-the-conditions)
   - [Examine a Comparison](#examine-a-comparison)

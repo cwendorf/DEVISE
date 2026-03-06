@@ -1,5 +1,4 @@
-Bootstrapped Intervals Examples
-================
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
 ## Bootstrapped Intervals Examples
 

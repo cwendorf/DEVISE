@@ -1,5 +1,4 @@
-Direct Input Examples
-================
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
 ## Direct Input Examples
 

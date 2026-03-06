@@ -7,12 +7,12 @@ from published or secondary sources to present estimation results.
 `DEVISE` handles the assembly, formatting, and visualization of these
 externally-sourced values without any computation.
 
-- [Case 1: Estimates from a Single Source](#case-1:-estimates-from-a-single-source)
+- [Case 1: Estimates from a Single Source](#case-1:-estimates-from-a-single-source) 
   - [Examine the Conditions](#examine-the-conditions)
   - [Display the Conditions](#display-the-conditions)
   - [Examine a Comparison](#examine-a-comparison)
   - [Display a Comparison](#display-a-comparison)
-- [Case 2: Estimates from Multiple Sources](#case-2:-estimates-from-multiple-sources)
+- [Case 2: Estimates from Multiple Sources](#case-2:-estimates-from-multiple-sources) 
   - [Examine the Studies](#examine-the-studies)
   - [Display the Studies](#display-the-studies)
 

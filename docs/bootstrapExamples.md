@@ -8,13 +8,13 @@ In conjunction with `DEVISE`, this vignette demonstrates how to use the
 normally-distributed data and bootstrap methods that provide
 distribution-free intervals without relying on parametric assumptions.
 
-- [Case 1: Parametric Confidence Intervals](#case-1:-parametric-confidence-intervals)
+- [Case 1: Parametric Confidence Intervals](#case-1:-parametric-confidence-intervals) 
   - [Input the Data](#input-the-data)
   - [Examine the Conditions](#examine-the-conditions)
   - [Display the Conditions](#display-the-conditions)
   - [Examine a Comparison](#examine-a-comparison)
   - [Display a Comparison](#display-a-comparison)
-- [Case 2: Bootstrap Confidence Intervals](#case-2:-bootstrap-confidence-intervals)
+- [Case 2: Bootstrap Confidence Intervals](#case-2:-bootstrap-confidence-intervals) 
   - [Examine the Conditions](#examine-the-conditions)
   - [Display the Conditions](#display-the-conditions)
   - [Examine a Comparison](#examine-a-comparison)

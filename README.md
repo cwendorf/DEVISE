@@ -31,7 +31,7 @@ source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 This package contains a set of examples to demonstrate its use:
 
 - [Introduction](./docs/README.md): Use the package to organize confidence interval workflow.
-- [Direct Input Examples](./docs/basicExamples.md): Use reported confidence intervals from published sources.
+- [Direct Input Examples](./docs/directExamples.md): Use reported confidence intervals from published sources.
 - [Reconstructed Information Examples](./docs/reconstructExamples.md): Use external packages to reconstruct confidence intervals.
 - [Bootstrapped Intervals Examples](./docs/bootstrapExamples.md): Use external packages to obtain bootstrapped confidence intervals.
 

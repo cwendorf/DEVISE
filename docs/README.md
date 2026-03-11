@@ -12,7 +12,7 @@ Though it works with base R and all packages, `DEVISE` is designed to work parti
 - [`confintr`](https://github.com/mayer79/confintr) - Provides classic and bootstrap confidence intervals for various parameters.
 - [`statpsych`](https://github.com/dgbonett/statpsych/) - Offers methods across multiple reseach designs and parameters.
 
-### The Workflow
+### Workflow
 
 `DEVISE` utilizes forward assignment (`->`) and pipe operators (`|>`) to keep examples readable and consistent. The goal is to read code left-to-right, from data creation to analysis to output.
 
@@ -39,10 +39,10 @@ df |> compute_correlations(Quiz, Exam)
 df |> compute_correlations(Quiz, Exam) |> style_matrix(title = "Table 2: Correlation Matrix", style = "apa")
 ```
 
-### Examples
+### Vignettes
 
-This package contains a set of examples to demonstrate its use:
+This package contains a set of vignettes to demonstrate its use:
 
-- [Direct Input Examples](./directExamples.md) – Use reported confidence intervals from published sources.
-- [Reconstructed Information Examples](./reconstructExamples.md) – Use external packages to reconstruct confidence intervals.
-- [Bootstrapped Intervals Examples](./bootstrapExamples.md) – Use external packages to obtain bootstrapped confidence intervals.
+- [Direct Input Vignette](./vignettes/directVignette.md) – Use reported confidence intervals from published sources.
+- [Reconstructed Information Vignette](./vignettes/reconstructVignette.md) – Use external packages to reconstruct confidence intervals.
+- [Bootstrapped Intervals Vignette](./vignettes/bootstrapVignette.md) – Use external packages to obtain bootstrapped confidence intervals.

@@ -1,8 +1,8 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
-## Direct Input Examples
+## Direct Input Vignette
 
-Tjhis vignette demonstrates how to directly input reported statistics
+This vignette demonstrates how to directly input reported statistics
 from published or secondary sources to present estimation results.
 `DEVISE` handles the assembly, formatting, and visualization of these
 externally-sourced values without any computation.

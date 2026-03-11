@@ -1,10 +1,10 @@
 ---
-title: "Reconstructed Information Examples"
+title: "Reconstructed Information Vignette"
 output:
   github_document:
     preserve_yaml: FALSE
 vignette: >
-  %\VignetteIndexEntry{Reconstructed Information Examples}
+  %\VignetteIndexEntry{Reconstructed Information Vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -22,7 +22,7 @@ if (!require(backcalc)) {remotes::install_github("cwendorf/backcalc")}
 library(backcalc)
 ```
 
-## Reconstructed Information Examples
+## Reconstructed Information Vignette
 
 In conjunction with `DEVISE`, this vignette demonstrates how to use `backcalc` to reconstruct and compute confidence intervals for statistics beyond simple means. When published studies report summary statistics or test results, `backcalc` can reconstruct the full inferential statistics for various types of analyses.
 

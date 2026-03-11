@@ -28,12 +28,12 @@ source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
 ### Usage
 
-This package contains a set of examples to demonstrate its use:
+This package contains a set of vignettes to demonstrate its use:
 
 - [Introduction](./docs/README.md): Use the package to organize confidence interval workflow.
-- [Direct Input Examples](./docs/directExamples.md): Use reported confidence intervals from published sources.
-- [Reconstructed Information Examples](./docs/reconstructExamples.md): Use external packages to reconstruct confidence intervals.
-- [Bootstrapped Intervals Examples](./docs/bootstrapExamples.md): Use external packages to obtain bootstrapped confidence intervals.
+- [Direct Input Vignette](./docs/vignettes/directVignette.md): Use reported confidence intervals from published sources.
+- [Reconstructed Information Vignette](./docs/vignettes/reconstructVignette.md): Use external packages to reconstruct confidence intervals.
+- [Bootstrapped Intervals Vignette](./docs/vignettes/bootstrapVignette.md): Use external packages to obtain bootstrapped confidence intervals.
 
 ### Contact
 

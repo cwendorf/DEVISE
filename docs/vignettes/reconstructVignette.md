@@ -1,6 +1,6 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
-## Reconstructed Information Examples
+## Reconstructed Information Vignette
 
 In conjunction with `DEVISE`, this vignette demonstrates how to use
 `backcalc` to reconstruct and compute confidence intervals for

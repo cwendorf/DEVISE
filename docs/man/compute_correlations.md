@@ -1,21 +1,23 @@
-# Compute Correlation or Covariance Matrices
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Compute Correlation or Covariance Matrices
 
 **Aliases:**
 
 - `compute_correlations`
 
-## Description
+### Description
 
 Computes a correlation or covariance matrix for selected numeric variables in a data frame,
 optionally grouped by a factor using a formula or bare variable names.
 
-## Usage
+### Usage
 
 ```r
 compute_correlations(data, ..., type = "cor", method = "pearson")
 ```
 
-## Arguments
+### Arguments
 
 - **`data`**: A data frame containing the variables of interest.
 - **`...`**: One or more expressions:
@@ -28,12 +30,12 @@ Default is "cor".
 - **`method`**: Character string specifying the correlation method: one of "pearson" (default), "spearman", or "kendall".
 Ignored if type = "cov".
 
-## Value
+### Value
 
 If no grouping is specified: returns a correlation or covariance matrix.
  If a grouping formula is specified: returns a named list of matrices, one per group level.
 
-## Examples
+### Examples
 
 ```r
 # Correlation matrix for all numeric variables

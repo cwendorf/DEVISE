@@ -1,33 +1,35 @@
-# Set Row Names of a Data Frame
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Set Row Names of a Data Frame
 
 **Aliases:**
 
 - `name_rows`
 
-## Description
+### Description
 
 Assign row names to a data frame in a pipe-friendly way.
 
-## Usage
+### Usage
 
 ```r
 name_rows(x, names)
 ```
 
-## Arguments
+### Arguments
 
 - **`x`**: A data frame.
 - **`names`**: A character vector of row names. Must have length equal to nrow(x).
 
-## Details
+### Details
 
 Note: This function does not modify the original data frame in place. You must assign the result back to a variable.
 
-## Value
+### Value
 
 A data frame identical to x but with updated row names.
 
-## Examples
+### Examples
 
 ```r
 # Basic usage

@@ -2,11 +2,7 @@
 
 ## Reconstructed Information Vignette
 
-In conjunction with `DEVISE`, this vignette demonstrates how to use
-`backcalc` to reconstruct and compute confidence intervals for
-statistics beyond simple means. When published studies report summary
-statistics or test results, `backcalc` can reconstruct the full
-inferential statistics for various types of analyses.
+In conjunction with `DEVISE`, this vignette demonstrates how to use `backcalc` to reconstruct and compute confidence intervals for statistics beyond simple means. When published studies report summary statistics or test results, `backcalc` can reconstruct the full inferential statistics for various types of analyses.
 
 - [Case 1: Calculate Confidence Intervals from Summary Statistics](#case-1%3A-calculate-confidence-intervals-from-summary-statistics) 
   - [Examine the Conditions](#examine-the-conditions)

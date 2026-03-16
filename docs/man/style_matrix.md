@@ -1,14 +1,16 @@
-# Style and Print a Formatted Matrix
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Style and Print a Formatted Matrix
 
 **Aliases:**
 
 - `style_matrix`
 
-## Description
+### Description
 
 Style and print a numeric matrix using a specified formatting style (plain or APA).
 
-## Usage
+### Usage
 
 ```r
 style_matrix(
@@ -23,7 +25,7 @@ style_matrix(
 )
 ```
 
-## Arguments
+### Arguments
 
 - **`results`**: A numeric matrix.
 - **`digits`**: Number of decimal places to round to.
@@ -34,7 +36,7 @@ style_matrix(
 - **`style`**: One of "plain" (default) or "apa".
 - **`...`**: Additional formatting arguments.
 
-## Value
+### Value
 
 Invisibly returns the formatted character matrix.
 

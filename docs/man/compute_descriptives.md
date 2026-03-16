@@ -1,10 +1,12 @@
-# Compute Descriptive Statistics for Numeric Variables (fixed)
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Compute Descriptive Statistics for Numeric Variables (fixed)
 
 **Aliases:**
 
 - `compute_descriptives`
 
-## Description
+### Description
 
 Calculates N, mean and SD for numeric variables, optionally grouped.
 Accepts either:
@@ -13,29 +15,29 @@ Accepts either:
  bare var names:  e.g. x, y or c(x,y),
  a formula: vars ~ group or ~ group.
 
-## Usage
+### Usage
 
 ```r
 compute_descriptives(data, ...)
 ```
 
-## Arguments
+### Arguments
 
 - **`data`**: data.frame
 - **`...`**: bare variable names (unquoted), or a single formula (e.g. x ~ Group,
 c(x,y) ~ Group, or ~ Group). If omitted, all numeric variables are used.
 
-## Details
+### Details
 
 If grouped and exactly one measured variable is requested, the function
 returns a single matrix with groups as rownames (auto-collapsed).
 If grouped with multiple measured variables, returns a named list of matrices.
 
-## Value
+### Value
 
 matrix (ungrouped), matrix (grouped + single var), or list of matrices (grouped + multiple vars)
 
-## Examples
+### Examples
 
 ```r
 data.frame(

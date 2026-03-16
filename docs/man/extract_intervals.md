@@ -1,28 +1,30 @@
-# Extract Point Estimate and Confidence Interval Columns
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Extract Point Estimate and Confidence Interval Columns
 
 **Aliases:**
 
 - `extract_intervals`
 
-## Description
+### Description
 
 Extract the point estimate and confidence interval columns from a data frame, matrix, list, or t.test result.
 
-## Usage
+### Usage
 
 ```r
 extract_intervals(x)
 ```
 
-## Arguments
+### Arguments
 
 - **`x`**: A data frame, matrix, list with 'estimate' and 'interval' (or 'conf.int') elements, or a t.test (htest) result.
 
-## Value
+### Value
 
 A matrix with columns: Estimate, LL, UL.
 
-## Examples
+### Examples
 
 ```r
 cbind(Estimate = c(10, 0, 5), LL = c(8, -1, 4), UL = c(12, 1, 6)) -> df

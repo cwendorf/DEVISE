@@ -1,8 +1,8 @@
-# Function Reference
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
-This section is the API reference for `DEVISE`. Each page documents one exported function, including usage, arguments, return values, and examples.
+## Function Reference
 
-## Function Index
+This section is the reference for `DEVISE`. Each page documents one exported function, including usage, arguments, return values, and examples.
 
 ### Data Setup and Selection
 
@@ -25,7 +25,7 @@ This section is the API reference for `DEVISE`. Each page documents one exported
 - [compute_correlations()](./compute_correlations.md): Compute correlation statistics.
 - [compute_metrics()](./compute_metrics.md): Compute standardized metrics used in reporting.
 
-### Tables and Plots
+#### Tables and Plots
 
 - [style_matrix()](./style_matrix.md): Format matrices or tables for publication-ready output.
 - [plot_conditions()](./plot_conditions.md): Plot estimates by condition.

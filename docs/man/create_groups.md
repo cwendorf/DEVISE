@@ -1,22 +1,24 @@
-# Create Groups
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Create Groups
 
 **Aliases:**
 
 - `create_groups`
 
-## Description
+### Description
 
 Generate a factor with k groups and a specified number of observations.
 Groups can be balanced (equal size) if n is a single integer, or weighted
 (unequal size) if n is a vector of group sizes.
 
-## Usage
+### Usage
 
 ```r
 create_groups(k, n, labels = seq_len(k))
 ```
 
-## Arguments
+### Arguments
 
 - **`k`**: Integer. Number of groups.
 - **`n`**: Integer. Either:
@@ -25,11 +27,11 @@ create_groups(k, n, labels = seq_len(k))
  A vector of length k: group sizes (must sum to total n).
 - **`labels`**: Character vector of group labels. Defaults to 1:k.
 
-## Value
+### Value
 
 A factor of length sum(n) with k groups in sequence.
 
-## Examples
+### Examples
 
 ```r
 # Example 1: Balanced groups (n = 12, k = 3 → 4 per group)

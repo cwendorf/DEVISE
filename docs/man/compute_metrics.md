@@ -1,26 +1,28 @@
-# Compute Additional Metrics for Statistical Estimates
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Compute Additional Metrics for Statistical Estimates
 
 **Aliases:**
 
 - `compute_metrics`
 
-## Description
+### Description
 
 This function computes additional metrics (Width, Margin of Error, Relative Width)
 for a data frame of estimates with confidence intervals.
 
-## Usage
+### Usage
 
 ```r
 compute_metrics(input)
 ```
 
-## Arguments
+### Arguments
 
 - **`input`**: A data frame containing at least the columns "Estimate", "LL", and "UL",
 where "LL" and "UL" represent the lower and upper bounds of a confidence interval, respectively.
 
-## Value
+### Value
 
 A data frame identical to input, with additional columns:
 
@@ -28,7 +30,7 @@ WidthThe width of the confidence interval (UL - LL).
 MoEThe margin of error (Width / 2).
 RelativeThe relative width of the interval (Width / abs(Estimate)). Returns NA if Estimate is zero.
 
-## Examples
+### Examples
 
 ```r
 cbind(Estimate = c(10, 0, 5), LL = c(8, -1, 4), UL = c(12, 1, 6)) -> df

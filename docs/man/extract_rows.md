@@ -1,29 +1,31 @@
-# Extract Rows from Data Frame, Matrix, or List
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Extract Rows from Data Frame, Matrix, or List
 
 **Aliases:**
 
 - `extract_rows`
 
-## Description
+### Description
 
 Extract specified rows from a data frame, matrix, or list of such objects.
 
-## Usage
+### Usage
 
 ```r
 extract_rows(out, rows = NULL)
 ```
 
-## Arguments
+### Arguments
 
 - **`out`**: A data frame, matrix, atomic vector, or a list of such objects.
 - **`rows`**: A numeric vector of row indices or a character vector of row names to retain. If NULL, all rows are returned.
 
-## Value
+### Value
 
 The filtered object with only the specified rows. The output type matches the input (matrix, data frame, or list).
 
-## Examples
+### Examples
 
 ```r
 data.frame(A = 1:5, B = letters[1:5]) -> df

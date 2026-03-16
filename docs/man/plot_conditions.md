@@ -1,14 +1,16 @@
-# Plot Point Estimates with Confidence Intervals
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Plot Point Estimates with Confidence Intervals
 
 **Aliases:**
 
 - `plot_conditions`
 
-## Description
+### Description
 
 Plots a set of point estimates and their confidence intervals for multiple conditions or outcomes.
 
-## Usage
+### Usage
 
 ```r
 plot_conditions(
@@ -32,7 +34,7 @@ plot_conditions(
 )
 ```
 
-## Arguments
+### Arguments
 
 - **`results`**: A data frame or matrix with point estimates in the first column,
 and confidence limits in columns named like "ll", "ul", "ci_lower", "ci_upper".
@@ -53,7 +55,7 @@ and confidence limits in columns named like "ll", "ul", "ci_lower", "ci_upper".
 - **`rope`**: Length-2 numeric vector for shading a region of practical equivalence.
 - **`...`**: Additional graphical parameters passed to plot().
 
-## Value
+### Value
 
 Invisibly returns the modified results object.
 

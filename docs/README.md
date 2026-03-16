@@ -1,4 +1,5 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
 ## Introduction
 
 ### Overview
@@ -12,37 +13,7 @@ Though it works with base R and all packages, `DEVISE` is designed to work parti
 - [`confintr`](https://github.com/mayer79/confintr) - Provides classic and bootstrap confidence intervals for various parameters.
 - [`statpsych`](https://github.com/dgbonett/statpsych/) - Offers methods across multiple reseach designs and parameters.
 
-### Workflow
+### Resources
 
-`DEVISE` utilizes forward assignment (`->`) and pipe operators (`|>`) to keep examples readable and consistent. The goal is to read code left-to-right, from data creation to analysis to output.
-
-To minimize visual backtracking, avoid left assignment (`<-`). Instead, use `->` to store objects after they are computed. This keeps the focus on the computation itself.
-
-```r
-data.frame(
-  Group = create_groups(k = 2, c(5, 5), labels = c("Group1", "Group2")),
-  Quiz = c(5, 6, 7, 5, 6, 8, 9, 7, 8, 9),
-  Exam = c(8, 7, 9, 6, 7, 10, 9, 9, 8, 10)
-) -> df
-
-compute_descriptives(df, Quiz ~ Group) -> descriptives
-descriptives
-```
-
-To keep data flowing, pipes (`|>`) show step-by-step transformations. They help express a sequence of operations without temporary assignment.
-
-```r
-df |> compute_descriptives(Quiz ~ Group)
-df |> compute_descriptives(Quiz ~ Group) |> style_matrix(title = "Table 1: Descriptive Statistics by Group", style = "apa")
-
-df |> compute_correlations(Quiz, Exam)
-df |> compute_correlations(Quiz, Exam) |> style_matrix(title = "Table 2: Correlation Matrix", style = "apa")
-```
-
-### Vignettes
-
-This package contains a set of vignettes to demonstrate its use:
-
-- [Direct Input Vignette](./vignettes/directVignette.md) – Use reported confidence intervals from published sources.
-- [Reconstructed Information Vignette](./vignettes/reconstructVignette.md) – Use external packages to reconstruct confidence intervals.
-- [Bootstrapped Intervals Vignette](./vignettes/bootstrapVignette.md) – Use external packages to obtain bootstrapped confidence intervals.
+- [Function Reference](./man/README.md): Documentation for all exported functions, including usage, arguments, return values, and examples.
+- [Vignettes](./vignettes/README.md): Worked examples demonstrating how to use `DEVISE` directly and in conjunction with other packages.

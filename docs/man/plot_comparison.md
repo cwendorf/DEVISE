@@ -1,15 +1,17 @@
-# Plot Comparison of Two Groups with Confidence Intervals
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Plot Comparison of Two Groups with Confidence Intervals
 
 **Aliases:**
 
 - `plot_comparison`
 
-## Description
+### Description
 
 Plots two group means and their confidence intervals, along with their difference estimate.
 Designed for paired or between-group comparisons.
 
-## Usage
+### Usage
 
 ```r
 plot_comparison(
@@ -34,7 +36,7 @@ plot_comparison(
 )
 ```
 
-## Arguments
+### Arguments
 
 - **`results`**: A data frame or matrix with three rows: two group estimates and one difference row.
 - **`title`**: Plot title. If NULL, uses the comment() attribute of results.
@@ -55,7 +57,7 @@ plot_comparison(
 - **`lines`**: Logical; draw lines from group points to the difference?
 - **`...`**: Additional graphical parameters.
 
-## Value
+### Value
 
 Invisibly returns the modified results object.
 

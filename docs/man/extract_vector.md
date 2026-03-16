@@ -1,33 +1,35 @@
-# Extract Row or Column as Named Vector from Data Frame or Matrix
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Extract Row or Column as Named Vector from Data Frame or Matrix
 
 **Aliases:**
 
 - `extract_vector`
 
-## Description
+### Description
 
 Extract a single row or column from a matrix or data frame as a named vector.
 
-## Usage
+### Usage
 
 ```r
 extract_vector(data, index)
 ```
 
-## Arguments
+### Arguments
 
 - **`data`**: A matrix or data frame from which to extract data.
 - **`index`**: A character or numeric value specifying the row or column to extract. If character, it is matched against row names first, then column names. If numeric, it is interpreted as a row index first, then a column index.
 
-## Details
+### Details
 
 This function automatically detects whether the input corresponds to a row or a column and returns the result as a named vector. Names are preserved from the opposite dimension (column names for rows, row names for columns).
 
-## Value
+### Value
 
 A named vector containing the extracted row or column values.
 
-## Examples
+### Examples
 
 ```r
 data.frame(

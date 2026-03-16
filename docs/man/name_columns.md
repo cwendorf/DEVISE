@@ -1,33 +1,35 @@
-# Set Column Names of a Data Frame
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Set Column Names of a Data Frame
 
 **Aliases:**
 
 - `name_columns`
 
-## Description
+### Description
 
 Assign column names to a data frame in a pipe-friendly way.
 
-## Usage
+### Usage
 
 ```r
 name_columns(x, names)
 ```
 
-## Arguments
+### Arguments
 
 - **`x`**: A data frame.
 - **`names`**: A character vector of column names. Must have length equal to ncol(x).
 
-## Details
+### Details
 
 Note: This function does not modify the original data frame in place. You must assign the result back to a variable if using outside of a pipe.
 
-## Value
+### Value
 
 A data frame identical to x but with updated column names.
 
-## Examples
+### Examples
 
 ```r
 # Basic usage

@@ -1,0 +1,60 @@
+---
+title: "Workflow Vignette"
+output:
+  github_document:
+    preserve_yaml: FALSE
+vignette: >
+  %\VignetteIndexEntry{Workflow Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(fig.width = 7, fig.height = 5, fig.path = "figures/", echo = TRUE, warning = FALSE, message = FALSE, comment = NA)
+devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
+```
+
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
+library(DEVISE)
+```
+
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+
+## Workflow Vignette
+
+`DEVISE` utilizes forward assignment (`->`) and pipe operators (`|>`) to keep examples readable and consistent. The goal is to read code left-to-right, from data creation to analysis to output.
+
+```{r toc, echo=FALSE}
+knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 4)
+```
+
+---
+
+### Using Forward Assignment
+
+To minimize visual backtracking, avoid left assignment (`<-`). Instead, use `->` to store objects after they are computed. This keeps the focus on the computation itself.
+
+```{r}
+data.frame(
+  Group = create_groups(k = 2, c(5, 5), labels = c("Group1", "Group2")),
+  Quiz = c(5, 6, 7, 5, 6, 8, 9, 7, 8, 9),
+  Exam = c(8, 7, 9, 6, 7, 10, 9, 9, 8, 10)
+) -> df
+
+compute_descriptives(df, Quiz ~ Group) -> descriptives
+descriptives
+```
+
+### Using Pipes
+
+To keep data flowing, pipes (`|>`) show step-by-step transformations. They help express a sequence of operations without temporary assignment.
+
+```{r}
+df |> compute_descriptives(Quiz ~ Group)
+df |> compute_descriptives(Quiz ~ Group) |> style_matrix(title = "Table 1: Descriptive Statistics by Group", style = "apa")
+
+df |> compute_correlations(Quiz, Exam)
+df |> compute_correlations(Quiz, Exam) |> style_matrix(title = "Table 2: Correlation Matrix", style = "apa")
+```

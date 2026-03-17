@@ -1,19 +1,20 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
-## Vignettes
+## Articles
 
 This section contains vignettes for `DEVISE`. Each page demonstrates a workflow using real or simulated data, including setup, computation, formatting, and visualization.
 
 ### Getting Started
 
-- **[Workflow Vignette](./workflowVignette.md)**: This vignette introduces the coding conventions used throughout `DEVISE`. It demonstrates the use of forward assignment (`->`) and pipe operators (`|>`) to write readable, left-to-right analytical workflows.
+- [Workflow Basics](./workflow.md): The coding conventions and process used throughout `DEVISE`.
 
-### Using DEVISE Directly
+### Mean Comparisons
 
-- **[Direct Input Vignette](./directVignette.md)**: This vignette demonstrates how to directly input reported statistics from published or secondary sources to present estimation results. `DEVISE` handles the assembly, formatting, and visualization of these externally-sourced values without any computation.
+The primary purpose of `DEVISE` is to aid in the presentation of a comparison after using other methods of calculating confidence intervals.
 
-### Using DEVISE with Other Packages
-
-- **[Reconstructed Information Vignette](./reconstructVignette.md)**: In conjunction with `DEVISE`, this vignette demonstrates how to use `backcalc` to reconstruct and compute confidence intervals for statistics beyond simple means. When published studies report summary statistics or test results, `backcalc` can reconstruct the full inferential statistics for various types of analyses.
-
-- **[Bootstrapped Intervals Vignette](./bootstrapVignette.md)**: In conjunction with `DEVISE`, this vignette demonstrates how to use the `confintr` package for parametric and bootstrap confidence intervals. `confintr` supports both distribution-based confidence intervals for normally-distributed data and bootstrap methods that provide distribution-free intervals without relying on parametric assumptions.
+- [Mean Comparisons with Direct Input](./directMeanComparisons.md): Uses direct input of confidence intervals from published sources.
+- [Mean Comparisons with Base R](./baseMeanComparisons.md): Uses base R to calculate confidence intervals from data.
+- [Mean Comparisons with EASI](./easiMeanComparisons.md): Uses `EASI` to calculate the confidence intervals from data and summary statistics.
+- [Mean Comparisons with statpsych and spTools](./spToolsMeanComparisons.md): Uses `statpsych` and `spTools` to calculate confidence intervals from summary statistics.
+- [Mean Comparisons with backcalc](./backcalcMeanComparisons.md): Uses `backcalc` to infer confidence intervals from incomplete summary statistics.
+- [Mean Comparisons with confintr](./confintrMeanComparisons.md): Uses `confintr` to calculate parametric and bootstrapped confidence intervals from data.

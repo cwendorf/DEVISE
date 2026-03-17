@@ -1,6 +1,6 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
-## Function Reference
+## Reference
 
 This section is the reference for `DEVISE`. Each page documents one exported function, including usage, arguments, return values, and examples.
 

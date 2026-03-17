@@ -1,10 +1,10 @@
 ---
-title: "Direct Input Vignette"
+title: "Mean Comparisons with Direct Input"
 output:
   github_document:
     preserve_yaml: FALSE
 vignette: >
-  %\VignetteIndexEntry{Direct Input Vignette}
+  %\VignetteIndexEntry{Mean Comparisons with Direct Input}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -20,9 +20,9 @@ if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
 library(DEVISE)
 ```
 
-## Direct Input Vignette
+## Mean Comparisons with Direct Input
 
-This vignette demonstrates how to directly input reported statistics from published or secondary sources to present estimation results. `DEVISE` handles the assembly, formatting, and visualization of these externally-sourced values without any computation. 
+This vignette shows how to supply confidence interval inputs directly and use DEVISE to assemble, format, and visualize conditions and comparisons.
 
 ```{r toc, echo=FALSE}
 knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 4)
@@ -49,14 +49,14 @@ c("Level1", "Level2", "Level3") -> rownames(Conditions)
 
 Format the condition matrix and visualize the intervals.
 
-```{r,direct-conditions}
+```{r,direct-case1-conditions}
 Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals for Conditions", style = "apa")
 Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals for Conditions", values = TRUE)
 ```
 
 #### Examine a Comparison
 
-In addition to condition-level estimates, you can directly input comparison results reported in published studies.
+Enter the comparison statistics for the selected conditions.
 
 ```{r}
 c(Estimate = 3.000, LL = 1.234, UL = 4.766) -> Difference
@@ -69,12 +69,12 @@ c("Level1", "Level2", "Difference") -> rownames(Comparison)
 
 Present the comparison in a formatted table and plot.
 
-```{r,direct-comparison}
-Comparison |> style_matrix(title = "Table 2: Reported Means and Confidence Intervals for a Comparison", style = "apa")
-Comparison |> plot_comparison(title = "Figure 2: Reported Means and Confidence Intervals for a Comparison", values = TRUE)
+```{r,direct-case1-comparison}
+Comparison |> style_matrix(title = "Table 2: Means and Confidence Intervals for a Comparison", style = "apa")
+Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals for a Comparison", values = TRUE)
 ```
 
-### Case 2: Estimates from Multiple Sources
+### Case 2: Estimates from Multiple Studies
 
 #### Examine the Studies
 
@@ -85,15 +85,15 @@ c(Estimate = 11.000, LL = 9.418, UL = 12.582) -> Study1
 c(Estimate = 10.800, LL = 9.234, UL = 12.366) -> Study2
 c(Estimate = 11.200, LL = 9.654, UL = 12.746) -> Study3
 
-rbind(Study1, Study2, Study3) -> MultiSource
-c("Study 1", "Study 2", "Study 3") -> rownames(MultiSource)
+rbind(Study1, Study2, Study3) -> Studies
+c("Study 1", "Study 2", "Study 3") -> rownames(Studies)
 ```
 
 #### Display the Studies
 
 Format and visualize results from multiple sources for comparison.
 
-```{r,direct-multi}
-MultiSource |> style_matrix(title = "Table 3: Means and Confidence Intervals Across Studies", style = "apa")
-MultiSource |> plot_conditions(title = "Figure 3: Means and Confidence Intervals Across Studies", values = TRUE)
+```{r,direct-case2-studies}
+Studies |> style_matrix(title = "Table 3: Means and Confidence Intervals Across Studies", style = "apa")
+Studies |> plot_conditions(title = "Figure 3: Means and Confidence Intervals Across Studies", values = TRUE)
 ```

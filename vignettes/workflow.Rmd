@@ -1,10 +1,10 @@
 ---
-title: "Workflow Vignette"
+title: "Workflow Basics"
 output:
   github_document:
     preserve_yaml: FALSE
 vignette: >
-  %\VignetteIndexEntry{Workflow Vignette}
+  %\VignetteIndexEntry{Workflow Basics}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -20,9 +20,7 @@ if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
 library(DEVISE)
 ```
 
-# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
-
-## Workflow Vignette
+## Workflow Basics
 
 `DEVISE` utilizes forward assignment (`->`) and pipe operators (`|>`) to keep examples readable and consistent. The goal is to read code left-to-right, from data creation to analysis to output.
 
@@ -47,9 +45,9 @@ compute_descriptives(df, Quiz ~ Group) -> descriptives
 descriptives
 ```
 
-### Using Pipes
+### Using Pipe Operators
 
-To keep data flowing, pipes (`|>`) show step-by-step transformations. They help express a sequence of operations without temporary assignment.
+To keep data flowing, pipe operators (`|>`) show step-by-step transformations. They help express a sequence of operations without temporary assignment.
 
 ```{r}
 df |> compute_descriptives(Quiz ~ Group)

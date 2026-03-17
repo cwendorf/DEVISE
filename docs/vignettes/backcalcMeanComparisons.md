@@ -1,15 +1,20 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
-## Reconstructed Information Vignette
+## Mean Comparisons with `backcalc`
 
-In conjunction with `DEVISE`, this vignette demonstrates how to use `backcalc` to reconstruct and compute confidence intervals for statistics beyond simple means. When published studies report summary statistics or test results, `backcalc` can reconstruct the full inferential statistics for various types of analyses.
+This vignette demonstrates a mean comparison workflow using `backcalc`
+to derive summary statistics and `DEVISE` to format and plot the
+results. In each case, the steps progress from computing condition
+intervals to a final comparison.
 
-- [Case 1: Calculate Confidence Intervals from Summary Statistics](#case-1%3A-calculate-confidence-intervals-from-summary-statistics) 
+- [Case 1: Calculate Confidence Intervals from Summary
+  Statistics](#case-1:-calculate-confidence-intervals-from-summary-statistics)
   - [Examine the Conditions](#examine-the-conditions)
   - [Display the Conditions](#display-the-conditions)
   - [Examine a Comparison](#examine-a-comparison)
   - [Display a Comparison](#display-a-comparison)
-- [Case 2: Reconstruct Confidence Intervals from t Tests](#case-2%3A-reconstruct-confidence-intervals-from-t-tests) 
+- [Case 2: Reconstruct Confidence Intervals from t
+  Tests](#case-2:-reconstruct-confidence-intervals-from-t-tests)
   - [Examine the Conditions](#examine-the-conditions)
   - [Display the Conditions](#display-the-conditions)
   - [Examine a Comparison](#examine-a-comparison)
@@ -56,7 +61,7 @@ Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals for 
 Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals for Conditions", values = TRUE)
 ```
 
-![](figures/complete-conditions-1.png)<!-- -->
+![](figures/bc-case1-conditions-1.png)<!-- -->
 
 #### Examine a Comparison
 
@@ -92,7 +97,7 @@ Comparison |> style_matrix(title = "Table 2: Means and Confidence Intervals for 
 Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals for a Comparison", values = TRUE)
 ```
 
-![](figures/complete-comparison-1.png)<!-- -->
+![](figures/bc-case1-comparison-1.png)<!-- -->
 
 ### Case 2: Reconstruct Confidence Intervals from t Tests
 
@@ -132,7 +137,7 @@ Conditions |> style_matrix(title = "Table 3: Means and Confidence Intervals for 
 Conditions |> plot_conditions(title = "Figure 3: Means and Confidence Intervals for the Conditions", values = TRUE)
 ```
 
-![](figures/reconstruct-conditions-1.png)<!-- -->
+![](figures/bc-case2-conditions-1.png)<!-- -->
 
 #### Examine a Comparison
 
@@ -169,4 +174,4 @@ Comparison |> style_matrix(title = "Table 4: Means and Confidence Intervals for 
 Comparison |> plot_comparison(title = "Figure 4: Means and Confidence Intervals for the Comparison", values = TRUE)
 ```
 
-![](figures/reconstruct-comparison-1.png)<!-- -->
+![](figures/bc-case2-comparison-1.png)<!-- -->

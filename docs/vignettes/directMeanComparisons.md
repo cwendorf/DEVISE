@@ -1,18 +1,19 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
-## Direct Input Vignette
+## Mean Comparisons with Direct Input
 
-This vignette demonstrates how to directly input reported statistics
-from published or secondary sources to present estimation results.
-`DEVISE` handles the assembly, formatting, and visualization of these
-externally-sourced values without any computation.
+This vignette shows how to supply confidence interval inputs directly
+and use DEVISE to assemble, format, and visualize conditions and
+comparisons.
 
-- [Case 1: Estimates from a Single Source](#case-1%3A-estimates-from-a-single-source) 
+- [Case 1: Estimates from a Single
+  Source](#case-1:-estimates-from-a-single-source)
   - [Examine the Conditions](#examine-the-conditions)
   - [Display the Conditions](#display-the-conditions)
   - [Examine a Comparison](#examine-a-comparison)
   - [Display a Comparison](#display-a-comparison)
-- [Case 2: Estimates from Multiple Sources](#case-2%3A-estimates-from-multiple-sources) 
+- [Case 2: Estimates from Multiple
+  Studies](#case-2:-estimates-from-multiple-studies)
   - [Examine the Studies](#examine-the-studies)
   - [Display the Studies](#display-the-studies)
 
@@ -59,12 +60,11 @@ Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals for 
 Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals for Conditions", values = TRUE)
 ```
 
-![](figures/direct-conditions-1.png)<!-- -->
+![](figures/direct-case1-conditions-1.png)<!-- -->
 
 #### Examine a Comparison
 
-In addition to condition-level estimates, you can directly input
-comparison results reported in published studies.
+Enter the comparison statistics for the selected conditions.
 
 ``` r
 c(Estimate = 3.000, LL = 1.234, UL = 4.766) -> Difference
@@ -78,11 +78,11 @@ c("Level1", "Level2", "Difference") -> rownames(Comparison)
 Present the comparison in a formatted table and plot.
 
 ``` r
-Comparison |> style_matrix(title = "Table 2: Reported Means and Confidence Intervals for a Comparison", style = "apa")
+Comparison |> style_matrix(title = "Table 2: Means and Confidence Intervals for a Comparison", style = "apa")
 ```
 
 
-    Table 2: Reported Means and Confidence Intervals for a Comparison 
+    Table 2: Means and Confidence Intervals for a Comparison 
 
     ------------------------------------------- 
                  Estimate         LL         UL 
@@ -93,12 +93,12 @@ Comparison |> style_matrix(title = "Table 2: Reported Means and Confidence Inter
     ------------------------------------------- 
 
 ``` r
-Comparison |> plot_comparison(title = "Figure 2: Reported Means and Confidence Intervals for a Comparison", values = TRUE)
+Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals for a Comparison", values = TRUE)
 ```
 
-![](figures/direct-comparison-1.png)<!-- -->
+![](figures/direct-case1-comparison-1.png)<!-- -->
 
-### Case 2: Estimates from Multiple Sources
+### Case 2: Estimates from Multiple Studies
 
 #### Examine the Studies
 
@@ -110,8 +110,8 @@ c(Estimate = 11.000, LL = 9.418, UL = 12.582) -> Study1
 c(Estimate = 10.800, LL = 9.234, UL = 12.366) -> Study2
 c(Estimate = 11.200, LL = 9.654, UL = 12.746) -> Study3
 
-rbind(Study1, Study2, Study3) -> MultiSource
-c("Study 1", "Study 2", "Study 3") -> rownames(MultiSource)
+rbind(Study1, Study2, Study3) -> Studies
+c("Study 1", "Study 2", "Study 3") -> rownames(Studies)
 ```
 
 #### Display the Studies
@@ -119,7 +119,7 @@ c("Study 1", "Study 2", "Study 3") -> rownames(MultiSource)
 Format and visualize results from multiple sources for comparison.
 
 ``` r
-MultiSource |> style_matrix(title = "Table 3: Means and Confidence Intervals Across Studies", style = "apa")
+Studies |> style_matrix(title = "Table 3: Means and Confidence Intervals Across Studies", style = "apa")
 ```
 
 
@@ -134,7 +134,7 @@ MultiSource |> style_matrix(title = "Table 3: Means and Confidence Intervals Acr
     ---------------------------------------- 
 
 ``` r
-MultiSource |> plot_conditions(title = "Figure 3: Means and Confidence Intervals Across Studies", values = TRUE)
+Studies |> plot_conditions(title = "Figure 3: Means and Confidence Intervals Across Studies", values = TRUE)
 ```
 
-![](figures/direct-multi-1.png)<!-- -->
+![](figures/direct-case2-studies-1.png)<!-- -->

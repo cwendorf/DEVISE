@@ -1,8 +1,8 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
-## Workflow Vignette
+## Workflow Basics
 
-`DEVISE` utilizes forward assignment (`->`) and pipe operators (`|>`) to keep examples readable and consistent. The goal is to read code left-to-right, from data creation to analysis to output.
+`DEVISE` utilizes forward assignment and the pipe operator to keep examples readable and consistent. The goal is to read code left-to-right, from data creation to analysis to output.
 
 - [Using Forward Assignment](#using-forward-assignment)
 - [Using Pipes](#using-pipes)
@@ -24,9 +24,9 @@ compute_descriptives(df, Quiz ~ Group) -> descriptives
 descriptives
 ```
 
-### Using Pipes
+### Using the Pipe Operator
 
-To keep data flowing, pipes (`|>`) show step-by-step transformations. They help express a sequence of operations without temporary assignment.
+To keep data flowing, the pipe operator (`|>`) allows step-by-step transformations. This helps express a sequence of operations without temporary assignment.
 
 ```r
 df |> compute_descriptives(Quiz ~ Group)

@@ -30,9 +30,9 @@ source("http://raw.githubusercontent.com/cwendorf/DEVISE/main/source-DEVISE.R")
 
 This package includes the following documentation:
 
-- [Introduction](./docs/README.md): Overview of the package and links to all resources.
-- [Functions](./docs/man/README.md): Documentation for all exported functions.
-- [Vignettes](./docs/vignettes/README.md): Worked examples demonstrating use of the package.
+- [Introduction](./docs/README.md): Overview of the package, listing of associated packages, and links to all resources.
+- [Reference](./docs/man/README.md): Documentation for all exported functions, including usage, arguments, return values, and examples.
+- [Articles](./docs/vignettes/README.md): Examples demonstrating how to use `DEVISE` directly and in conjunction with other packages.
 
 ### Contact
 

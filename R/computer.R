@@ -1,7 +1,7 @@
 # DEVISE
 ## Computing Statistics
 
-#' Compute Descriptive Statistics for Numeric Variables (fixed)
+#' Compute Descriptive Statistics for Numeric Variables
 #'
 #' Calculates N, mean and SD for numeric variables, optionally grouped.
 #' Accepts either:

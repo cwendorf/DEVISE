@@ -2,7 +2,7 @@
 % Please edit documentation in R/computer.R
 \name{compute_descriptives}
 \alias{compute_descriptives}
-\title{Compute Descriptive Statistics for Numeric Variables (fixed)}
+\title{Compute Descriptive Statistics for Numeric Variables}
 \usage{
 compute_descriptives(data, ...)
 }

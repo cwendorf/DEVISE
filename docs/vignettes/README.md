@@ -8,7 +8,6 @@ This section contains vignettes for `DEVISE`. Each page demonstrates a workflow 
 
 - [Basic Workflow](./basicWorkflow.md): The coding conventions and process used throughout `DEVISE`.
 - [Calculating Descriptive Statistics](./descriptiveStatistics.md): Shows how to compute descriptive statistics and correlations from raw data.
-- [Using Data Helpers](./dataHelpers.md): Demonstrates helper functions for selecting and renaming data, extracting vectors, evaluating expressions in pipelines, and retaining intermediate results.
 
 ### Mean Comparisons
 

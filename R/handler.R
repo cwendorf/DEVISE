@@ -1,8 +1,6 @@
 # DEVISE
 ## Method Handler
 
-
-
 ### Argument Handling
 
 map_args <- list(

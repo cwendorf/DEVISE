@@ -6,19 +6,8 @@ This vignette illustrates a mean comparison workflow using the confintr
 package to compute intervals and DEVISE to format and plot results. The
 steps move from condition intervals to the final comparison display.
 
-- [Case 1: Parametric Confidence
-  Intervals](#case-1:-parametric-confidence-intervals)
-  - [Input the Data](#input-the-data)
-  - [Examine the Conditions](#examine-the-conditions)
-  - [Display the Conditions](#display-the-conditions)
-  - [Examine a Comparison](#examine-a-comparison)
-  - [Display a Comparison](#display-a-comparison)
-- [Case 2: Bootstrap Confidence
-  Intervals](#case-2:-bootstrap-confidence-intervals)
-  - [Examine the Conditions](#examine-the-conditions)
-  - [Display the Conditions](#display-the-conditions)
-  - [Examine a Comparison](#examine-a-comparison)
-  - [Display a Comparison](#display-a-comparison)
+- [Case 1: Parametric Confidence Intervals](#case-1%3A-parametric-confidence-intervals)
+- [Case 2: Bootstrap Confidence Intervals](#case-2%3A-bootstrap-confidence-intervals)
 
 ------------------------------------------------------------------------
 

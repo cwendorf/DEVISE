@@ -29,7 +29,7 @@ library(spTools)
 This vignette demonstrates two approaches: `statpsych` functions alone, and a combined `statpsych` + `spTools` workflow. Each approach computes condition intervals and then a direct comparison.
 
 ```{r toc, echo=FALSE}
-knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 4)
+knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
 ```
 
 ---

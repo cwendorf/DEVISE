@@ -7,13 +7,7 @@ Base R for data entry and DEVISE for interval extraction and
 visualization. Each step builds on the previous one, ending with a
 comparison table and plot.
 
-- [Case 1: Raw Data Input](#case-1:-raw-data-input)
-  - [Input the Data](#input-the-data)
-  - [Examine the Conditions](#examine-the-conditions)
-  - [Display the Conditions](#display-the-conditions)
-  - [Make a Comparison](#make-a-comparison)
-  - [Examine a Comparison](#examine-a-comparison)
-  - [Display a Comparison](#display-a-comparison)
+- [Case 1: Raw Data Input](#case-1%3A-raw-data-input)
 
 ------------------------------------------------------------------------
 

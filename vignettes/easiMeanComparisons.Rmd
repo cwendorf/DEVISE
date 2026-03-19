@@ -27,7 +27,7 @@ library(EASI)
 This vignette demonstrates two workflows with EASI: one using raw data and one using summary statistics. Each workflow follows the same pattern of building condition intervals, then generating a comparison.
 
 ```{r toc, echo=FALSE}
-knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 4)
+knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
 ```
 
 ---

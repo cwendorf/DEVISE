@@ -6,16 +6,8 @@ This vignette demonstrates two approaches: `statpsych` functions alone,
 and a combined `statpsych` + `spTools` workflow. Each approach computes
 condition intervals and then a direct comparison.
 
-- [Case 1: Summary Statistics Input](#case-1:-summary-statistics-input)
-  - [Examine the Conditions](#examine-the-conditions)
-  - [Display the Conditions](#display-the-conditions)
-  - [Examine a Comparison](#examine-a-comparison)
-  - [Display a Comparison](#display-a-comparison)
-- [Case 2: Summary Statistics Input (with spTools)](#case-2:-summary-statistics-input-(with-sptools))
-  - [Examine the Conditions](#examine-the-conditions)
-  - [Display the Conditions](#display-the-conditions)
-  - [Examine a Comparison](#examine-a-comparison)
-  - [Display a Comparison](#display-a-comparison)
+- [Case 1: Summary Statistics Input](#case-1%3A-summary-statistics-input)
+- [Case 2: Summary Statistics Input (with spTools)](#case-2%3A-summary-statistics-input-(with-sptools))
 
 ------------------------------------------------------------------------
 

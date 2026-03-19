@@ -25,7 +25,7 @@ library(DEVISE)
 This vignette shows how to supply confidence interval inputs directly and use DEVISE to assemble, format, and visualize conditions and comparisons.
 
 ```{r toc, echo=FALSE}
-knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 4)
+knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
 ```
 
 ---

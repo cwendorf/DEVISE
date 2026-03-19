@@ -6,8 +6,8 @@
 keep examples readable and consistent. The goal is to read code
 left-to-right, from data creation to transformed output.
 
-- [Case 1: Using Forward Assignment](#case-1:-using-forward-assignment)
-- [Case 2: Using Pipe Operators](#case-2:-using-pipe-operators)
+- [Case 1: Using Forward Assignment](#case-1%3A-using-forward-assignment)
+- [Case 2: Using Pipe Operators](#case-2%3A-using-pipe-operators)
 
 ------------------------------------------------------------------------
 

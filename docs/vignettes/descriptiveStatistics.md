@@ -7,20 +7,9 @@ statistics and correlations using `DEVISE`. These functions help
 extract, summarize, and visualize data characteristics for exploratory
 analysis and presentation.
 
-- [Case 1: Overall Descriptive
-  Statistics](#case-1:-overall-descriptive-statistics)
-  - [Create Sample Data](#create-sample-data)
-  - [Obtain Descriptive Statistics](#obtain-descriptive-statistics)
-- [Case 2: Grouped Descriptive
-  Statistics](#case-2:-grouped-descriptive-statistics)
-  - [Obtain Descriptive Statistics for a Single
-    Variable](#obtain-descriptive-statistics-for-a-single-variable)
-  - [Obtain Descriptive Statistics for Multiple
-    Variables](#obtain-descriptive-statistics-for-multiple-variables)
-- [Case 3: Correlation Analysis](#case-3:-correlation-analysis)
-  - [Compute Correlation Matrix](#compute-correlation-matrix)
-  - [Compute Correlation Matrices](#compute-correlation-matrices)
-  - [Compute Covariance Matrix](#compute-covariance-matrix)
+- [Case 1: Overall Descriptive Statistics](#case-1%3A-overall-descriptive-statistics)
+- [Case 2: Grouped Descriptive Statistics](#case-2%3A-grouped-descriptive-statistics)
+- [Case 3: Correlation Analysis](#case-3%3A-correlation-analysis)
 
 ------------------------------------------------------------------------
 

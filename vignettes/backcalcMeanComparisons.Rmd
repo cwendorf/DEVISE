@@ -27,7 +27,7 @@ library(backcalc)
 This vignette demonstrates a mean comparison workflow using `backcalc` to derive summary statistics and `DEVISE` to format and plot the results. In each case, the steps progress from computing condition intervals to a final comparison.
 
 ```{r toc, echo=FALSE}
-knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 4)
+knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
 ```
 
 ---

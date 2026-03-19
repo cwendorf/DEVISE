@@ -78,7 +78,7 @@ Comparison |> style_matrix(title = "Table 2: Means and Confidence Intervals for 
 Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals for a Comparison", values = TRUE)
 ```
 
-### Case 2: Summary Statistics Input (with `spTools`)
+### Case 2: Summary Statistics Input with `spTools`
 
 #### Examine the Conditions
 

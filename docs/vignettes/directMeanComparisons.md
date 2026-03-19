@@ -6,8 +6,8 @@ This vignette shows how to supply confidence interval inputs directly
 and use DEVISE to assemble, format, and visualize conditions and
 comparisons.
 
-- [Case 1: Estimates from a Single Source](#case-1%3A-estimates-from-a-single-source)
-- [Case 2: Estimates from Multiple Studies](#case-2%3A-estimates-from-multiple-studies)
+- [Case 1: Estimates from a Single Source](#case-1-estimates-from-a-single-source)
+- [Case 2: Estimates from Multiple Studies](#case-2-estimates-from-multiple-studies)
 
 ------------------------------------------------------------------------
 

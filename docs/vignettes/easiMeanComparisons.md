@@ -6,8 +6,8 @@ This vignette demonstrates two workflows with EASI: one using raw data
 and one using summary statistics. Each workflow follows the same pattern
 of building condition intervals, then generating a comparison.
 
-- [Case 1: Raw Data Input](#case-1%3A-raw-data-input)
-- [Case 2: Summary Statistics Input](#case-2%3A-summary-statistics-input)
+- [Case 1: Raw Data Input](#case-1-raw-data-input)
+- [Case 2: Summary Statistics Input](#case-2-summary-statistics-input)
 
 ------------------------------------------------------------------------
 

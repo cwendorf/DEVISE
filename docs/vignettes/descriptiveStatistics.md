@@ -7,9 +7,9 @@ statistics and correlations using `DEVISE`. These functions help
 extract, summarize, and visualize data characteristics for exploratory
 analysis and presentation.
 
-- [Case 1: Overall Descriptive Statistics](#case-1%3A-overall-descriptive-statistics)
-- [Case 2: Grouped Descriptive Statistics](#case-2%3A-grouped-descriptive-statistics)
-- [Case 3: Correlation Analysis](#case-3%3A-correlation-analysis)
+- [Case 1: Overall Descriptive Statistics](#case-1-overall-descriptive-statistics)
+- [Case 2: Grouped Descriptive Statistics](#case-2-grouped-descriptive-statistics)
+- [Case 3: Correlation Analysis](#case-3-correlation-analysis)
 
 ------------------------------------------------------------------------
 

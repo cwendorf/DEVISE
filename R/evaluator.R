@@ -53,13 +53,13 @@ use_vars <- function(data, ...) {
   }
 }
 
-#' Retain an Object in a Pipeline
+#' Keep an Object in a Pipeline
 #'
-#' `retain()` assigns an object in the caller's environment
+#' `keep_as()` assigns an object in the caller's environment
 #' while returning the value invisibly. This makes it easy to save
 #' intermediate results when using the native pipe (`|>`).
 #'
-#' @param x The object to retain (typically coming from a pipeline).
+#' @param x The object to keep (typically coming from a pipeline).
 #' @param name A symbol giving the name to assign `x` to in the
 #'   caller's environment.
 #'
@@ -70,22 +70,22 @@ use_vars <- function(data, ...) {
 #' # Save a filtered dataset in a pipeline
 #' iris |>
 #'   subset(Species == "setosa") |>
-#'   retain(setosa_only) |>
+#'   keep_as(setosa_only) |>
 #'   summary()
 #'
 #' # Save a model fit while still viewing its summary
 #' iris |>
 #'   lm(Sepal.Length ~ Sepal.Width, data = _) |>
-#'   retain(model_fit) |>
+#'   keep_as(model_fit) |>
 #'   summary()
 #'
 #' # Save an intermediate step for debugging
 #' mtcars |>
 #'   subset(cyl == 6) |>
-#'   retain(six_cyls) |>
+#'   keep_as(six_cyls) |>
 #'   transform(kpl = mpg * 0.425) |>
 #'   head()
-retain <- function(x, name) {
+keep_as <- function(x, name) {
   assign(deparse(substitute(name)), x, envir = parent.frame())
   invisible(x)
 }

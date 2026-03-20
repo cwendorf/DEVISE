@@ -176,6 +176,60 @@ extract_rows <- function(out, rows = NULL) {
   filter_one(out)
 }
 
+#' Filter Rows Referenced by a Formula
+#'
+#' `use_rows()` filters the variables referenced in a two-sided formula and
+#' returns the same formula with an updated environment containing only the
+#' filtered rows. This allows formula-based functions (for example, `t.test()`)
+#' to be used in a pipe-friendly workflow without creating temporary objects.
+#'
+#' If `condition` is written as `x == c("a", "b")`, it is treated as
+#' membership (`x %in% c("a", "b")`) to avoid element-wise recycling.
+#'
+#' @param formula A two-sided formula (for example, `Outcome ~ Group`).
+#' @param condition A logical condition evaluated in the formula's model frame.
+#'
+#' @return A formula with the same left- and right-hand sides as `formula`, but
+#'   whose environment contains only filtered rows.
+#' @examples
+#' # Base R t test with formula filtering in a pipe
+#' gl(3, 10, labels = c("Level1", "Level2", "Level3")) -> Factor
+#' c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7,
+#'   7, 13, 11, 10, 13, 8, 11, 14, 12, 11,
+#'   9, 16, 11, 12, 15, 13, 9, 14, 11, 10) -> Outcome
+#'
+#' (Outcome ~ Factor) |>
+#'   use_rows(Factor == c("Level1", "Level2")) |>
+#'   t.test() |>
+#'   extract_intervals()
+#'
+#' # Equivalent explicit condition form
+#' (Outcome ~ Factor) |>
+#'   use_rows(Factor %in% c("Level2", "Level3")) |>
+#'   t.test()
+#' @export
+use_rows <- function(formula, condition) {
+  cond_expr <- substitute(condition)
+
+  # Treat == c("a", "b") as membership, not element-wise recycling.
+  if (is.call(cond_expr) && identical(cond_expr[[1L]], as.name("=="))) {
+    rhs <- cond_expr[[3L]]
+    if (is.call(rhs) && identical(rhs[[1L]], as.name("c"))) {
+      cond_expr <- as.call(list(as.name("%in%"), cond_expr[[2L]], rhs))
+    }
+  }
+
+  old_env <- environment(formula)
+  d <- model.frame(formula, na.action = na.pass)
+  d <- subset(d, eval(cond_expr, d, old_env))
+  d <- droplevels(d)
+
+  new_env <- new.env(parent = old_env)
+  list2env(d, envir = new_env)
+  environment(formula) <- new_env
+  formula
+}
+
 #' Extract Row or Column as Named Vector from Data Frame or Matrix
 #'
 #' Extract a single row or column from a matrix or data frame as a named vector.

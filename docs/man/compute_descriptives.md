@@ -1,6 +1,6 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
-## Compute Descriptive Statistics for Numeric Variables (fixed)
+## Compute Descriptive Statistics for Numeric Variables
 
 **Aliases:**
 

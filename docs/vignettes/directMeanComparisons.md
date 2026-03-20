@@ -24,9 +24,7 @@ reconstructing results from research reports.
 c(Estimate = 8.000, LL = 6.988, UL = 9.012) -> Level1
 c(Estimate = 11.000, LL = 9.418, UL = 12.582) -> Level2
 c(Estimate = 12.000, LL = 10.248, UL = 13.752) -> Level3
-
-rbind(Level1, Level2, Level3) -> Conditions
-c("Level1", "Level2", "Level3") -> rownames(Conditions)
+rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
 
 #### Display the Conditions
@@ -60,9 +58,7 @@ Enter the comparison statistics for the selected conditions.
 
 ``` r
 c(Estimate = 3.000, LL = 1.234, UL = 4.766) -> Difference
-
-rbind(Level1, Level2, Difference) -> Comparison
-c("Level1", "Level2", "Difference") -> rownames(Comparison)
+rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
 
 #### Display a Comparison
@@ -101,9 +97,7 @@ easy to organize and present findings from different sources.
 c(Estimate = 11.000, LL = 9.418, UL = 12.582) -> Study1
 c(Estimate = 10.800, LL = 9.234, UL = 12.366) -> Study2
 c(Estimate = 11.200, LL = 9.654, UL = 12.746) -> Study3
-
-rbind(Study1, Study2, Study3) -> Studies
-c("Study 1", "Study 2", "Study 3") -> rownames(Studies)
+rbind(Study1, Study2, Study3) |> name_rows(c("Study 1", "Study 2", "Study 3")) -> Studies
 ```
 
 #### Display the Studies

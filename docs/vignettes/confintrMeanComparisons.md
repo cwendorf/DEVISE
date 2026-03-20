@@ -28,12 +28,10 @@ data.frame(Factor, Outcome) -> df
 Use `confintr` with the default parametric method for each condition.
 
 ``` r
-ci_mean(df$Outcome[df$Factor == "Level1"]) |> extract_intervals() -> Level1
-ci_mean(df$Outcome[df$Factor == "Level2"]) |> extract_intervals() -> Level2
-ci_mean(df$Outcome[df$Factor == "Level3"]) |> extract_intervals() -> Level3
-
-rbind(Level1, Level2, Level3) -> Conditions
-c("Level1", "Level2", "Level3") -> rownames(Conditions)
+df |> use_vars(Outcome[Factor == "Level1"]) |> ci_mean() |> extract_intervals() -> Level1
+df |> use_vars(Outcome[Factor == "Level2"]) |> ci_mean() |> extract_intervals() -> Level2
+df |> use_vars(Outcome[Factor == "Level3"]) |> ci_mean() |> extract_intervals() -> Level3
+rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
 
 #### Display the Conditions
@@ -68,9 +66,7 @@ Use the parametric method to compare conditions.
 ``` r
 ci_mean_diff(df$Outcome[df$Factor == "Level2"], 
              df$Outcome[df$Factor == "Level1"]) |> extract_intervals() -> Difference
-
-rbind(Level1, Level2, Difference) -> Comparison
-c("Level1", "Level2", "Difference") -> rownames(Comparison)
+rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
 
 #### Display a Comparison
@@ -105,12 +101,10 @@ Comparison |> plot_comparison(title = "Figure 2: Means and Parametric Confidence
 Use `confintr` with bootstrap methods for each condition.
 
 ``` r
-ci_mean(df$Outcome[df$Factor == "Level1"], type = "bootstrap", R = 10000) |> extract_intervals() -> Level1
-ci_mean(df$Outcome[df$Factor == "Level2"], type = "bootstrap", R = 10000) |> extract_intervals() -> Level2
-ci_mean(df$Outcome[df$Factor == "Level3"], type = "bootstrap", R = 10000) |> extract_intervals() -> Level3
-
-rbind(Level1, Level2, Level3) -> Conditions
-c("Level1", "Level2", "Level3") -> rownames(Conditions)
+df |> use_vars(Outcome[Factor == "Level1"]) |> ci_mean(type = "bootstrap", R = 10000) |> extract_intervals() -> Level1
+df |> use_vars(Outcome[Factor == "Level2"]) |> ci_mean(type = "bootstrap", R = 10000) |> extract_intervals() -> Level2
+df |> use_vars(Outcome[Factor == "Level3"]) |> ci_mean(type = "bootstrap", R = 10000) |> extract_intervals() -> Level3
+rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
 
 #### Display the Conditions
@@ -127,9 +121,9 @@ Conditions |> style_matrix(title = "Table 3: Means and Bootstrap Confidence Inte
     --------------------------------------- 
              Estimate         LL         UL 
     --------------------------------------- 
-    Level1      8.000      6.957      9.043
-    Level2     11.000      8.999     12.373
-    Level3     12.000     10.364     14.032 
+    Level1      8.000      6.957      9.006
+    Level2     11.000      8.985     12.394
+    Level3     12.000     10.364     13.996 
     --------------------------------------- 
 
 ``` r
@@ -147,9 +141,7 @@ ci_mean_diff(df$Outcome[df$Factor == "Level2"],
              df$Outcome[df$Factor == "Level1"], 
              type = "bootstrap", 
              R = 10000) |> extract_intervals() -> Difference
-
-rbind(Level1, Level2, Difference) -> Comparison
-c("Level1", "Level2", "Difference") -> rownames(Comparison)
+rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
 
 #### Display a Comparison
@@ -166,9 +158,9 @@ Comparison |> style_matrix(title = "Table 4: Means and Bootstrap Confidence Inte
     ------------------------------------------- 
                  Estimate         LL         UL 
     ------------------------------------------- 
-    Level1          8.000      6.957      9.043
-    Level2         11.000      8.999     12.373
-    Difference      3.000      1.008      4.641 
+    Level1          8.000      6.957      9.006
+    Level2         11.000      8.985     12.394
+    Difference      3.000      1.033      4.661 
     ------------------------------------------- 
 
 ``` r

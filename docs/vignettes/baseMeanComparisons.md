@@ -32,9 +32,7 @@ conditions matrix.
 Outcome[Factor == "Level1"] |> t.test() |> extract_intervals() -> Level1
 Outcome[Factor == "Level2"] |> t.test() |> extract_intervals() -> Level2
 Outcome[Factor == "Level3"] |> t.test() |> extract_intervals() -> Level3
-
-rbind(Level1, Level2, Level3) -> Conditions
-c("Level1", "Level2", "Level3") -> rownames(Conditions)
+rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
 
 #### Display the Conditions
@@ -62,24 +60,14 @@ Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals 
 
 ![](figures/base-case1-conditions-1.png)<!-- -->
 
-#### Make a Comparison
-
-Subset the data to the two conditions that will be compared directly.
-
-``` r
-Outcome[Factor %in% c("Level1", "Level2")] -> Outcome_Sub
-Factor[Factor %in% c("Level1", "Level2")] -> Factor_Sub
-```
-
 #### Examine a Comparison
 
-Compute the comparison interval between the two selected conditions.
+Compute the comparison interval between the two selected conditions
+directly in `t.test()`.
 
 ``` r
-(Outcome_Sub ~ Factor_Sub) |> t.test() |> extract_intervals() -> Difference
-
-rbind(Level1, Level2, Difference) -> Comparison
-c("Level1", "Level2", "Difference") -> rownames(Comparison)
+(Outcome ~ Factor) |> use_rows(Factor == c("Level1", "Level2")) |>  t.test() |> extract_intervals() -> Difference
+rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
 
 #### Display a Comparison

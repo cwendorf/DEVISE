@@ -23,9 +23,7 @@ summary statistics.
 backcalc_means(m = 8.000, sd = 1.414, n = 10) |> extract_intervals() -> Level1
 backcalc_means(m = 11.000, sd = 2.211, n = 10) |> extract_intervals() -> Level2
 backcalc_means(m = 12.000, sd = 2.162, n = 10) |> extract_intervals() -> Level3
-
-rbind(Level1, Level2, Level3) -> Conditions
-c("Level1", "Level2", "Level3") -> rownames(Conditions)
+rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
 
 #### Display the Conditions
@@ -59,9 +57,7 @@ Compute the comparison interval between the two selected conditions.
 
 ``` r
 backcalc_means(m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() -> Difference
-
-rbind(Level1, Level2, Difference) -> Comparison
-c("Level1", "Level2", "Difference") -> rownames(Comparison)
+rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
 
 #### Display a Comparison
@@ -100,9 +96,7 @@ means and the resulting test statistics and degrees of freedom.
 ``` r
 backcalc_means(m = 4.20, statistic = 2.80, df = 19) |> extract_intervals() -> Level1
 backcalc_means(m = 6.10, statistic = 3.40, df = 19) |> extract_intervals() -> Level2
-
-rbind(Level1, Level2) -> Conditions
-c("Level1", "Level2") -> rownames(Conditions)
+rbind(Level1, Level2) |> name_rows(c("Level1", "Level2")) -> Conditions
 ```
 
 #### Display the Conditions
@@ -136,9 +130,7 @@ two means, we use the statistics from the comparison.
 
 ``` r
 backcalc_means(m = c(6.10, 4.20), statistic = 0.825, df = 38) |> extract_intervals() -> Difference
-
-rbind(Level1, Level2, Difference) -> Comparison
-c("Level1", "Level2", "Difference") -> rownames(Comparison)
+rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
 
 #### Display a Comparison

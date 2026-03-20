@@ -55,21 +55,12 @@ Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals 
 
 ![](figures/easi-case1-conditions-1.png)<!-- -->
 
-#### Make a Comparison
-
-Subset to the two conditions that will be compared directly.
-
-``` r
-Outcome[Factor %in% c("Level1", "Level2")] -> Outcome_Sub
-Factor[Factor %in% c("Level1", "Level2")] -> Factor_Sub
-```
-
 #### Examine a Comparison
 
-Estimate the comparison interval for the selected conditions.
+Estimate the comparison intervals for the selected conditions.
 
 ``` r
-(Outcome_Sub~Factor_Sub) |> estimateComparison() -> Comparison
+(Outcome ~ Factor) |> use_rows(Factor == c("Level1", "Level2")) |> estimateComparison() -> Comparison
 ```
 
 #### Display a Comparison

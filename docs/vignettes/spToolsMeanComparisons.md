@@ -7,7 +7,7 @@ and a combined `statpsych` + `spTools` workflow. Each approach computes
 condition intervals and then a direct comparison.
 
 - [Case 1: Summary Statistics Input](#case-1-summary-statistics-input)
-- [Case 2: Summary Statistics Input with spTools](#case-2-summary-statistics-input-with-sptools)
+- [Case 2: Summary Statistics Input with `spTools`](#case-2-summary-statistics-input-with-sptools)
 
 ------------------------------------------------------------------------
 
@@ -21,9 +21,7 @@ Compute condition intervals using `statpsych` functions.
 ci.mean(alpha = .05, m = 8.000, sd = 1.414, n = 10) |> extract_intervals() -> Level1
 ci.mean(alpha = .05, m = 11.000, sd = 2.211, n = 10) |> extract_intervals() -> Level2
 ci.mean(alpha = .05, m = 12.000, sd = 2.449, n = 10) |> extract_intervals() -> Level3
-
-rbind(Level1, Level2, Level3) -> Conditions
-c("Level1", "Level2", "Level3") -> rownames(Conditions)
+rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
 
 #### Display the Conditions
@@ -57,9 +55,7 @@ Compute the comparison interval between two conditions.
 
 ``` r
 ci.mean2(alpha = .05, 11.000, 8.000, 2.211, 1.414, 10, 10) |> extract_intervals() |> extract_rows(1) -> Difference
-
-rbind(Level1, Level2, Difference) -> Comparison
-c("Level1", "Level2", "Difference") -> rownames(Comparison)
+rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
 
 #### Display a Comparison
@@ -95,8 +91,7 @@ Compute condition intervals using vectorized functions from `statpsych`
 and `spTools`.
 
 ``` r
-ci.mean.vec(alpha = .05, m = c(8.000, 11.000, 12.000), sd = c(1.414, 2.211, 2.449), n = c(10, 10, 10)) |> extract_intervals() -> Conditions
-c("Level1", "Level2", "Level3") -> rownames(Conditions)
+ci.mean.vec(alpha = .05, m = c(8.000, 11.000, 12.000), sd = c(1.414, 2.211, 2.449), n = c(10, 10, 10)) |> extract_intervals() |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
 
 #### Display the Conditions
@@ -130,9 +125,7 @@ Compute the comparison interval between two conditions.
 
 ``` r
 ci.mean2.vec(alpha = .05, m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() |> extract_rows(1) -> Difference
-
-rbind(Conditions[1,], Conditions[2,], Difference) -> Comparison
-c("Level1", "Level2", "Difference") -> rownames(Comparison)
+rbind(Conditions[1,], Conditions[2,], Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
 
 #### Display a Comparison

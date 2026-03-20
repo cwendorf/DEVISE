@@ -12,8 +12,9 @@ This section is the reference for `DEVISE`. Each page documents one exported fun
 
 ### Selection
 
-- [retain()](./retain.md): Keep selected values, rows, or columns.
 - [use_vars()](./use_vars.md): Select variables for downstream analysis.
+- [use_rows()](./use_rows.md): Filter rows referenced by a formula.
+- [keep_as()](./retain.md): Keep selected values, rows, or columns.
 - [extract_rows()](./extract_rows.md): Extract one or more rows.
 - [extract_columns()](./extract_columns.md): Extract one or more columns.
 - [extract_vector()](./extract_vector.md): Extract a named row or column.

@@ -11,7 +11,7 @@ This section contains vignettes for `DEVISE`. Each page demonstrates a workflow 
 
 ### Mean Comparisons
 
-The primary purpose of `DEVISE` is to aid in the presentation of a comparison after using other methods of calculating confidence intervals.
+One main purpose of `DEVISE` is to aid in the presentation of a mean comparison after using other methods or packages to calculate the  confidence intervals.
 
 - [Mean Comparisons with Direct Input](./directMeanComparisons.md): Uses direct input of confidence intervals from published sources.
 - [Mean Comparisons with Base R](./baseMeanComparisons.md): Uses base R to calculate confidence intervals from data.

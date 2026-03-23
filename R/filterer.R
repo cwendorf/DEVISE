@@ -178,7 +178,7 @@ extract_rows <- function(out, rows = NULL) {
 
 #' Filter Rows Referenced by a Formula
 #'
-#' `use_rows()` filters the variables referenced in a two-sided formula and
+#' `filter_rows()` filters the variables referenced in a two-sided formula and
 #' returns the same formula with an updated environment containing only the
 #' filtered rows. This allows formula-based functions (for example, `t.test()`)
 #' to be used in a pipe-friendly workflow without creating temporary objects.
@@ -199,16 +199,16 @@ extract_rows <- function(out, rows = NULL) {
 #'   9, 16, 11, 12, 15, 13, 9, 14, 11, 10) -> Outcome
 #'
 #' (Outcome ~ Factor) |>
-#'   use_rows(Factor == c("Level1", "Level2")) |>
+#'   filter_rows(Factor == c("Level1", "Level2")) |>
 #'   t.test() |>
 #'   extract_intervals()
 #'
 #' # Equivalent explicit condition form
 #' (Outcome ~ Factor) |>
-#'   use_rows(Factor %in% c("Level2", "Level3")) |>
+#'   filter_rows(Factor %in% c("Level2", "Level3")) |>
 #'   t.test()
 #' @export
-use_rows <- function(formula, condition) {
+filter_rows <- function(formula, condition) {
   cond_expr <- substitute(condition)
 
   # Treat == c("a", "b") as membership, not element-wise recycling.

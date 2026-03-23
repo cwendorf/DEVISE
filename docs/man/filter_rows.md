@@ -4,11 +4,11 @@
 
 **Aliases:**
 
-- `use_rows`
+- `filter_rows`
 
 ### Description
 
-use_rows() filters the variables referenced in a two-sided formula and
+filter_rows() filters the variables referenced in a two-sided formula and
 returns the same formula with an updated environment containing only the
 filtered rows. This allows formula-based functions (for example, t.test())
 to be used in a pipe-friendly workflow without creating temporary objects.
@@ -16,7 +16,7 @@ to be used in a pipe-friendly workflow without creating temporary objects.
 ### Usage
 
 ```r
-use_rows(formula, condition)
+filter_rows(formula, condition)
 ```
 
 ### Arguments
@@ -44,13 +44,12 @@ c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7,
   9, 16, 11, 12, 15, 13, 9, 14, 11, 10) -> Outcome
 
 (Outcome ~ Factor) |>
-  use_rows(Factor == c("Level1", "Level2")) |>
+  filter_rows(Factor == c("Level1", "Level2")) |>
   t.test() |>
   extract_intervals()
 
 # Equivalent explicit condition form
 (Outcome ~ Factor) |>
-  use_rows(Factor %in% c("Level2", "Level3")) |>
+  filter_rows(Factor %in% c("Level2", "Level3")) |>
   t.test()
 ```
-

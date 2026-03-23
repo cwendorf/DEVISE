@@ -66,7 +66,7 @@ Compute the comparison interval between the two selected conditions
 directly in `t.test()`.
 
 ``` r
-(Outcome ~ Factor) |> use_rows(Factor == c("Level1", "Level2")) |>  t.test() |> extract_intervals() -> Difference
+(Outcome ~ Factor) |> filter_rows(Factor == c("Level1", "Level2")) |>  t.test() |> extract_intervals() -> Difference
 rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
 

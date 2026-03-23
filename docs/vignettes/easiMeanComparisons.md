@@ -60,7 +60,7 @@ Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals 
 Estimate the comparison intervals for the selected conditions.
 
 ``` r
-(Outcome ~ Factor) |> use_rows(Factor == c("Level1", "Level2")) |> estimateComparison() -> Comparison
+(Outcome ~ Factor) |> filter_rows(Factor == c("Level1", "Level2")) |> estimateComparison() -> Comparison
 ```
 
 #### Display a Comparison

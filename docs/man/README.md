@@ -13,7 +13,7 @@ This section is the reference for `DEVISE`. Each page documents one exported fun
 ### Selection
 
 - [use_vars()](./use_vars.md): Select variables for downstream analysis.
-- [use_rows()](./use_rows.md): Filter rows referenced by a formula.
+- [filter_rows()](./filter_rows.md): Filter rows referenced by a formula.
 - [keep_as()](./retain.md): Keep selected values, rows, or columns.
 - [extract_rows()](./extract_rows.md): Extract one or more rows.
 - [extract_columns()](./extract_columns.md): Extract one or more columns.

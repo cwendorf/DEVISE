@@ -30,7 +30,7 @@ knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
 
 ---
 
-### Case 1: Using Forward Assignment
+### Principle 1: Using Forward Assignment
 
 To minimize visual backtracking, avoid left assignment (`<-`). Instead, use `->` to store objects after they are computed. This keeps the focus on the computation itself.
 
@@ -41,15 +41,14 @@ data.frame(
   Exam = c(8, 7, 9, 6, 7, 10, 9, 9, 8, 10)
 ) -> df
 
-head(df)
+df
 ```
 
-### Case 2: Using Pipe Operators
+### Principle 2: Using Pipe Operators
 
 To keep data flowing, pipe operators (`|>`) show step-by-step transformations. They help express a sequence of operations without temporary assignment.
 
 ```{r}
-df |> subset(Group == "Group1") |> head()
-
-df |> transform(Total = Quiz + Exam) |> head()
+df |> subset(Group == "Group1")
+df |> transform(Total = Quiz + Exam)
 ```

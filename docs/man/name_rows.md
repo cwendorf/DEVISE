@@ -2,10 +2,6 @@
 
 ## Set Row Names of a Data Frame
 
-**Aliases:**
-
-- `name_rows`
-
 ### Description
 
 Assign row names to a data frame in a pipe-friendly way.

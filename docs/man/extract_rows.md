@@ -2,10 +2,6 @@
 
 ## Extract Rows from Data Frame, Matrix, or List
 
-**Aliases:**
-
-- `extract_rows`
-
 ### Description
 
 Extract specified rows from a data frame, matrix, or list of such objects.

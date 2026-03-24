@@ -2,10 +2,6 @@
 
 ## Extract Columns from Data Frame, Matrix, or List
 
-**Aliases:**
-
-- `extract_columns`
-
 ### Description
 
 Extract specified columns from a data frame, matrix, or list of such objects.

@@ -2,10 +2,6 @@
 
 ## Filter Rows Referenced by a Formula
 
-**Aliases:**
-
-- `filter_rows`
-
 ### Description
 
 filter_rows() filters the variables referenced in a two-sided formula and

@@ -41,7 +41,7 @@ unformat_matrix <- function(results) {
 #' @param title Optional title printed above the matrix.
 #' @param spacing Number of blank lines above and below the matrix. A single number or a vector of length 2.
 #'
-#' @return Invisibly returns the printed matrix.
+#' @return Returns the printed matrix.
 #' @noRd
 style_plain <- function(results, title = NULL, spacing = 0, ...) {
   if (length(spacing) == 1) {
@@ -64,7 +64,7 @@ style_plain <- function(results, title = NULL, spacing = 0, ...) {
 #' @param title Optional title printed above the matrix.
 #' @param spacing Number of blank lines above and below the matrix. A single number or a vector of length 2.
 #'
-#' @return Invisibly returns the printed matrix.
+#' @return Returns the printed matrix.
 #' @noRd
 style_apa <- function(results, title = NULL, spacing = 0, ...) {
   if (length(spacing) == 1) {
@@ -105,7 +105,7 @@ style_apa <- function(results, title = NULL, spacing = 0, ...) {
 #' @param spacing Lines of vertical space before/after matrix.
 #' @param style One of "plain" (default) or "apa".
 #' @param ... Additional formatting arguments.
-#' @return Invisibly returns the formatted character matrix.
+#' @return Returns the formatted character matrix.
 #' @export
 style_matrix <- function(results,
                         digits = 3,

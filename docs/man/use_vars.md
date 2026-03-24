@@ -2,10 +2,6 @@
 
 ## Select Variables or Formulas from a Data Frame
 
-**Aliases:**
-
-- `use_vars`
-
 ### Description
 
 use_vars() evaluates one or more expressions within the context of a data frame.

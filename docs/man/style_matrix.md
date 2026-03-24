@@ -2,10 +2,6 @@
 
 ## Style and Print a Formatted Matrix
 
-**Aliases:**
-
-- `style_matrix`
-
 ### Description
 
 Style and print a numeric matrix using a specified formatting style (plain or APA).
@@ -38,5 +34,5 @@ style_matrix(
 
 ### Value
 
-Invisibly returns the formatted character matrix.
+Returns the formatted character matrix.
 

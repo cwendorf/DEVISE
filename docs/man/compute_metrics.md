@@ -2,10 +2,6 @@
 
 ## Compute Additional Metrics for Statistical Estimates
 
-**Aliases:**
-
-- `compute_metrics`
-
 ### Description
 
 This function computes additional metrics (Width, Margin of Error, Relative Width)

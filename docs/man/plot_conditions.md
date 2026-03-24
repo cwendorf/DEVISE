@@ -2,10 +2,6 @@
 
 ## Plot Point Estimates with Confidence Intervals
 
-**Aliases:**
-
-- `plot_conditions`
-
 ### Description
 
 Plots a set of point estimates and their confidence intervals for multiple conditions or outcomes.

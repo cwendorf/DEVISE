@@ -2,10 +2,6 @@
 
 ## Extract Row or Column as Named Vector from Data Frame or Matrix
 
-**Aliases:**
-
-- `extract_vector`
-
 ### Description
 
 Extract a single row or column from a matrix or data frame as a named vector.

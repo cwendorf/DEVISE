@@ -2,10 +2,6 @@
 
 ## Extract Point Estimate and Confidence Interval Columns
 
-**Aliases:**
-
-- `extract_intervals`
-
 ### Description
 
 Extract the point estimate and confidence interval columns from a data frame, matrix, list, or t.test result.

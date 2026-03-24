@@ -2,10 +2,6 @@
 
 ## Set Column Names of a Data Frame
 
-**Aliases:**
-
-- `name_columns`
-
 ### Description
 
 Assign column names to a data frame in a pipe-friendly way.

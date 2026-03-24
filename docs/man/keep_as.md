@@ -2,10 +2,6 @@
 
 ## Keep an Object in a Pipeline
 
-**Aliases:**
-
-- `keep_as`
-
 ### Description
 
 keep_as() assigns an object in the caller's environment

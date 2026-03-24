@@ -2,10 +2,6 @@
 
 ## Create Groups
 
-**Aliases:**
-
-- `create_groups`
-
 ### Description
 
 Generate a factor with k groups and a specified number of observations.

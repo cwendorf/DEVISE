@@ -2,10 +2,6 @@
 
 ## Plot Comparison of Two Groups with Confidence Intervals
 
-**Aliases:**
-
-- `plot_comparison`
-
 ### Description
 
 Plots two group means and their confidence intervals, along with their difference estimate.

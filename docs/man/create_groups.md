@@ -17,10 +17,7 @@ create_groups(k, n, labels = seq_len(k))
 ### Arguments
 
 - **`k`**: Integer. Number of groups.
-- **`n`**: Integer. Either:
-
- A single value: total number of observations (must be divisible by k), or
- A vector of length k: group sizes (must sum to total n).
+- **`n`**: Integer. Either: A single value: total number of observations (must be divisible by k), or a vector of length k: group sizes (must sum to total n).
 - **`labels`**: Character vector of group labels. Defaults to 1:k.
 
 ### Value

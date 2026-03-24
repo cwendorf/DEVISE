@@ -53,5 +53,5 @@ and confidence limits in columns named like "ll", "ul", "ci_lower", "ci_upper".
 
 ### Value
 
-Invisibly returns the modified results object.
+Returns the modified results object.
 

@@ -3,7 +3,7 @@
 
 #' Select Variables or Formulas from a Data Frame
 #'
-#' `use_vars()` evaluates one or more expressions within the context of a data frame.
+#' Evaluates one or more expressions within the context of a data frame.
 #' This can include formulas (e.g., `y ~ x`) or bare variable names. The result
 #' is pipe-friendly and adapts depending on whether you select a single variable,
 #' multiple variables, or a formula.
@@ -55,7 +55,7 @@ use_vars <- function(data, ...) {
 
 #' Keep an Object in a Pipeline
 #'
-#' `keep_as()` assigns an object in the caller's environment
+#' Assigns an object in the caller's environment
 #' while returning the value invisibly. This makes it easy to save
 #' intermediate results when using the native pipe (`|>`).
 #'

@@ -2,18 +2,10 @@
 
 ## Compute Descriptive Statistics for Numeric Variables
 
-**Aliases:**
-
-- `compute_descriptives`
-
 ### Description
 
 Calculates N, mean and SD for numeric variables, optionally grouped.
-Accepts either:
-
- no args: all numeric vars,
- bare var names:  e.g. x, y or c(x,y),
- a formula: vars ~ group or ~ group.
+Accepts either: no args: all numeric vars, bare var names:  e.g. x, y or c(x,y), a formula: vars ~ group or ~ group.
 
 ### Usage
 
@@ -24,8 +16,7 @@ compute_descriptives(data, ...)
 ### Arguments
 
 - **`data`**: data.frame
-- **`...`**: bare variable names (unquoted), or a single formula (e.g. x ~ Group,
-c(x,y) ~ Group, or ~ Group). If omitted, all numeric variables are used.
+- **`...`**: bare variable names (unquoted), or a single formula (e.g. x ~ Group, c(x,y) ~ Group, or ~ Group). If omitted, all numeric variables are used.
 
 ### Details
 

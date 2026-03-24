@@ -4,7 +4,7 @@
 
 ### Description
 
-keep_as() assigns an object in the caller's environment
+Assigns an object in the caller's environment
 while returning the value invisibly. This makes it easy to save
 intermediate results when using the native pipe (|>).
 

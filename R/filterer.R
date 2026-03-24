@@ -178,7 +178,7 @@ extract_rows <- function(out, rows = NULL) {
 
 #' Filter Rows Referenced by a Formula
 #'
-#' `filter_rows()` filters the variables referenced in a two-sided formula and
+#' Filters the variables referenced in a two-sided formula and
 #' returns the same formula with an updated environment containing only the
 #' filtered rows. This allows formula-based functions (for example, `t.test()`)
 #' to be used in a pipe-friendly workflow without creating temporary objects.

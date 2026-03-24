@@ -20,11 +20,8 @@ where "LL" and "UL" represent the lower and upper bounds of a confidence interva
 
 ### Value
 
-A data frame identical to input, with additional columns:
-
-WidthThe width of the confidence interval (UL - LL).
-MoEThe margin of error (Width / 2).
-RelativeThe relative width of the interval (Width / abs(Estimate)). Returns NA if Estimate is zero.
+A data frame identical to input, with additional columns: Width: The width of the confidence interval (UL - LL).
+MoE: The margin of error (Width / 2). Relative: The relative width of the interval (Width / abs(Estimate)). Returns NA if Estimate is zero.
 
 ### Examples
 

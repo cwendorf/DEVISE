@@ -115,7 +115,7 @@ plot_conditions <- function(results,
 #' @param lines Logical; draw lines from group points to the difference?
 #' @param ... Additional graphical parameters.
 #'
-#' @return Invisibly returns the modified `results` object.
+#' @return Returns the modified `results` object.
 #' @export
 plot_comparison <- function(results, 
                     title = NULL, 

@@ -24,7 +24,7 @@ library(confintr)
 
 ## Mean Comparisons with `confintr`
 
-This vignette illustrates a mean comparison workflow using the confintr package to compute intervals and DEVISE to format and plot results. The steps move from condition intervals to the final comparison display.
+This vignette illustrates a mean comparison workflow using the confintr package to compute intervals and `DEVISE` to format and plot results. The steps move from condition intervals to the final comparison display.
 
 ```{r toc, echo=FALSE}
 knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)

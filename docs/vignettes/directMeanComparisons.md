@@ -3,7 +3,7 @@
 ## Mean Comparisons with Direct Input
 
 This vignette shows how to supply confidence interval inputs directly
-and use DEVISE to assemble, format, and visualize conditions and
+and use `DEVISE` to assemble, format, and visualize conditions and
 comparisons.
 
 - [Case 1: Estimates from a Single Source](#case-1-estimates-from-a-single-source)
@@ -90,7 +90,7 @@ Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals 
 
 #### Examine the Studies
 
-When synthesizing results from multiple publications, DEVISE makes it
+When synthesizing results from multiple publications, `DEVISE` makes it
 easy to organize and present findings from different sources.
 
 ``` r

@@ -3,7 +3,7 @@
 ## Mean Comparisons with `confintr`
 
 This vignette illustrates a mean comparison workflow using the confintr
-package to compute intervals and DEVISE to format and plot results. The
+package to compute intervals and `DEVISE` to format and plot results. The
 steps move from condition intervals to the final comparison display.
 
 - [Case 1: Parametric Confidence Intervals](#case-1-parametric-confidence-intervals)

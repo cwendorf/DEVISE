@@ -22,7 +22,7 @@ library(DEVISE)
 
 ## Mean Comparisons with Base R
 
-This vignette walks through a complete mean comparison workflow using Base R for data entry and DEVISE for interval extraction and visualization. Each step builds on the previous one, ending with a comparison table and plot.
+This vignette walks through a complete mean comparison workflow using Base R for data entry and `DEVISE` for interval extraction and visualization. Each step builds on the previous one, ending with a comparison table and plot.
 
 ```{r toc, echo=FALSE}
 knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)

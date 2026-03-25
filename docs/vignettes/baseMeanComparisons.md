@@ -3,7 +3,7 @@
 ## Mean Comparisons with Base R
 
 This vignette walks through a complete mean comparison workflow using
-Base R for data entry and DEVISE for interval extraction and
+Base R for data entry and `DEVISE` for interval extraction and
 visualization. Each step builds on the previous one, ending with a
 comparison table and plot.
 

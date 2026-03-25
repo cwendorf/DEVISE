@@ -22,7 +22,7 @@ library(DEVISE)
 
 ## Mean Comparisons with Direct Input
 
-This vignette shows how to supply confidence interval inputs directly and use DEVISE to assemble, format, and visualize conditions and comparisons.
+This vignette shows how to supply confidence interval inputs directly and use `DEVISE` to assemble, format, and visualize conditions and comparisons.
 
 ```{r toc, echo=FALSE}
 knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
@@ -74,7 +74,7 @@ Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals 
 
 #### Examine the Studies
 
-When synthesizing results from multiple publications, DEVISE makes it easy to organize and present findings from different sources.
+When synthesizing results from multiple publications, `DEVISE` makes it easy to organize and present findings from different sources.
 
 ```{r}
 c(Estimate = 11.000, LL = 9.418, UL = 12.582) -> Study1

@@ -4,11 +4,6 @@
 
 This section contains vignettes for `DEVISE`. Each page demonstrates a workflow using real or simulated data, including setup, computation, formatting, and visualization.
 
-- [Core Functions](#core-functions)
-- [Mean Comparisons](#mean-comparisons)
-
----
-
 ### Core Functions
 
 `DEVISE` uses a particular workflow and set of functions to organize and handle data and results.

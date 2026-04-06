@@ -1,5 +1,4 @@
-
-# `DEVISE` 
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
 ## Data Exploration, Visualization, and Inference with Statistical Estimation
 

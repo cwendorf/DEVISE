@@ -2,7 +2,9 @@
 
 ## Calculating Descriptive Statistics
 
-This vignette demonstrates how to compute and format descriptive statistics and correlations using `DEVISE`. These functions help extract and summarize data for exploratory and additional analyses.
+This vignette demonstrates how to compute and format descriptive
+statistics and correlations using `DEVISE`. These functions help extract
+and summarize data for exploratory and additional analyses.
 
 - [Case 1: Overall Descriptive Statistics](#case-1-overall-descriptive-statistics)
 - [Case 2: Grouped Descriptive Statistics](#case-2-grouped-descriptive-statistics)
@@ -103,6 +105,32 @@ df |> compute_descriptives(c(Quiz, Exam) ~ Group)
     Quiz 5 8.2 0.83666
     Exam 5 9.2 0.83666
 
+Format with styling:
+
+``` r
+df |> compute_descriptives(c(Quiz, Exam) ~ Group) |> style_matrix(title = "Table 3: Descriptive Statistics by Group", style = "apa")
+```
+
+
+    Table 3: Descriptive Statistics by Group (Group1) 
+
+    ------------------------------------- 
+                  N          M         SD 
+    ------------------------------------- 
+    Quiz      5.000      5.800      0.837
+    Exam      5.000      7.400      1.140 
+    ------------------------------------- 
+
+
+    Table 3: Descriptive Statistics by Group (Group2) 
+
+    ------------------------------------- 
+                  N          M         SD 
+    ------------------------------------- 
+    Quiz      5.000      8.200      0.837
+    Exam      5.000      9.200      0.837 
+    ------------------------------------- 
+
 ### Case 3: Correlation Analysis
 
 #### Compute Correlation Matrix
@@ -120,11 +148,11 @@ df |> compute_correlations()
 Format as a styled table:
 
 ``` r
-df |> compute_correlations(Quiz, Exam) |> style_matrix(title = "Table 3: Correlation Matrix", style = "apa")
+df |> compute_correlations(Quiz, Exam) |> style_matrix(title = "Table 4: Correlation Matrix", style = "apa")
 ```
 
 
-    Table 3: Correlation Matrix 
+    Table 4: Correlation Matrix 
 
     -------------------------- 
                Quiz       Exam 
@@ -151,16 +179,52 @@ df |> compute_correlations(c(Quiz, Exam) ~ Group)
     Quiz 1.0000000 0.2857143
     Exam 0.2857143 1.0000000
 
+Format with styling:
+
+``` r
+df |> compute_correlations(c(Quiz, Exam) ~ Group) |> style_matrix(title = "Table 5: Correlation Matrices by Group", style = "apa")
+```
+
+
+    Table 5: Correlation Matrices by Group (Group1) 
+
+    -------------------------- 
+               Quiz       Exam 
+    -------------------------- 
+    Quiz      1.000      0.629
+    Exam      0.629      1.000 
+    -------------------------- 
+
+
+    Table 5: Correlation Matrices by Group (Group2) 
+
+    -------------------------- 
+               Quiz       Exam 
+    -------------------------- 
+    Quiz      1.000      0.286
+    Exam      0.286      1.000 
+    -------------------------- 
+
 #### Compute Covariance Matrix
 
 Compute the covariance matrix instead of correlations:
 
 ``` r
-df |> compute_correlations(Quiz, Exam, type = "cov") |> style_matrix(title = "Table 4: Covariance Matrix", style = "apa")
+df |> compute_correlations(Quiz, Exam, type = "cov")
+```
+
+             Quiz     Exam
+    Quiz 2.222222 1.555556
+    Exam 1.555556 1.788889
+
+Format with styling:
+
+``` r
+df |> compute_correlations(Quiz, Exam, type = "cov") |> style_matrix(title = "Table 6: Covariance Matrix", style = "apa")
 ```
 
 
-    Table 4: Covariance Matrix 
+    Table 6: Covariance Matrix 
 
     -------------------------- 
                Quiz       Exam 

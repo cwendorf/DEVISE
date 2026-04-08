@@ -82,6 +82,12 @@ Compute descriptive statistics for multiple variables grouped by another variabl
 df |> compute_descriptives(c(Quiz, Exam) ~ Group)
 ```
 
+Format with styling:
+
+```{r}
+df |> compute_descriptives(c(Quiz, Exam) ~ Group) |> style_matrix(title = "Table 3: Descriptive Statistics by Group", style = "apa")
+```
+
 ### Case 3: Correlation Analysis
 
 #### Compute Correlation Matrix
@@ -95,7 +101,7 @@ df |> compute_correlations()
 Format as a styled table:
 
 ```{r}
-df |> compute_correlations(Quiz, Exam) |> style_matrix(title = "Table 3: Correlation Matrix", style = "apa")
+df |> compute_correlations(Quiz, Exam) |> style_matrix(title = "Table 4: Correlation Matrix", style = "apa")
 ```
 
 #### Compute Correlation Matrices
@@ -106,10 +112,22 @@ Compute correlations separately for each group:
 df |> compute_correlations(c(Quiz, Exam) ~ Group)
 ```
 
+Format with styling:
+
+```{r}
+df |> compute_correlations(c(Quiz, Exam) ~ Group) |> style_matrix(title = "Table 5: Correlation Matrices by Group", style = "apa")
+```
+
 #### Compute Covariance Matrix
 
 Compute the covariance matrix instead of correlations:
 
 ```{r}
-df |> compute_correlations(Quiz, Exam, type = "cov") |> style_matrix(title = "Table 4: Covariance Matrix", style = "apa")
+df |> compute_correlations(Quiz, Exam, type = "cov")
+```
+
+Format with styling:
+
+```{r}
+df |> compute_correlations(Quiz, Exam, type = "cov") |> style_matrix(title = "Table 6: Covariance Matrix", style = "apa")
 ```

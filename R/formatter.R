@@ -115,6 +115,15 @@ style_matrix <- function(results,
                         spacing = 1,
                         style = "plain",
                         ...) {
+  if (is.list(results) && !is.data.frame(results)) {
+    out <- lapply(names(results), function(nm) {
+      sub_title <- if (!is.null(title)) paste0(title, " (", nm, ")") else nm
+      style_matrix(results[[nm]], digits = digits, padding = padding, width = width,
+                   title = sub_title, spacing = spacing, style = style, ...)
+    })
+    return(invisible(out))
+  }
+
   formatted <- format_matrix(results, digits = digits, padding = padding, width = width, ...)
 
   if (is.null(title)) {

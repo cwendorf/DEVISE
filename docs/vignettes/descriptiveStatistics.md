@@ -2,10 +2,7 @@
 
 ## Calculating Descriptive Statistics
 
-This vignette demonstrates how to compute and format descriptive
-statistics and correlations using `DEVISE`. These functions help
-extract, summarize, and visualize data characteristics for exploratory
-analysis and presentation.
+This vignette demonstrates how to compute and format descriptive statistics and correlations using `DEVISE`. These functions help extract and summarize data for exploratory and additional analyses.
 
 - [Case 1: Overall Descriptive Statistics](#case-1-overall-descriptive-statistics)
 - [Case 2: Grouped Descriptive Statistics](#case-2-grouped-descriptive-statistics)

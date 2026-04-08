@@ -3,15 +3,15 @@
 ## Basic Workflow
 
 `DEVISE` utilizes forward assignment (`->`) and pipe operators (`|>`) to
-keep examples readable and consistent. The goal is to read code
+keep examples readable and consistent. The overall goal is to read code
 left-to-right, from data creation to transformed output.
 
-- [Case 1: Using Forward Assignment](#case-1-using-forward-assignment)
-- [Case 2: Using Pipe Operators](#case-2-using-pipe-operators)
+- [Principle 1: Using Forward Assignment](#principle-1-using-forward-assignment)
+- [Principle 2: Using Pipe Operators](#principle-2-using-pipe-operators)
 
 ------------------------------------------------------------------------
 
-### Case 1: Using Forward Assignment
+### Principle 1: Using Forward Assignment
 
 To minimize visual backtracking, avoid left assignment (`<-`). Instead,
 use `->` to store objects after they are computed. This keeps the focus
@@ -35,7 +35,7 @@ head(df)
     5 Group1    6    7
     6 Group2    8   10
 
-### Case 2: Using Pipe Operators
+### Principle 2: Using Pipe Operators
 
 To keep data flowing, pipe operators (`|>`) show step-by-step
 transformations. They help express a sequence of operations without

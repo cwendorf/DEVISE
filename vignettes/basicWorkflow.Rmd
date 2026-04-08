@@ -22,7 +22,7 @@ library(DEVISE)
 
 ## Basic Workflow
 
-`DEVISE` utilizes forward assignment (`->`) and pipe operators (`|>`) to keep examples readable and consistent. The goal is to read code left-to-right, from data creation to transformed output.
+`DEVISE` utilizes forward assignment (`->`) and pipe operators (`|>`) to keep examples readable and consistent. The overall goal is to read code left-to-right, from data creation to transformed output.
 
 ```{r toc, echo=FALSE}
 knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)

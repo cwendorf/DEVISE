@@ -3,17 +3,15 @@
 ## Mean Comparisons with `confintr`
 
 This vignette illustrates a mean comparison workflow using the confintr
-package to compute intervals and `DEVISE` to format and plot results. The
-steps move from condition intervals to the final comparison display.
+package to compute intervals and `DEVISE` to format and plot results.
+The steps move from condition intervals to the final comparison display.
 
-- [Case 1: Parametric Confidence Intervals](#case-1-parametric-confidence-intervals)
-- [Case 2: Bootstrap Confidence Intervals](#case-2-bootstrap-confidence-intervals)
+- [Parametric Confidence Intervals](#parametric-confidence-intervals)
+- [Bootstrap Confidence Intervals](#bootstrap-confidence-intervals)
 
 ------------------------------------------------------------------------
 
-### Case 1: Parametric Confidence Intervals
-
-#### Input the Data
+### Parametric Confidence Intervals
 
 Create a dataset for confidence interval analysis.
 
@@ -23,8 +21,6 @@ c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 1
 data.frame(Factor, Outcome) -> df
 ```
 
-#### Examine the Conditions
-
 Use `confintr` with the default parametric method for each condition.
 
 ``` r
@@ -33,8 +29,6 @@ df |> use_vars(Outcome[Factor == "Level2"]) |> ci_mean() |> extract_intervals() 
 df |> use_vars(Outcome[Factor == "Level3"]) |> ci_mean() |> extract_intervals() -> Level3
 rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
-
-#### Display the Conditions
 
 Format and visualize the parametric confidence intervals.
 
@@ -59,8 +53,6 @@ Conditions |> plot_conditions(title = "Figure 1: Means and Parametric Confidence
 
 ![](figures/cr-case1-conditions-1.png)<!-- -->
 
-#### Examine a Comparison
-
 Use the parametric method to compare conditions.
 
 ``` r
@@ -68,8 +60,6 @@ ci_mean_diff(df$Outcome[df$Factor == "Level2"],
              df$Outcome[df$Factor == "Level1"]) |> extract_intervals() -> Difference
 rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
-
-#### Display a Comparison
 
 Present the parametric comparison results in tables and plots.
 
@@ -94,9 +84,7 @@ Comparison |> plot_comparison(title = "Figure 2: Means and Parametric Confidence
 
 ![](figures/cr-case1-comparison-1.png)<!-- -->
 
-### Case 2: Bootstrap Confidence Intervals
-
-#### Examine the Conditions
+### Bootstrap Confidence Intervals
 
 Use `confintr` with bootstrap methods for each condition.
 
@@ -106,8 +94,6 @@ df |> use_vars(Outcome[Factor == "Level2"]) |> ci_mean(type = "bootstrap", R = 1
 df |> use_vars(Outcome[Factor == "Level3"]) |> ci_mean(type = "bootstrap", R = 10000) |> extract_intervals() -> Level3
 rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
-
-#### Display the Conditions
 
 Format and visualize the bootstrap confidence intervals.
 
@@ -121,9 +107,9 @@ Conditions |> style_matrix(title = "Table 3: Means and Bootstrap Confidence Inte
     --------------------------------------- 
              Estimate         LL         UL 
     --------------------------------------- 
-    Level1      8.000      6.957      9.006
-    Level2     11.000      8.985     12.394
-    Level3     12.000     10.364     13.996 
+    Level1      8.000      6.957      9.043
+    Level2     11.000      9.038     12.366
+    Level3     12.000     10.381     13.996 
     --------------------------------------- 
 
 ``` r
@@ -131,8 +117,6 @@ Conditions |> plot_conditions(title = "Figure 3: Means and Bootstrap Confidence 
 ```
 
 ![](figures/cr-case2-conditions-1.png)<!-- -->
-
-#### Examine a Comparison
 
 Use the bootstrap method to compare conditions.
 
@@ -143,8 +127,6 @@ ci_mean_diff(df$Outcome[df$Factor == "Level2"],
              R = 10000) |> extract_intervals() -> Difference
 rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
-
-#### Display a Comparison
 
 Present the bootstrap comparison results in tables and plots.
 
@@ -158,9 +140,9 @@ Comparison |> style_matrix(title = "Table 4: Means and Bootstrap Confidence Inte
     ------------------------------------------- 
                  Estimate         LL         UL 
     ------------------------------------------- 
-    Level1          8.000      6.957      9.006
-    Level2         11.000      8.985     12.394
-    Difference      3.000      1.033      4.661 
+    Level1          8.000      6.957      9.043
+    Level2         11.000      9.038     12.366
+    Difference      3.000      1.001      4.637 
     ------------------------------------------- 
 
 ``` r

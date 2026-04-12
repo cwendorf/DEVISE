@@ -8,8 +8,7 @@ This section contains vignettes for `DEVISE`. Each page demonstrates a workflow 
 
 `DEVISE` uses a particular workflow and set of functions to organize and handle data and results.
 
-- [Basic Workflow](./basicWorkflow.md): The coding conventions and process used throughout `DEVISE`.
-- [Calculating Descriptive Statistics](./descriptiveStatistics.md): Shows how to compute descriptive statistics and correlations from raw data.
+- [Basic Workflow](./basicWorkflow.md): The coding conventions and process used throughout the package.
 
 ### Mean Comparisons
 

@@ -30,7 +30,7 @@ knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
 
 ---
 
-### Principle 1: Using Forward Assignment
+### Using Forward Assignment
 
 To minimize visual backtracking, avoid left assignment (`<-`). Instead, use `->` to store objects after they are computed. This keeps the focus on the computation itself.
 
@@ -44,7 +44,7 @@ data.frame(
 df
 ```
 
-### Principle 2: Using Pipe Operators
+### Using Pipe Operators
 
 To keep data flowing, pipe operators (`|>`) show step-by-step transformations. They help express a sequence of operations without temporary assignment.
 
@@ -52,3 +52,34 @@ To keep data flowing, pipe operators (`|>`) show step-by-step transformations. T
 df |> subset(Group == "Group1")
 df |> transform(Total = Quiz + Exam)
 ```
+
+When several operations are needed, chain them in one pipeline so each step builds directly on the previous one. This keeps the workflow compact and readable from left to right.
+
+```{r}
+df |>
+  subset(Group == "Group1") |>
+  transform(Total = Quiz + Exam)
+```
+
+If the chained result will be reused later, capture it with forward assignment at the end.
+
+```{r}
+df |>
+  subset(Group == "Group2") |>
+  transform(Total = Quiz + Exam) -> group2_with_total
+
+group2_with_total
+```
+
+### Extending the Workflow
+
+`DEVISE` provides additional functions for data manipulation, result standardization, and visualization. They are designed to work seamlessly with forward assignment and pipe operators.
+
+```{r}
+df |>
+  compute_descriptives(Quiz ~ Group) |>
+  name_rows(c("First Class", "Second Class")) |>
+  style_matrix(title = "Table 1: Quiz Descriptives by Class", style = "apa")
+```
+
+For detailed information on all available functions, visit the Reference documentation.

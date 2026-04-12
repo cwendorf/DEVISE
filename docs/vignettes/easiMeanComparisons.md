@@ -6,14 +6,12 @@ This vignette demonstrates two workflows with EASI: one using raw data
 and one using summary statistics. Each workflow follows the same pattern
 of building condition intervals, then generating a comparison.
 
-- [Case 1: Raw Data Input](#case-1-raw-data-input)
-- [Case 2: Summary Statistics Input](#case-2-summary-statistics-input)
+- [Confidence Intervals from Raw Data Input](#confidence-intervals-from-raw-data-input)
+- [Confidence Intervals from Summary Statistics Input](#confidence-intervals-from-summary-statistics-input)
 
 ------------------------------------------------------------------------
 
-### Case 1: Raw Data Input
-
-#### Input the Data
+### Confidence Intervals from Raw Data Input
 
 Create a factor and outcome vector for the raw-data workflow.
 
@@ -22,15 +20,11 @@ gl(3, 10, labels = c("Level1", "Level2", "Level3")) -> Factor
 c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10) -> Outcome
 ```
 
-#### Examine the Conditions
-
 Estimate condition means and intervals from the raw data.
 
 ``` r
 (Outcome~Factor) |> estimateMeans() -> Conditions
 ```
-
-#### Display the Conditions
 
 Format and visualize the condition intervals.
 
@@ -55,15 +49,11 @@ Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals 
 
 ![](figures/easi-case1-conditions-1.png)<!-- -->
 
-#### Examine a Comparison
-
 Estimate the comparison intervals for the selected conditions.
 
 ``` r
 (Outcome ~ Factor) |> filter_rows(Factor == c("Level1", "Level2")) |> estimateComparison() -> Comparison
 ```
-
-#### Display a Comparison
 
 Present the comparison in a formatted table and plot.
 
@@ -88,9 +78,7 @@ Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals 
 
 ![](figures/easi-case1-comparison-1.png)<!-- -->
 
-### Case 2: Summary Statistics Input
-
-#### Input the Statistics
+### Confidence Intervals from Summary Statistics Input
 
 Provide summary statistics to demonstrate the summary-input workflow.
 
@@ -101,15 +89,11 @@ c(N = 10, M = 12.000, SD = 2.449) -> Level3
 construct(Level1, Level2, Level3, class = "bsm") -> IndependentSummary
 ```
 
-#### Examine the Conditions
-
 Estimate condition intervals from summary statistics.
 
 ``` r
 IndependentSummary |> estimateMeans() -> Conditions
 ```
-
-#### Display the Conditions
 
 Format and visualize the condition intervals.
 
@@ -134,15 +118,11 @@ Conditions |> plot_conditions(title = "Figure 3: Means and Confidence Intervals 
 
 ![](figures/easi-case2-conditions-1.png)<!-- -->
 
-#### Examine a Comparison
-
 Compute the comparison interval for the summary-input workflow.
 
 ``` r
 construct(Level1, Level2, class = "bsm") |> estimateComparison() -> Comparison
 ```
-
-#### Display a Comparison
 
 Present the comparison in a formatted table and plot.
 

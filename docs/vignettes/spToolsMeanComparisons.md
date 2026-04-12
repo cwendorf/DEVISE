@@ -6,14 +6,12 @@ This vignette demonstrates two approaches: `statpsych` functions alone,
 and a combined `statpsych` + `spTools` workflow. Each approach computes
 condition intervals and then a direct comparison.
 
-- [Case 1: Summary Statistics Input](#case-1-summary-statistics-input)
-- [Case 2: Summary Statistics Input with `spTools`](#case-2-summary-statistics-input-with-sptools)
+- [Confidence Intervals from Summary Statistics Input Using `statpsych`](#confidence-intervals-from-summary-statistics-input-using-%60statpsych%60)
+- [Confidence Intervals from Summary Statistics Input Using `statpsych` and `spTools`](#confidence-intervals-from-summary-statistics-input-using-%60statpsych%60-and-%60sptools%60)
 
 ------------------------------------------------------------------------
 
-### Case 1: Summary Statistics Input
-
-#### Examine the Conditions
+### Confidence Intervals from Summary Statistics Input Using `statpsych`
 
 Compute condition intervals using `statpsych` functions.
 
@@ -23,8 +21,6 @@ ci.mean(alpha = .05, m = 11.000, sd = 2.211, n = 10) |> extract_intervals() -> L
 ci.mean(alpha = .05, m = 12.000, sd = 2.449, n = 10) |> extract_intervals() -> Level3
 rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
-
-#### Display the Conditions
 
 Format and visualize the condition intervals.
 
@@ -49,16 +45,12 @@ Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals 
 
 ![](figures/sp-case1-conditions-1.png)<!-- -->
 
-#### Examine a Comparison
-
 Compute the comparison interval between two conditions.
 
 ``` r
 ci.mean2(alpha = .05, 11.000, 8.000, 2.211, 1.414, 10, 10) |> extract_intervals() |> extract_rows(1) -> Difference
 rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
-
-#### Display a Comparison
 
 Present the comparison in a formatted table and plot.
 
@@ -83,9 +75,7 @@ Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals 
 
 ![](figures/sp-case1-comparison-1.png)<!-- -->
 
-### Case 2: Summary Statistics Input with `spTools`
-
-#### Examine the Conditions
+### Confidence Intervals from Summary Statistics Input Using `statpsych` and `spTools`
 
 Compute condition intervals using vectorized functions from `statpsych`
 and `spTools`.
@@ -93,8 +83,6 @@ and `spTools`.
 ``` r
 ci.mean.vec(alpha = .05, m = c(8.000, 11.000, 12.000), sd = c(1.414, 2.211, 2.449), n = c(10, 10, 10)) |> extract_intervals() |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
-
-#### Display the Conditions
 
 Format and visualize the condition intervals.
 
@@ -119,16 +107,12 @@ Conditions |> plot_conditions(title = "Figure 3: Means and Confidence Intervals 
 
 ![](figures/sp-case2-conditions-1.png)<!-- -->
 
-#### Examine a Comparison
-
 Compute the comparison interval between two conditions.
 
 ``` r
 ci.mean2.vec(alpha = .05, m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() |> extract_rows(1) -> Difference
 rbind(Conditions[1,], Conditions[2,], Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
-
-#### Display a Comparison
 
 Present the comparison in a formatted table and plot.
 

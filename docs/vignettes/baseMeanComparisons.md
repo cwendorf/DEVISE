@@ -7,13 +7,11 @@ Base R for data entry and `DEVISE` for interval extraction and
 visualization. Each step builds on the previous one, ending with a
 comparison table and plot.
 
-- [Case 1: Raw Data Input](#case-1-raw-data-input)
+- [Confidence Intervals from Raw Data](#confidence-intervals-from-raw-data)
 
 ------------------------------------------------------------------------
 
-### Case 1: Raw Data Input
-
-#### Input the Data
+### Confidence Intervals from Raw Data
 
 Create a simple factor and outcome vector that will be used to compute
 condition-specific statistics.
@@ -22,8 +20,6 @@ condition-specific statistics.
 gl(3, 10, labels = c("Level1", "Level2", "Level3")) -> Factor
 c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10) -> Outcome
 ```
-
-#### Examine the Conditions
 
 Compute confidence intervals for each level and assemble them into a
 conditions matrix.
@@ -34,8 +30,6 @@ Outcome[Factor == "Level2"] |> t.test() |> extract_intervals() -> Level2
 Outcome[Factor == "Level3"] |> t.test() |> extract_intervals() -> Level3
 rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
-
-#### Display the Conditions
 
 Format the conditions matrix and visualize the confidence intervals.
 
@@ -60,8 +54,6 @@ Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals 
 
 ![](figures/base-case1-conditions-1.png)<!-- -->
 
-#### Examine a Comparison
-
 Compute the comparison interval between the two selected conditions
 directly in `t.test()`.
 
@@ -69,8 +61,6 @@ directly in `t.test()`.
 (Outcome ~ Factor) |> filter_rows(Factor == c("Level1", "Level2")) |>  t.test() |> extract_intervals() -> Difference
 rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
-
-#### Display a Comparison
 
 Present the comparison in a formatted table and plot.
 

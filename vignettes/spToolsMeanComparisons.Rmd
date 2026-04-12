@@ -34,9 +34,7 @@ knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
 
 ---
 
-### Case 1: Summary Statistics Input
-
-#### Examine the Conditions
+### Confidence Intervals from Summary Statistics Input Using `statpsych`
 
 Compute condition intervals using `statpsych` functions.
 
@@ -47,16 +45,12 @@ ci.mean(alpha = .05, m = 12.000, sd = 2.449, n = 10) |> extract_intervals() -> L
 rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
 
-#### Display the Conditions
-
 Format and visualize the condition intervals.
 
 ```{r,sp-case1-conditions}
 Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals for Conditions", style = "apa")
 Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals for Conditions", values = TRUE)
 ```
-
-#### Examine a Comparison
 
 Compute the comparison interval between two conditions.
 
@@ -65,8 +59,6 @@ ci.mean2(alpha = .05, 11.000, 8.000, 2.211, 1.414, 10, 10) |> extract_intervals(
 rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
 
-#### Display a Comparison
-
 Present the comparison in a formatted table and plot.
 
 ```{r,sp-case1-comparison}
@@ -74,17 +66,13 @@ Comparison |> style_matrix(title = "Table 2: Means and Confidence Intervals for 
 Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals for a Comparison", values = TRUE)
 ```
 
-### Case 2: Summary Statistics Input with `spTools`
-
-#### Examine the Conditions
+### Confidence Intervals from Summary Statistics Input Using `statpsych` and `spTools`
 
 Compute condition intervals using vectorized functions from `statpsych` and `spTools`.
 
 ```{r}
 ci.mean.vec(alpha = .05, m = c(8.000, 11.000, 12.000), sd = c(1.414, 2.211, 2.449), n = c(10, 10, 10)) |> extract_intervals() |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
 ```
-
-#### Display the Conditions
 
 Format and visualize the condition intervals.
 
@@ -93,16 +81,12 @@ Conditions |> style_matrix(title = "Table 3: Means and Confidence Intervals for 
 Conditions |> plot_conditions(title = "Figure 3: Means and Confidence Intervals for Conditions", values = TRUE)
 ```
 
-#### Examine a Comparison
-
 Compute the comparison interval between two conditions.
 
 ```{r}
 ci.mean2.vec(alpha = .05, m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() |> extract_rows(1) -> Difference
 rbind(Conditions[1,], Conditions[2,], Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
-
-#### Display a Comparison
 
 Present the comparison in a formatted table and plot.
 

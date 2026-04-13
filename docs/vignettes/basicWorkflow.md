@@ -1,4 +1,5 @@
-# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
+Basic Workflow
+================
 
 ## Basic Workflow
 
@@ -112,7 +113,7 @@ group2_with_total
 
 `DEVISE` provides additional functions for data manipulation, result
 standardization, and visualization. They are designed to work seamlessly
-with forward assignment and pipe operators.
+with forward assignment and pipe operators. For example:
 
 ``` r
 df |>

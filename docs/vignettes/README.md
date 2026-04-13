@@ -4,15 +4,16 @@
 
 This section contains vignettes for `DEVISE`. Each page demonstrates a workflow using real or simulated data, including setup, computation, formatting, and visualization.
 
-### Core Functions
+### Core Operations
 
 `DEVISE` uses a particular workflow and set of functions to organize and handle data and results.
 
 - [Basic Workflow](./basicWorkflow.md): The coding conventions and process used throughout the package.
+- [Descriptive Statistics](./descriptiveStatistics.md): Obtaining descriptive statistics for later analyses.
 
 ### Mean Comparisons
 
-One main purpose of `DEVISE` is to aid in the presentation of a mean comparison after using other methods or packages to calculate the confidence intervals for each condition and the difference.
+One main purpose of `DEVISE` is to aid in the presentation of a mean comparison after using other methods or packages to calculate the confidence intervals.
 
 - [Mean Comparisons with Direct Input](./directMeanComparisons.md): Uses direct input of confidence intervals from published sources.
 - [Mean Comparisons with Base R](./baseMeanComparisons.md): Uses base R to calculate confidence intervals from data.

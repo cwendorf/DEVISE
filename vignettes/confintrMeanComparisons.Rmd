@@ -61,8 +61,7 @@ Conditions |> plot_conditions(title = "Figure 1: Means and Parametric Confidence
 Use the parametric method to compare conditions.
 
 ```{r}
-ci_mean_diff(df$Outcome[df$Factor == "Level2"], 
-             df$Outcome[df$Factor == "Level1"]) |> extract_intervals() -> Difference
+ci_mean_diff(df$Outcome[df$Factor == "Level2"], df$Outcome[df$Factor == "Level1"]) |> extract_intervals() -> Difference
 rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
 
@@ -94,10 +93,7 @@ Conditions |> plot_conditions(title = "Figure 3: Means and Bootstrap Confidence 
 Use the bootstrap method to compare conditions.
 
 ```{r}
-ci_mean_diff(df$Outcome[df$Factor == "Level2"], 
-             df$Outcome[df$Factor == "Level1"], 
-             type = "bootstrap", 
-             R = 10000) |> extract_intervals() -> Difference
+ci_mean_diff(df$Outcome[df$Factor == "Level2"], df$Outcome[df$Factor == "Level1"], type = "bootstrap", R = 10000) |> extract_intervals() -> Difference
 rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
 ```
 

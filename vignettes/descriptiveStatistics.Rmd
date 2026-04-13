@@ -1,0 +1,95 @@
+---
+title: "Descriptive Statistics"
+output:
+  github_document:
+    preserve_yaml: FALSE
+vignette: >
+  %\VignetteIndexEntry{Descriptive Statistics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(comment = NA)
+devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
+```
+
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
+library(DEVISE)
+```
+
+## Descriptive Statistics
+
+This vignette demonstrates how to compute descriptive statistics using `DEVISE`. These functions help extract and summarize data for later analyses.
+
+```{r toc, echo=FALSE}
+knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
+```
+
+---
+
+### Create Sample Data
+
+Create a sample dataset with groups and multiple variables for demonstration purposes.
+
+```{r}
+data.frame(
+  Group = rep(c("Group1", "Group2"), each = 5),
+  Quiz = c(5, 6, 7, 5, 6, 8, 9, 7, 8, 9),
+  Exam = c(8, 7, 9, 6, 7, 10, 9, 9, 8, 10)
+) -> df
+```
+
+### Means and Standard Deviations
+
+Compute descriptive statistics for the whole frame:
+
+```{r}
+df |> compute_descriptives()
+```
+
+Compute descriptive statistics for selected variables:
+
+```{r}
+df |> compute_descriptives(Quiz, Exam)
+```
+
+Compute descriptive statistics for a single variable grouped by another variable:
+
+```{r}
+df |> compute_descriptives(Quiz ~ Group)
+```
+
+Compute descriptive statistics for multiple variables grouped by another variable:
+
+```{r}
+df |> compute_descriptives(c(Quiz, Exam) ~ Group)
+```
+
+### Correlations and Covariances
+
+Compute a correlation matrix for a whole frame:
+
+```{r}
+df |> compute_correlations()
+```
+
+Compute a correlation matrix for selected variables:
+
+```{r}
+df |> compute_correlations(Quiz, Exam)
+```
+
+Compute correlations separately for each group:
+
+```{r}
+df |> compute_correlations(c(Quiz, Exam) ~ Group)
+```
+
+Compute covariances instead of correlations:
+
+```{r}
+df |> compute_correlations(Quiz, Exam, type = "cov")
+```

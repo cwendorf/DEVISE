@@ -73,7 +73,7 @@ group2_with_total
 
 ### Extending the Workflow
 
-`DEVISE` provides additional functions for data manipulation, result standardization, and visualization. They are designed to work seamlessly with forward assignment and pipe operators.
+`DEVISE` provides additional functions for data manipulation, result standardization, and visualization. They are designed to work seamlessly with forward assignment and pipe operators. For example:
 
 ```{r}
 df |>

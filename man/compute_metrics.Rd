@@ -4,27 +4,33 @@
 \alias{compute_metrics}
 \title{Compute Additional Metrics for Statistical Estimates}
 \usage{
-compute_metrics(input)
+compute_metrics(input, rope = NULL)
 }
 \arguments{
 \item{input}{A data frame containing at least the columns \code{"Estimate"}, \code{"LL"}, and \code{"UL"},
 where \code{"LL"} and \code{"UL"} represent the lower and upper bounds of a confidence interval, respectively.}
+
+\item{rope}{Optional length-2 numeric vector \code{c(lower, upper)} defining the Region of
+Practical Equivalence. If provided, an \code{SGPV} column is added.}
 }
 \value{
 A data frame identical to \code{input}, with additional columns:
 \details{
 \item{Width}{The width of the confidence interval (\code{UL - LL}).}
 \item{MoE}{The margin of error (\code{Width / 2}).}
-\item{Relative}{The relative width of the interval (\code{Width / abs(Estimate)}). Returns \code{NA} if \code{Estimate} is zero.}
+\item{RW}{The relative width of the interval (\code{Width / abs(Estimate)}). Returns \code{NA} if \code{Estimate} is zero.}
+\item{SGPV}{If \code{rope} is provided, the proportion of CI overlap with the ROPE
+(\code{|CI \cap ROPE| / |CI|}).}
 }
 }
 \description{
 This function computes additional metrics (Width, Margin of Error, Relative Width)
-for a data frame of estimates with confidence intervals.
+for a data frame of estimates with confidence intervals. If a ROPE is provided,
+it also computes the Second Generation P-Value (SGPV).
 }
 \examples{
 cbind(Estimate = c(10, 0, 5), LL = c(8, -1, 4), UL = c(12, 1, 6)) -> df
 c("A", "B", "C") -> rownames(df)
 df |> compute_metrics()
-
+df |> compute_metrics(rope = c(-1, 1))
 }

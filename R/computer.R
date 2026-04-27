@@ -121,7 +121,6 @@ compute_descriptives <- function(data, ...) {
   return(out)
 }
 
-
 #' Compute Correlation or Covariance Matrices
 #'
 #' Computes a correlation or covariance matrix for selected numeric variables in a data frame,
@@ -211,28 +210,59 @@ compute_correlations <- function(data, ..., type = "cor", method = "pearson") {
 #' Compute Additional Metrics for Statistical Estimates
 #'
 #' This function computes additional metrics (Width, Margin of Error, Relative Width)
-#' for a data frame of estimates with confidence intervals.
+#' for a data frame of estimates with confidence intervals. If a ROPE is provided,
+#' it also computes the Second Generation P-Value (SGPV), defined as the proportion
+#' of the confidence interval that overlaps with the ROPE.
 #'
 #' @param input A data frame containing at least the columns `"Estimate"`, `"LL"`, and `"UL"`,
 #' where `"LL"` and `"UL"` represent the lower and upper bounds of a confidence interval, respectively.
+#' @param rope Optional length-2 numeric vector `c(lower, upper)` defining the Region of
+#' Practical Equivalence. If provided, an `SGPV` column is added.
 #'
 #' @return A data frame identical to `input`, with additional columns:
 #' \details{
 #'   \item{Width}{The width of the confidence interval (`UL - LL`).}
 #'   \item{MoE}{The margin of error (`Width / 2`).}
-#'   \item{Relative}{The relative width of the interval (`Width / abs(Estimate)`). Returns `NA` if `Estimate` is zero.}
+#'   \item{RW}{The relative width of the interval (`Width / abs(Estimate)`). Returns `NA` if `Estimate` is zero.}
+#'   \item{SGPV}{If `rope` is provided, the proportion of CI overlap with the ROPE (`|CI \cap ROPE| / |CI|`).}
 #' }
 #'
 #' @examples
 #' cbind(Estimate = c(10, 0, 5), LL = c(8, -1, 4), UL = c(12, 1, 6)) -> df
 #' c("A", "B", "C") -> rownames(df)
 #' df |> compute_metrics()
+#' df |> compute_metrics(rope = c(-1, 1))
 #'
 #' @export
-compute_metrics <- function(input) {
+compute_metrics <- function(input, rope = NULL) {
+  if (!all(c("Estimate", "LL", "UL") %in% colnames(input))) {
+    stop("input must have columns named 'Estimate', 'LL', and 'UL'.")
+  }
+
   width <- input[, "UL"] - input[, "LL"]
   moe <- width / 2
   relative <- ifelse(input[, "Estimate"] == 0, NA, width / abs(input[, "Estimate"]))
-  out <- cbind(input, Width = width, MoE = moe, Relative = relative)
+
+  out <- cbind(input, Width = width, MoE = moe, RW = relative)
+
+  if (!is.null(rope)) {
+    if (length(rope) != 2L || rope[1] >= rope[2]) {
+      stop("rope must be a length-2 vector with rope[1] < rope[2].")
+    }
+
+    rope_lo <- rope[1]
+    rope_hi <- rope[2]
+    overlap <- pmax(0, pmin(input[, "UL"], rope_hi) - pmax(input[, "LL"], rope_lo))
+    sgpv <- ifelse(width == 0, NA, overlap / width)
+    out <- cbind(out, SGPV = sgpv)
+  }
+
+  metric_cols <- c("Width", "MoE", "RW", "SGPV")
+  present_metrics <- metric_cols[metric_cols %in% colnames(out)]
+  core_cols <- c("Estimate", "LL", "UL")
+  present_core <- core_cols[core_cols %in% colnames(out)]
+  other_cols <- setdiff(colnames(out), c(present_core, present_metrics))
+  out <- out[, c(present_core, other_cols, present_metrics), drop = FALSE]
+
   return(out)
 }

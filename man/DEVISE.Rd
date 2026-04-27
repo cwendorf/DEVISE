@@ -6,10 +6,11 @@
 \alias{DEVISE-package}
 \title{DEVISE: Data Exploration, Visualization, and Inference with Statistical Estimation}
 \description{
-A companion package for working with results from a variety of other statistical packages.
-Where other packages provide high-accuracy confidence intervals for a wide variety of statistics,
-DEVISE handles the pre-processing of data into the required formats and post-processing
-the results into more accessible and readable forms.
+`DEVISE` is a companion toolkit for working with other packages that focus on statistical estimation. 
+Where other packages provide high-accuracy confidence intervals for a wide variety of statistics, 
+`DEVISE` handles the pre-processing of data (extraction of data, calculation of descriptives) and 
+post-processing of results into more accessible and readable formats (such as summary tables and comparison plots) 
+all using a pipe-friendly framework.
 }
 \seealso{
 Useful links:

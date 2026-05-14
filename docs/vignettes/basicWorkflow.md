@@ -1,5 +1,4 @@
-Basic Workflow
-================
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
 ## Basic Workflow
 

@@ -1,5 +1,4 @@
-Pipeline Helpers
-================
+# [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
 ## Pipeline Helpers
 

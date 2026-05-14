@@ -117,7 +117,7 @@ with forward assignment and pipe operators. For example:
 
 ``` r
 df |>
-  compute_descriptives(Quiz ~ Group) |>
+  summarize_descriptives(Quiz ~ Group) |>
   name_rows(c("First Class", "Second Class")) |>
   style_matrix(title = "Table 1: Quiz Descriptives by Class", style = "apa")
 ```

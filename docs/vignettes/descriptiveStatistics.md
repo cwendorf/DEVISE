@@ -31,7 +31,7 @@ data.frame(
 Compute descriptive statistics for the whole frame:
 
 ``` r
-df |> compute_descriptives()
+df |> summarize_descriptives()
 ```
 
           N   M       SD
@@ -41,7 +41,7 @@ df |> compute_descriptives()
 Compute descriptive statistics for selected variables:
 
 ``` r
-df |> compute_descriptives(Quiz, Exam)
+df |> summarize_descriptives(Quiz, Exam)
 ```
 
           N   M       SD
@@ -52,7 +52,7 @@ Compute descriptive statistics for a single variable grouped by another
 variable:
 
 ``` r
-df |> compute_descriptives(Quiz ~ Group)
+df |> summarize_descriptives(Quiz ~ Group)
 ```
 
            N   M      SD
@@ -63,7 +63,7 @@ Compute descriptive statistics for multiple variables grouped by another
 variable:
 
 ``` r
-df |> compute_descriptives(c(Quiz, Exam) ~ Group)
+df |> summarize_descriptives(c(Quiz, Exam) ~ Group)
 ```
 
     $Group1
@@ -81,7 +81,7 @@ df |> compute_descriptives(c(Quiz, Exam) ~ Group)
 Compute a correlation matrix for a whole frame:
 
 ``` r
-df |> compute_correlations()
+df |> summarize_relationships()
 ```
 
               Quiz      Exam
@@ -91,7 +91,7 @@ df |> compute_correlations()
 Compute a correlation matrix for selected variables:
 
 ``` r
-df |> compute_correlations(Quiz, Exam)
+df |> summarize_relationships(Quiz, Exam)
 ```
 
               Quiz      Exam
@@ -101,7 +101,7 @@ df |> compute_correlations(Quiz, Exam)
 Compute correlations separately for each group:
 
 ``` r
-df |> compute_correlations(c(Quiz, Exam) ~ Group)
+df |> summarize_relationships(c(Quiz, Exam) ~ Group)
 ```
 
     $Group1
@@ -117,7 +117,7 @@ df |> compute_correlations(c(Quiz, Exam) ~ Group)
 Compute covariances instead of correlations:
 
 ``` r
-df |> compute_correlations(Quiz, Exam, type = "cov")
+df |> summarize_relationships(Quiz, Exam, type = "cov")
 ```
 
              Quiz     Exam

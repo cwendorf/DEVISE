@@ -1,16 +1,16 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
-## Compute Correlation or Covariance Matrices
+## Summarize Correlation or Covariance Matrices
 
 ### Description
 
-Computes a correlation or covariance matrix for selected numeric variables in a data frame,
+Summarizes a correlation or covariance matrix for selected numeric variables in a data frame,
 optionally grouped by a factor using a formula or bare variable names.
 
 ### Usage
 
 ```r
-compute_correlations(data, ..., type = "cor", method = "pearson")
+summarize_relationships(data, ..., type = "cor", method = "pearson")
 ```
 
 ### Arguments
@@ -30,15 +30,15 @@ If no grouping is specified: returns a correlation or covariance matrix. If a gr
 
 ```r
 # Correlation matrix for all numeric variables
-iris |> compute_correlations()
+iris |> summarize_relationships()
 
 # Covariance matrix for specific variables
-iris |> compute_correlations(Sepal.Length, Petal.Length, type = "cov")
+iris |> summarize_relationships(Sepal.Length, Petal.Length, type = "cov")
 
 # Grouped correlation matrices by Species
-iris |> compute_correlations(~ Species)
+iris |> summarize_relationships(~ Species)
 
 # Grouped correlation matrices for specific variables
-iris |> compute_correlations(Sepal.Length, Petal.Length ~ Species)
+iris |> summarize_relationships(Sepal.Length, Petal.Length ~ Species)
 ```
 

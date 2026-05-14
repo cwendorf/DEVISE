@@ -22,8 +22,9 @@ This section is the reference for `DEVISE`. Each page documents one exported fun
 
 ### Computation
 
-- [compute_descriptives](./compute_descriptives.md): Compute descriptive statistics.
-- [compute_correlations](./compute_correlations.md): Compute correlation or covariance matrices.
+- [summarize_quartiles](./summarize_quartiles.md): Summarize quartiles for numeric variables.
+- [summarize_descriptives](./summarize_descriptives.md): Summarize descriptive statistics.
+- [summarize_relationships](./summarize_relationships.md): Summarize correlation or covariance matrices.
 - [compute_metrics](./compute_metrics.md): Compute additional metrics for statistical estimates.
 
 ### Output

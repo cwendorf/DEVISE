@@ -1,6 +1,6 @@
 # [`DEVISE`](https://github.com/cwendorf/DEVISE/)
 
-## Compute Descriptive Statistics for Numeric Variables
+## Summarize Descriptive Statistics for Numeric Variables
 
 ### Description
 
@@ -10,7 +10,7 @@ Accepts either: no args: all numeric vars, bare var names:  e.g. x, y or c(x,y),
 ### Usage
 
 ```r
-compute_descriptives(data, ...)
+summarize_descriptives(data, ...)
 ```
 
 ### Arguments
@@ -36,9 +36,9 @@ data.frame(
   x = c(1,2,3,4,5, 2,3,4,5,6),
   y = c(5,4,3,2,1, 6,7,8,9,10)
 ) -> df
-df |> compute_descriptives()
-df |> compute_descriptives(x, y)
-df |> compute_descriptives(x ~ Group)
-df |> compute_descriptives(c(x,y) ~ Group)
+df |> summarize_descriptives()
+df |> summarize_descriptives(x, y)
+df |> summarize_descriptives(x ~ Group)
+df |> summarize_descriptives(c(x,y) ~ Group)
 ```
 

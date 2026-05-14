@@ -1,7 +1,7 @@
 # DEVISE
 ## Computing Statistics
 
-#' Compute Descriptive Statistics for Numeric Variables
+#' Summarize Descriptive Statistics for Numeric Variables
 #'
 #' Calculates N, mean and SD for numeric variables, optionally grouped.
 #' Accepts either:
@@ -23,12 +23,12 @@
 #'   x = c(1,2,3,4,5, 2,3,4,5,6),
 #'   y = c(5,4,3,2,1, 6,7,8,9,10)
 #' ) -> df
-#' df |> compute_descriptives()
-#' df |> compute_descriptives(x, y)
-#' df |> compute_descriptives(x ~ Group)
-#' df |> compute_descriptives(c(x,y) ~ Group)
+#' df |> summarize_descriptives()
+#' df |> summarize_descriptives(x, y)
+#' df |> summarize_descriptives(x ~ Group)
+#' df |> summarize_descriptives(c(x,y) ~ Group)
 #' @export
-compute_descriptives <- function(data, ...) {
+summarize_descriptives <- function(data, ...) {
   spec <- substitute(list(...))[-1L]
 
   # helper to turn symbol / c(...) calls into names
@@ -121,7 +121,7 @@ compute_descriptives <- function(data, ...) {
   return(out)
 }
 
-#' Compute Correlation or Covariance Matrices
+#' Summarize Correlation or Covariance Matrices
 #'
 #' Computes a correlation or covariance matrix for selected numeric variables in a data frame,
 #' optionally grouped by a factor using a formula or bare variable names.
@@ -142,19 +142,19 @@ compute_descriptives <- function(data, ...) {
 #'
 #' @examples
 #' # Correlation matrix for all numeric variables
-#' iris |> compute_correlations()
+#' iris |> summarize_relationships()
 #'
 #' # Covariance matrix for specific variables
-#' iris |> compute_correlations(Sepal.Length, Petal.Length, type = "cov")
+#' iris |> summarize_relationships(Sepal.Length, Petal.Length, type = "cov")
 #'
 #' # Grouped correlation matrices by Species
-#' iris |> compute_correlations(~ Species)
+#' iris |> summarize_relationships(~ Species)
 #'
 #' # Grouped correlation matrices for specific variables
-#' iris |> compute_correlations(Sepal.Length, Petal.Length ~ Species)
+#' iris |> summarize_relationships(Sepal.Length, Petal.Length ~ Species)
 #'
 #' @export
-compute_correlations <- function(data, ..., type = "cor", method = "pearson") {
+summarize_relationships <- function(data, ..., type = "cor", method = "pearson") {
   type <- match.arg(type, choices = c("cor", "cov"))
   dots <- substitute(list(...))[-1L]
 
@@ -264,5 +264,107 @@ compute_metrics <- function(input, rope = NULL) {
   other_cols <- setdiff(colnames(out), c(present_core, present_metrics))
   out <- out[, c(present_core, other_cols, present_metrics), drop = FALSE]
 
+  return(out)
+}
+
+#' Summarize Quartiles for Numeric Variables
+#'
+#' Computes sample size, median, and IQR for selected numeric variables,
+#' optionally grouped by a single factor.
+#'
+#' @param data data.frame
+#' @param ... bare variable names (unquoted), or a single formula (e.g. `x ~ Group`,
+#'   `c(x,y) ~ Group`, or `~ Group`). If omitted, all numeric variables are used.
+#'
+#' @return matrix (ungrouped), matrix (grouped + single var), or list of matrices (grouped + multiple vars)
+#' @examples
+#' data.frame(
+#'   Group = rep(c("A","B"), each = 5),
+#'   x = c(1,2,3,4,5, 2,3,4,5,6),
+#'   y = c(5,4,3,2,1, 6,7,8,9,10)
+#' ) -> df
+#' df |> summarize_quartiles()
+#' df |> summarize_quartiles(x, y)
+#' df |> summarize_quartiles(x ~ Group)
+#' df |> summarize_quartiles(c(x,y) ~ Group)
+#' @export
+summarize_quartiles <- function(data, ...) {
+  spec <- substitute(list(...))[-1L]
+
+  expr_to_names <- function(e) {
+    if (is.symbol(e)) return(deparse(e))
+    if (is.call(e) && identical(e[[1]], as.symbol("c"))) {
+      parts <- as.list(e)[-1L]
+      return(unlist(lapply(parts, expr_to_names), use.names = FALSE))
+    }
+    val <- try(eval(e, parent.frame()), silent = TRUE)
+    if (!inherits(val, "try-error") && is.character(val)) return(val)
+    stop("Invalid variable specification")
+  }
+
+  summarize_median <- function(vec) {
+    n <- sum(!is.na(vec))
+    if (n == 0L) return(c(N = 0, Mdn = NA_real_, IQR = NA_real_))
+    q <- stats::quantile(vec, probs = c(0.25, 0.5, 0.75), na.rm = TRUE, names = FALSE)
+    c(N = n, Mdn = q[2], IQR = q[3] - q[1])
+  }
+
+  is_formula_expr <- function(expr) {
+    (is.call(expr) && identical(expr[[1]], as.symbol("~"))) ||
+      inherits(eval(expr, parent.frame()), "formula")
+  }
+
+  if (length(spec) == 1L && is_formula_expr(spec[[1L]])) {
+    fml <- tryCatch(as.formula(spec[[1L]], env = parent.frame()),
+                    error = function(e) eval(spec[[1L]], parent.frame()))
+    lhs_vars <- all.vars(fml[[2]])
+    rhs_vars <- all.vars(fml[[3]])
+
+    if (length(rhs_vars) != 1L) stop("Formula must be of the form vars ~ group (RHS must be a single grouping variable).")
+    groupvar <- rhs_vars[[1L]]
+    if (!(groupvar %in% names(data))) stop("Grouping variable not found in data.")
+
+    if (length(lhs_vars) == 0L) {
+      measurevars <- names(data)[sapply(data, is.numeric)]
+    } else {
+      measurevars <- intersect(lhs_vars, names(data))
+      measurevars <- measurevars[sapply(data[measurevars], is.numeric)]
+    }
+    if (length(measurevars) == 0L) stop("No numeric variables found on the left-hand side.")
+
+    groups <- unique(data[[groupvar]])
+
+    if (length(measurevars) == 1L) {
+      mv <- measurevars[[1L]]
+      out <- t(sapply(groups, function(g) {
+        vec <- data[data[[groupvar]] == g, mv]
+        summarize_median(vec)
+      }))
+      rownames(out) <- as.character(groups)
+      return(out)
+    }
+
+    results <- lapply(groups, function(g) {
+      subset <- data[data[[groupvar]] == g, , drop = FALSE]
+      t(sapply(measurevars, function(x) {
+        summarize_median(subset[[x]])
+      }))
+    })
+    names(results) <- as.character(groups)
+    return(results)
+  }
+
+  if (length(spec) == 0L) {
+    vars <- names(data)[sapply(data, is.numeric)]
+  } else {
+    vars <- unique(unlist(lapply(spec, expr_to_names), use.names = FALSE))
+    vars <- intersect(vars, names(data))
+    vars <- vars[sapply(data[vars], is.numeric)]
+  }
+  if (length(vars) == 0L) stop("No numeric variables selected.")
+
+  out <- t(sapply(vars, function(x) {
+    summarize_median(data[[x]])
+  }))
   return(out)
 }

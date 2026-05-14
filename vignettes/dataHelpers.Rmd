@@ -67,9 +67,6 @@ the data frame. This is useful for preparing inputs for model functions.
 
 ```{r}
 # Formula captured from data columns
-df |> use_vars(Quiz ~ Group)
-
-# View the model frame from the captured formula
 df |> use_vars(Quiz ~ Group) |> model.frame()
 ```
 
@@ -82,7 +79,4 @@ Use it when your downstream function expects a formula.
 ```{r}
 # Pipe-friendly with filter_rows()
 df |> use_vars(Outcome ~ Group) |> filter_rows(Group == c("Level1", "Level2")) |> model.frame()
-
-# Use with a different subset and formula
-df |> use_vars(Exam ~ Group + Quiz) |> filter_rows(Group == c("Level2", "Level3")) |> model.matrix()
 ```

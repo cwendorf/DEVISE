@@ -23,8 +23,7 @@ demonstration purposes.
 data.frame(
   Group = create_groups(k = 3, c(10, 10, 10), labels = c("Level1", "Level2", "Level3")),
   Outcome = c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10),
-  Quiz = c(5, 6, 7, 5, 6, 8, 9, 7, 8, 9, 6, 7, 8, 6, 7, 9, 10, 8, 9, 10, 7, 8, 9, 7, 8, 10, 11, 9, 10, 11),
-  Exam = c(8, 7, 9, 6, 7, 10, 9, 9, 8, 10, 7, 8, 9, 7, 8, 10, 11, 9, 10, 11, 8, 9, 10, 8, 9, 11, 12, 10, 11, 12)
+  Quiz = c(5, 6, 7, 5, 6, 8, 9, 7, 8, 9, 6, 7, 8, 6, 7, 9, 10, 8, 9, 10, 7, 8, 9, 7, 8, 10, 11, 9, 10, 11)
 ) -> df
 ```
 
@@ -122,7 +121,7 @@ df |> extract_rows(c(1, 11, 21))
     21 Level3       9    7
 
 ``` r
-# By row name number
+# Use with column extraction to subset both dimensions
 df |>
   extract_columns(c("Group", "Outcome")) |>
   extract_rows(c(1, 11, 21))
@@ -220,13 +219,73 @@ df |>
   extract_columns(c("Group", "Outcome")) |>
   keep_as(narrow_df)
 
-nrow(full_df)
+full_df
 ```
 
-    [1] 30
+        Group Outcome Quiz
+    1  Level1       6    5
+    2  Level1       8    6
+    3  Level1       6    7
+    4  Level1       8    5
+    5  Level1      10    6
+    6  Level1       8    8
+    7  Level1      10    9
+    8  Level1       9    7
+    9  Level1       8    8
+    10 Level1       7    9
+    11 Level2       7    6
+    12 Level2      13    7
+    13 Level2      11    8
+    14 Level2      10    6
+    15 Level2      13    7
+    16 Level2       8    9
+    17 Level2      11   10
+    18 Level2      14    8
+    19 Level2      12    9
+    20 Level2      11   10
+    21 Level3       9    7
+    22 Level3      16    8
+    23 Level3      11    9
+    24 Level3      12    7
+    25 Level3      15    8
+    26 Level3      13   10
+    27 Level3       9   11
+    28 Level3      14    9
+    29 Level3      11   10
+    30 Level3      10   11
 
 ``` r
-nrow(narrow_df)
+narrow_df
 ```
 
-    [1] 30
+        Group Outcome
+    1  Level1       6
+    2  Level1       8
+    3  Level1       6
+    4  Level1       8
+    5  Level1      10
+    6  Level1       8
+    7  Level1      10
+    8  Level1       9
+    9  Level1       8
+    10 Level1       7
+    11 Level2       7
+    12 Level2      13
+    13 Level2      11
+    14 Level2      10
+    15 Level2      13
+    16 Level2       8
+    17 Level2      11
+    18 Level2      14
+    19 Level2      12
+    20 Level2      11
+    21 Level3       9
+    22 Level3      16
+    23 Level3      11
+    24 Level3      12
+    25 Level3      15
+    26 Level3      13
+    27 Level3       9
+    28 Level3      14
+    29 Level3      11
+    30 Level3      10

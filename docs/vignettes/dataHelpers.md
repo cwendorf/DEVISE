@@ -117,14 +117,6 @@ functions.
 
 ``` r
 # Formula captured from data columns
-df |> use_vars(Quiz ~ Group)
-```
-
-    Quiz ~ Group
-    <environment: 0x000002097788d728>
-
-``` r
-# View the model frame from the captured formula
 df |> use_vars(Quiz ~ Group) |> model.frame()
 ```
 
@@ -192,35 +184,3 @@ df |> use_vars(Outcome ~ Group) |> filter_rows(Group == c("Level1", "Level2")) |
     18      14 Level2
     19      12 Level2
     20      11 Level2
-
-``` r
-# Use with a different subset and formula
-df |> use_vars(Exam ~ Group + Quiz) |> filter_rows(Group == c("Level2", "Level3")) |> model.matrix()
-```
-
-       (Intercept) GroupLevel3 Quiz
-    1            1           0    6
-    2            1           0    7
-    3            1           0    8
-    4            1           0    6
-    5            1           0    7
-    6            1           0    9
-    7            1           0   10
-    8            1           0    8
-    9            1           0    9
-    10           1           0   10
-    11           1           1    7
-    12           1           1    8
-    13           1           1    9
-    14           1           1    7
-    15           1           1    8
-    16           1           1   10
-    17           1           1   11
-    18           1           1    9
-    19           1           1   10
-    20           1           1   11
-    attr(,"assign")
-    [1] 0 1 2
-    attr(,"contrasts")
-    attr(,"contrasts")$Group
-    [1] "contr.treatment"

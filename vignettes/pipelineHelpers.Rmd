@@ -63,7 +63,7 @@ or row names. Like `extract_columns()`, it is type-preserving.
 # By numeric index
 df |> extract_rows(c(1, 11, 21))
 
-# By row name number
+# Use with column extraction to subset both dimensions
 df |>
   extract_columns(c("Group", "Outcome")) |>
   extract_rows(c(1, 11, 21))
@@ -111,6 +111,6 @@ df |>
   extract_columns(c("Group", "Outcome")) |>
   keep_as(narrow_df)
 
-nrow(full_df)
-nrow(narrow_df)
+full_df
+narrow_df
 ```

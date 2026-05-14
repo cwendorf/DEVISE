@@ -20,6 +20,15 @@ style and can appear anywhere in a pipeline.
 Create a sample dataset with groups and multiple variables for
 demonstration purposes.
 
+``` r
+data.frame(
+  Group = create_groups(k = 3, c(10, 10, 10), labels = c("Level1", "Level2", "Level3")),
+  Outcome = c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10),
+  Quiz = c(5, 6, 7, 5, 6, 8, 9, 7, 8, 9, 6, 7, 8, 6, 7, 9, 10, 8, 9, 10, 7, 8, 9, 7, 8, 10, 11, 9, 10, 11),
+  Exam = c(8, 7, 9, 6, 7, 10, 9, 9, 8, 10, 7, 8, 9, 7, 8, 10, 11, 9, 10, 11, 8, 9, 10, 8, 9, 11, 12, 10, 11, 12)
+) -> df
+```
+
 ### Extracting Columns and Rows
 
 `extract_columns()` keeps only the specified columns, accepting either

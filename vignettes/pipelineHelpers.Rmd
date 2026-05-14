@@ -34,7 +34,7 @@ knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
 
 Create a sample dataset with groups and multiple variables for demonstration purposes.
 
-```{r, include=FALSE}
+```{r}
 data.frame(
   Group = create_groups(k = 3, c(10, 10, 10), labels = c("Level1", "Level2", "Level3")),
   Outcome = c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10),

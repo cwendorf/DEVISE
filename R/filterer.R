@@ -22,6 +22,9 @@
 #' @export
 name_rows <- function(x, names) {
   rownames(x) <- names
+  #' Extract Point Estimate and Confidence Interval Columns
+  #'
+  #' Extract the point estimate and confidence interval columns from a data frame, matrix, list, or t.test result.
   x
 }
 
@@ -357,5 +360,10 @@ extract_intervals <- function(x) {
     est_idx <- 1  # Default to first column if no estimate found
   }
 
-  x[, c(est_idx, ll_idx, ul_idx), drop = FALSE]
+  result <- x[, c(est_idx, ll_idx, ul_idx), drop = FALSE]
+  result <- as.matrix(result)
+  if (!is.null(rownames(x))) {
+    rownames(result) <- rownames(x)
+  }
+  result
 }

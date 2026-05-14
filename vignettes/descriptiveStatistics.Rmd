@@ -68,6 +68,32 @@ Compute descriptive statistics for multiple variables grouped by another variabl
 df |> summarize_descriptives(c(Quiz, Exam) ~ Group)
 ```
 
+### Medians and Quartiles
+
+Compute quartile summaries for the whole frame:
+
+```{r}
+df |> summarize_quartiles()
+```
+
+Compute quartile summaries for selected variables:
+
+```{r}
+df |> summarize_quartiles(Quiz, Exam)
+```
+
+Compute quartile summaries for a single variable grouped by another variable:
+
+```{r}
+df |> summarize_quartiles(Quiz ~ Group)
+```
+
+Compute quartile summaries for multiple variables grouped by another variable:
+
+```{r}
+df |> summarize_quartiles(c(Quiz, Exam) ~ Group)
+```
+
 ### Correlations and Covariances
 
 Compute a correlation matrix for a whole frame:

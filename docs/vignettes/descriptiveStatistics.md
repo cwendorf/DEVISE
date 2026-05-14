@@ -9,6 +9,7 @@ analyses.
 
 - [Create Sample Data](#create-sample-data)
 - [Means and Standard Deviations](#means-and-standard-deviations)
+- [Medians and Quartiles](#medians-and-quartiles)
 - [Correlations and Covariances](#correlations-and-covariances)
 
 ------------------------------------------------------------------------
@@ -75,6 +76,56 @@ df |> summarize_descriptives(c(Quiz, Exam) ~ Group)
          N   M      SD
     Quiz 5 8.2 0.83666
     Exam 5 9.2 0.83666
+
+### Medians and Quartiles
+
+Compute quartile summaries for the whole frame:
+
+``` r
+df |> summarize_quartiles()
+```
+
+          N Mdn  IQR
+    Quiz 10 7.0 2.00
+    Exam 10 8.5 1.75
+
+Compute quartile summaries for selected variables:
+
+``` r
+df |> summarize_quartiles(Quiz, Exam)
+```
+
+          N Mdn  IQR
+    Quiz 10 7.0 2.00
+    Exam 10 8.5 1.75
+
+Compute quartile summaries for a single variable grouped by another
+variable:
+
+``` r
+df |> summarize_quartiles(Quiz ~ Group)
+```
+
+           N Mdn IQR
+    Group1 5   6   1
+    Group2 5   8   1
+
+Compute quartile summaries for multiple variables grouped by another
+variable:
+
+``` r
+df |> summarize_quartiles(c(Quiz, Exam) ~ Group)
+```
+
+    $Group1
+         N Mdn IQR
+    Quiz 5   6   1
+    Exam 5   7   1
+
+    $Group2
+         N Mdn IQR
+    Quiz 5   8   1
+    Exam 5   9   1
 
 ### Correlations and Covariances
 

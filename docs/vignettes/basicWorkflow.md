@@ -108,29 +108,3 @@ group2_with_total
     8  Group2    7    9    16
     9  Group2    8    8    16
     10 Group2    9   10    19
-
-### Extending the Workflow
-
-`DEVISE` provides additional functions for data manipulation, result
-standardization, and visualization. They are designed to work seamlessly
-with forward assignment and pipe operators. For example:
-
-``` r
-df |>
-  summarize_descriptives(Quiz ~ Group) |>
-  name_rows(c("First Class", "Second Class")) |>
-  style_matrix(title = "Table 1: Quiz Descriptives by Class", style = "apa")
-```
-
-
-    Table 1: Quiz Descriptives by Class 
-
-    --------------------------------------------- 
-                          N          M         SD 
-    --------------------------------------------- 
-    First Class       5.000      5.800      0.837
-    Second Class      5.000      8.200      0.837 
-    --------------------------------------------- 
-
-For detailed information on all available functions, visit the Reference
-documentation.

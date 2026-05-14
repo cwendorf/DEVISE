@@ -9,6 +9,8 @@ This section contains vignettes for `DEVISE`. Each page demonstrates a workflow 
 `DEVISE` uses a particular workflow and set of functions to organize and handle data and results.
 
 - [Basic Workflow](./basicWorkflow.md): The coding conventions and process used throughout the package.
+- [Pipeline Helpers](./pipelineHelpers.md): Helper functions for streamlining data processing pipelines.
+- [Data Helpers](./dataHelpers.md): Helper functions for data extraction, selection, and manipulation.
 - [Descriptive Statistics](./descriptiveStatistics.md): Obtaining descriptive statistics for later analyses.
 
 ### Mean Comparisons

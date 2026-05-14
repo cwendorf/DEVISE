@@ -1,0 +1,116 @@
+---
+title: "Pipeline Helpers"
+output:
+  github_document:
+    preserve_yaml: FALSE
+vignette: >
+  %\VignetteIndexEntry{Pipeline Helpers}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(fig.width = 7, fig.height = 5, fig.path = "figures/", echo = TRUE, warning = FALSE, message = FALSE, comment = NA)
+devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
+```
+
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
+library(DEVISE)
+```
+
+## Pipeline Helpers
+
+Several `DEVISE` helpers are not specific to any analysis stage — they work equally well on raw data frames and on result matrices produced by analysis functions. These functions support a general pipe-and-assign style and can appear anywhere in a pipeline.
+
+```{r toc, echo=FALSE}
+knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
+```
+
+---
+
+### Create Sample Data
+
+Create a sample dataset with groups and multiple variables for demonstration purposes.
+
+```{r, include=FALSE}
+data.frame(
+  Group = create_groups(k = 3, c(10, 10, 10), labels = c("Level1", "Level2", "Level3")),
+  Outcome = c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10),
+  Quiz = c(5, 6, 7, 5, 6, 8, 9, 7, 8, 9, 6, 7, 8, 6, 7, 9, 10, 8, 9, 10, 7, 8, 9, 7, 8, 10, 11, 9, 10, 11)
+) -> df
+```
+
+### Extracting Columns and Rows
+
+`extract_columns()` keeps only the specified columns, accepting either
+names or numeric indices. It preserves the object type — a data frame in,
+a data frame out; a matrix in, a matrix out.
+
+```{r}
+# By name
+df |> extract_columns(c("Group", "Quiz"))
+
+# By index
+df |> extract_columns(c(1, 3))
+```
+
+`extract_rows()` keeps only the specified rows, accepting numeric indices
+or row names. Like `extract_columns()`, it is type-preserving.
+
+```{r}
+# By numeric index
+df |> extract_rows(c(1, 11, 21))
+
+# By row name number
+df |>
+  extract_columns(c("Group", "Outcome")) |>
+  extract_rows(c(1, 11, 21))
+```
+
+`extract_vector()` returns a single row or column as a named vector. This is
+useful when you need one slice of a data frame or matrix inside a pipeline.
+
+```{r}
+# Extract a column vector
+df |> extract_vector("Outcome")
+```
+
+### Relabeling Rows and Columns
+
+`name_rows()` and `name_columns()` assign new labels in-place within a
+pipeline. They work on any data frame or matrix and do not require a
+temporary assignment between steps.
+
+```{r}
+# Rename columns on a data frame
+df |>
+  extract_columns(c("Group", "Outcome")) |>
+  name_columns(c("Condition", "Response"))
+
+# Rename rows and columns on df-derived subset
+df |>
+  extract_columns(c("Outcome", "Quiz")) |>
+  extract_rows(c(1, 11, 21)) |>
+  name_rows(c("RowA", "RowB", "RowC")) |>
+  name_columns(c("Pre", "Post"))
+```
+
+### Capturing an Object Mid-Pipeline
+
+`keep_as()` saves the current pipeline value under a name in the calling
+environment and then passes the value through unchanged. Use it whenever
+you need to retain an intermediate result without branching the pipeline
+into a separate assignment statement.
+
+```{r}
+# Save the full data frame, then continue narrowing it
+df |>
+  keep_as(full_df) |>
+  extract_columns(c("Group", "Outcome")) |>
+  keep_as(narrow_df)
+
+nrow(full_df)
+nrow(narrow_df)
+```

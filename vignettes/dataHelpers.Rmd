@@ -1,0 +1,88 @@
+---
+title: "Data Helpers"
+output:
+  github_document:
+    preserve_yaml: FALSE
+vignette: >
+  %\VignetteIndexEntry{Data Helpers}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(fig.width = 7, fig.height = 5, fig.path = "figures/", echo = TRUE, warning = FALSE, message = FALSE, comment = NA)
+devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
+```
+
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
+library(DEVISE)
+```
+
+## Data Helpers
+
+This vignette demonstrates helper functions that operate on *raw data*, 
+building datasets and preparing variables and formulas
+for downstream analysis functions.
+
+```{r toc, echo=FALSE}
+knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
+```
+
+---
+
+### Create Sample Data
+
+`create_groups()` constructs a factor grouping variable by repeating labels
+according to the requested group sizes.
+
+```{r}
+data.frame(
+  Group = create_groups(k = 3, c(10, 10, 10), labels = c("Level1", "Level2", "Level3")),
+  Outcome = c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 11, 12, 15, 13, 9, 14, 11, 10),
+  Quiz = c(5, 6, 7, 5, 6, 8, 9, 7, 8, 9, 6, 7, 8, 6, 7, 9, 10, 8, 9, 10, 7, 8, 9, 7, 8, 10, 11, 9, 10, 11),
+  Exam = c(8, 7, 9, 6, 7, 10, 9, 9, 8, 10, 7, 8, 9, 7, 8, 10, 11, 9, 10, 11, 8, 9, 10, 8, 9, 11, 12, 10, 11, 12)
+) -> df
+
+df
+```
+
+### Evaluate Variables
+
+`use_vars()` extracts one or more named columns from a data frame and passes
+them to the next function. This avoids attaching the data frame or creating
+temporary objects.
+
+```{r}
+# Single variable
+df |> use_vars(Quiz)
+
+# Multiple variables
+df |> use_vars(Quiz, Exam)
+```
+
+`use_vars()` also accepts formula syntax, scoping the formula variables to
+the data frame. This is useful for preparing inputs for model functions.
+
+```{r}
+# Formula captured from data columns
+df |> use_vars(Quiz ~ Group)
+
+# View the model frame from the captured formula
+df |> use_vars(Quiz ~ Group) |> model.frame()
+```
+
+### Filter Formula Rows
+
+`filter_rows()` restricts the data referenced by a formula to a subset of
+groups and returns a formula with the filtered rows in its environment.
+Use it when your downstream function expects a formula.
+
+```{r}
+# Pipe-friendly with filter_rows()
+df |> use_vars(Outcome ~ Group) |> filter_rows(Group == c("Level1", "Level2")) |> model.frame()
+
+# Use with a different subset and formula
+df |> use_vars(Exam ~ Group + Quiz) |> filter_rows(Group == c("Level2", "Level3")) |> model.matrix()
+```

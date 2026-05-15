@@ -182,7 +182,7 @@ plot_comparison <- function(results,
   }
 
   if (points) {
-    points(1:3 + offset, graph[, 1], pch = pch, cex = 1.5, col = col, lwd = 2)
+    points(1:3 + offset, graph[, 1], pch = pch, cex = 1.5, col = col, bg = col, lwd = 2)
   }
 
   if (lines) {

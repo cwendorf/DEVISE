@@ -220,12 +220,11 @@ summarize_relationships <- function(data, ..., type = "cor", method = "pearson")
 #' Practical Equivalence. If provided, an `SGPV` column is added.
 #'
 #' @return A data frame identical to `input`, with additional columns:
-#' \details{
-#'   \item{Width}{The width of the confidence interval (`UL - LL`).}
-#'   \item{MoE}{The margin of error (`Width / 2`).}
-#'   \item{RW}{The relative width of the interval (`Width / abs(Estimate)`). Returns `NA` if `Estimate` is zero.}
-#'   \item{SGPV}{If `rope` is provided, the proportion of CI overlap with the ROPE (`|CI \cap ROPE| / |CI|`).}
-#' }
+#'   - `Width`: The width of the confidence interval (`UL - LL`).
+#'   - `MoE`: The margin of error (`Width / 2`).
+#'   - `RW`: The relative width of the interval (`Width / abs(Estimate)`). Returns `NA` if `Estimate` is zero.
+#'   - `SGPV`: If `rope` is provided, the proportion of CI overlap with the ROPE
+#'     (intersection length divided by CI length).
 #'
 #' @examples
 #' cbind(Estimate = c(10, 0, 5), LL = c(8, -1, 4), UL = c(12, 1, 6)) -> df

@@ -2,7 +2,7 @@
 % Please edit documentation in R/computer.R
 \name{summarize_quartiles}
 \alias{summarize_quartiles}
-	itle{Summarize Quartiles for Numeric Variables}
+\title{Summarize Quartiles for Numeric Variables}
 \usage{
 summarize_quartiles(data, ...)
 }

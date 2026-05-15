@@ -2,7 +2,7 @@
 % Please edit documentation in R/computer.R
 \name{summarize_descriptives}
 \alias{summarize_descriptives}
-	itle{Summarize Descriptive Statistics for Numeric Variables}
+\title{Summarize Descriptive Statistics for Numeric Variables}
 \usage{
 summarize_descriptives(data, ...)
 }

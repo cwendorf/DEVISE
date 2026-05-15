@@ -2,7 +2,7 @@
 % Please edit documentation in R/computer.R
 \name{summarize_relationships}
 \alias{summarize_relationships}
-	itle{Summarize Correlation or Covariance Matrices}
+\title{Summarize Correlation or Covariance Matrices}
 \usage{
 summarize_relationships(data, ..., type = "cor", method = "pearson")
 }

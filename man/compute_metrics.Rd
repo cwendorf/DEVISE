@@ -15,12 +15,12 @@ Practical Equivalence. If provided, an \code{SGPV} column is added.}
 }
 \value{
 A data frame identical to \code{input}, with additional columns:
-\details{
-\item{Width}{The width of the confidence interval (\code{UL - LL}).}
-\item{MoE}{The margin of error (\code{Width / 2}).}
-\item{RW}{The relative width of the interval (\code{Width / abs(Estimate)}). Returns \code{NA} if \code{Estimate} is zero.}
-\item{SGPV}{If \code{rope} is provided, the proportion of CI overlap with the ROPE
-(\code{|CI \cap ROPE| / |CI|}).}
+\itemize{
+\item \code{Width}: The width of the confidence interval (\code{UL - LL}).
+\item \code{MoE}: The margin of error (\code{Width / 2}).
+\item \code{RW}: The relative width of the interval (\code{Width / abs(Estimate)}). Returns \code{NA} if \code{Estimate} is zero.
+\item \code{SGPV}: If \code{rope} is provided, the proportion of CI overlap with the ROPE
+(intersection length divided by CI length).
 }
 }
 \description{

@@ -113,7 +113,7 @@ style_matrix <- function(results,
                         width = 10,
                         title = NULL,
                         spacing = 1,
-                        style = "plain",
+                        style = "apa",
                         ...) {
   if (is.list(results) && !is.data.frame(results)) {
     out <- lapply(names(results), function(nm) {

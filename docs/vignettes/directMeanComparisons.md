@@ -22,28 +22,25 @@ reconstructing results from research reports.
 c(Estimate = 8.000, LL = 6.988, UL = 9.012) -> Level1
 c(Estimate = 11.000, LL = 9.418, UL = 12.582) -> Level2
 c(Estimate = 12.000, LL = 10.248, UL = 13.752) -> Level3
-rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
+rbind(Level1, Level2, Level3) |> name_rows(c("Level 1", "Level 2", "Level 3")) -> Conditions
 ```
 
 Format the condition matrix and visualize the intervals.
 
 ``` r
-Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals for Conditions", style = "apa")
+Conditions |> style_matrix(title = "Table 1a: Means and Confidence Intervals for Conditions")
 ```
 
 
-    Table 1: Means and Confidence Intervals for Conditions 
+    Table 1a: Means and Confidence Intervals for Conditions 
 
-    --------------------------------------- 
-             Estimate         LL         UL 
-    --------------------------------------- 
-    Level1      8.000      6.988      9.012
-    Level2     11.000      9.418     12.582
-    Level3     12.000     10.248     13.752 
-    --------------------------------------- 
+              Estimate         LL         UL
+    Level 1      8.000      6.988      9.012
+    Level 2     11.000      9.418     12.582
+    Level 3     12.000     10.248     13.752
 
 ``` r
-Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals for Conditions", values = TRUE)
+Conditions |> plot_conditions(title = "Figure 1a: Means and Confidence Intervals for Conditions")
 ```
 
 ![](figures/direct-case1-conditions-1.png)<!-- -->
@@ -52,28 +49,25 @@ Enter the comparison statistics for the selected conditions.
 
 ``` r
 c(Estimate = 3.000, LL = 1.234, UL = 4.766) -> Difference
-rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
+rbind(Level1, Level2, Difference) |> name_rows(c("Level 1", "Level 2", "Comparison")) -> Comparison
 ```
 
 Present the comparison in a formatted table and plot.
 
 ``` r
-Comparison |> style_matrix(title = "Table 2: Means and Confidence Intervals for a Comparison", style = "apa")
+Comparison |> style_matrix(title = "Table 1b: Means and Confidence Intervals for a Comparison")
 ```
 
 
-    Table 2: Means and Confidence Intervals for a Comparison 
+    Table 1b: Means and Confidence Intervals for a Comparison 
 
-    ------------------------------------------- 
-                 Estimate         LL         UL 
-    ------------------------------------------- 
-    Level1          8.000      6.988      9.012
-    Level2         11.000      9.418     12.582
-    Difference      3.000      1.234      4.766 
-    ------------------------------------------- 
+                 Estimate         LL         UL
+    Level 1         8.000      6.988      9.012
+    Level 2        11.000      9.418     12.582
+    Comparison      3.000      1.234      4.766
 
 ``` r
-Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals for a Comparison", values = TRUE)
+Comparison |> plot_comparison(title = "Figure 1b: Means and Confidence Intervals for a Comparison")
 ```
 
 ![](figures/direct-case1-comparison-1.png)<!-- -->
@@ -93,22 +87,19 @@ rbind(Study1, Study2, Study3) |> name_rows(c("Study 1", "Study 2", "Study 3")) -
 Format and visualize results from multiple sources for comparison.
 
 ``` r
-Studies |> style_matrix(title = "Table 3: Means and Confidence Intervals Across Studies", style = "apa")
+Studies |> style_matrix(title = "Table 2: Means and Confidence Intervals Across Studies")
 ```
 
 
-    Table 3: Means and Confidence Intervals Across Studies 
+    Table 2: Means and Confidence Intervals Across Studies 
 
-    ---------------------------------------- 
-              Estimate         LL         UL 
-    ---------------------------------------- 
+              Estimate         LL         UL
     Study 1     11.000      9.418     12.582
     Study 2     10.800      9.234     12.366
-    Study 3     11.200      9.654     12.746 
-    ---------------------------------------- 
+    Study 3     11.200      9.654     12.746
 
 ``` r
-Studies |> plot_conditions(title = "Figure 3: Means and Confidence Intervals Across Studies", values = TRUE)
+Studies |> plot_conditions(title = "Figure 2: Means and Confidence Intervals Across Studies")
 ```
 
 ![](figures/direct-case2-studies-1.png)<!-- -->

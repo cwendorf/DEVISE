@@ -6,7 +6,7 @@ This vignette demonstrates two approaches: `statpsych` functions alone,
 and a combined `statpsych` + `spTools` workflow. Each approach computes
 condition intervals and then a direct comparison.
 
-- [Confidence Intervals from Summary Statistics Input Using `statpsych`](#confidence-intervals-from-summary-statistics-input-using-%60statpsych%60)
+- [Confidence Intervals from Summary Statistics Input Using `statpsych`] (#confidence-intervals-from-summary-statistics-input-using-%60statpsych%60)
 - [Confidence Intervals from Summary Statistics Input Using `statpsych` and `spTools`](#confidence-intervals-from-summary-statistics-input-using-%60statpsych%60-and-%60sptools%60)
 
 ------------------------------------------------------------------------
@@ -19,28 +19,25 @@ Compute condition intervals using `statpsych` functions.
 ci.mean(alpha = .05, m = 8.000, sd = 1.414, n = 10) |> extract_intervals() -> Level1
 ci.mean(alpha = .05, m = 11.000, sd = 2.211, n = 10) |> extract_intervals() -> Level2
 ci.mean(alpha = .05, m = 12.000, sd = 2.449, n = 10) |> extract_intervals() -> Level3
-rbind(Level1, Level2, Level3) |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
+rbind(Level1, Level2, Level3) |> name_rows(c("Level 1", "Level 2", "Level 3")) -> Conditions
 ```
 
 Format and visualize the condition intervals.
 
 ``` r
-Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals for Conditions", style = "apa")
+Conditions |> style_matrix(title = "Table 1a: Means and Confidence Intervals for Conditions")
 ```
 
 
-    Table 1: Means and Confidence Intervals for Conditions 
+    Table 1a: Means and Confidence Intervals for Conditions 
 
-    --------------------------------------- 
-             Estimate         LL         UL 
-    --------------------------------------- 
-    Level1      8.000      6.988      9.012
-    Level2     11.000      9.418     12.582
-    Level3     12.000     10.248     13.752 
-    --------------------------------------- 
+              Estimate         LL         UL
+    Level 1      8.000      6.988      9.012
+    Level 2     11.000      9.418     12.582
+    Level 3     12.000     10.248     13.752
 
 ``` r
-Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals for Conditions", values = TRUE)
+Conditions |> plot_conditions(title = "Figure 1a: Means and Confidence Intervals for Conditions")
 ```
 
 ![](figures/sp-case1-conditions-1.png)<!-- -->
@@ -49,28 +46,25 @@ Compute the comparison interval between two conditions.
 
 ``` r
 ci.mean2(alpha = .05, 11.000, 8.000, 2.211, 1.414, 10, 10) |> extract_intervals() |> extract_rows(1) -> Difference
-rbind(Level1, Level2, Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
+rbind(Level1, Level2, Difference) |> name_rows(c("Level 1", "Level 2", "Comparison")) -> Comparison
 ```
 
 Present the comparison in a formatted table and plot.
 
 ``` r
-Comparison |> style_matrix(title = "Table 2: Means and Confidence Intervals for a Comparison", style = "apa")
+Comparison |> style_matrix(title = "Table 1b: Means and Confidence Intervals for a Comparison")
 ```
 
 
-    Table 2: Means and Confidence Intervals for a Comparison 
+    Table 1b: Means and Confidence Intervals for a Comparison 
 
-    ------------------------------------------- 
-                 Estimate         LL         UL 
-    ------------------------------------------- 
-    Level1          8.000      6.988      9.012
-    Level2         11.000      9.418     12.582
-    Difference      3.000      1.256      4.744 
-    ------------------------------------------- 
+                 Estimate         LL         UL
+    Level 1         8.000      6.988      9.012
+    Level 2        11.000      9.418     12.582
+    Comparison      3.000      1.256      4.744
 
 ``` r
-Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals for a Comparison", values = TRUE)
+Comparison |> plot_comparison(title = "Figure 1b: Means and Confidence Intervals for a Comparison")
 ```
 
 ![](figures/sp-case1-comparison-1.png)<!-- -->
@@ -81,28 +75,25 @@ Compute condition intervals using vectorized functions from `statpsych`
 and `spTools`.
 
 ``` r
-ci.mean.vec(alpha = .05, m = c(8.000, 11.000, 12.000), sd = c(1.414, 2.211, 2.449), n = c(10, 10, 10)) |> extract_intervals() |> name_rows(c("Level1", "Level2", "Level3")) -> Conditions
+ci.mean.vec(alpha = .05, m = c(8.000, 11.000, 12.000), sd = c(1.414, 2.211, 2.449), n = c(10, 10, 10)) |> extract_intervals() |> name_rows(c("Level 1", "Level 2", "Level 3")) -> Conditions
 ```
 
 Format and visualize the condition intervals.
 
 ``` r
-Conditions |> style_matrix(title = "Table 3: Means and Confidence Intervals for Conditions", style = "apa")
+Conditions |> style_matrix(title = "Table 2a: Means and Confidence Intervals for Conditions")
 ```
 
 
-    Table 3: Means and Confidence Intervals for Conditions 
+    Table 2a: Means and Confidence Intervals for Conditions 
 
-    --------------------------------------- 
-             Estimate         LL         UL 
-    --------------------------------------- 
-    Level1      8.000      6.988      9.012
-    Level2     11.000      9.418     12.582
-    Level3     12.000     10.248     13.752 
-    --------------------------------------- 
+              Estimate         LL         UL
+    Level 1      8.000      6.988      9.012
+    Level 2     11.000      9.418     12.582
+    Level 3     12.000     10.248     13.752
 
 ``` r
-Conditions |> plot_conditions(title = "Figure 3: Means and Confidence Intervals for Conditions", values = TRUE)
+Conditions |> plot_conditions(title = "Figure 2a: Means and Confidence Intervals for Conditions")
 ```
 
 ![](figures/sp-case2-conditions-1.png)<!-- -->
@@ -111,28 +102,25 @@ Compute the comparison interval between two conditions.
 
 ``` r
 ci.mean2.vec(alpha = .05, m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() |> extract_rows(1) -> Difference
-rbind(Conditions[1,], Conditions[2,], Difference) |> name_rows(c("Level1", "Level2", "Difference")) -> Comparison
+rbind(Conditions[1,], Conditions[2,], Difference) |> name_rows(c("Level 1", "Level 2", "Comparison")) -> Comparison
 ```
 
 Present the comparison in a formatted table and plot.
 
 ``` r
-Comparison |> style_matrix(title = "Table 4: Means and Confidence Intervals for a Comparison", style = "apa")
+Comparison |> style_matrix(title = "Table 2b: Means and Confidence Intervals for a Comparison")
 ```
 
 
-    Table 4: Means and Confidence Intervals for a Comparison 
+    Table 2b: Means and Confidence Intervals for a Comparison 
 
-    ------------------------------------------- 
-                 Estimate         LL         UL 
-    ------------------------------------------- 
-    Level1          8.000      6.988      9.012
-    Level2         11.000      9.418     12.582
-    Difference      3.000      1.256      4.744 
-    ------------------------------------------- 
+                 Estimate         LL         UL
+    Level 1         8.000      6.988      9.012
+    Level 2        11.000      9.418     12.582
+    Comparison      3.000      1.256      4.744
 
 ``` r
-Comparison |> plot_comparison(title = "Figure 4: Means and Confidence Intervals for a Comparison", values = TRUE)
+Comparison |> plot_comparison(title = "Figure 2b: Means and Confidence Intervals for a Comparison")
 ```
 
 ![](figures/sp-case2-comparison-1.png)<!-- -->

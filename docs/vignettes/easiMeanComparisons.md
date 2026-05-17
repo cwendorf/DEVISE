@@ -23,28 +23,25 @@ c(6, 8, 6, 8, 10, 8, 10, 9, 8, 7, 7, 13, 11, 10, 13, 8, 11, 14, 12, 11, 9, 16, 1
 Estimate condition means and intervals from the raw data.
 
 ``` r
-(Outcome~Factor) |> estimateMeans() -> Conditions
+(Outcome ~ Factor) |> estimateMeans() |> name_rows(c("Level 1", "Level 2", "Level 3")) -> Conditions
 ```
 
 Format and visualize the condition intervals.
 
 ``` r
-Conditions |> style_matrix(title = "Table 1: Means and Confidence Intervals for Conditions", style = "apa")
+Conditions |> style_matrix(title = "Table 1a: Means and Confidence Intervals for Conditions")
 ```
 
 
-    Table 1: Means and Confidence Intervals for Conditions 
+    Table 1a: Means and Confidence Intervals for Conditions 
 
-    ------------------------------------------------------------- 
-                  Est         SE         df         LL         UL 
-    ------------------------------------------------------------- 
-    Level1      8.000      0.447      9.000      6.988      9.012
-    Level2     11.000      0.699      9.000      9.418     12.582
-    Level3     12.000      0.775      9.000     10.248     13.752 
-    ------------------------------------------------------------- 
+                   Est         SE         df         LL         UL
+    Level 1      8.000      0.447      9.000      6.988      9.012
+    Level 2     11.000      0.699      9.000      9.418     12.582
+    Level 3     12.000      0.775      9.000     10.248     13.752
 
 ``` r
-Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals for Conditions", values = TRUE)
+Conditions |> plot_conditions(title = "Figure 1a: Means and Confidence Intervals for Conditions")
 ```
 
 ![](figures/easi-case1-conditions-1.png)<!-- -->
@@ -52,28 +49,25 @@ Conditions |> plot_conditions(title = "Figure 1: Means and Confidence Intervals 
 Estimate the comparison intervals for the selected conditions.
 
 ``` r
-(Outcome ~ Factor) |> filter_rows(Factor == c("Level1", "Level2")) |> estimateComparison() -> Comparison
+(Outcome ~ Factor) |> filter_rows(Factor == c("Level1", "Level2")) |> estimateComparison() |> name_rows(c("Level 1", "Level 2", "Comparison")) -> Comparison
 ```
 
 Present the comparison in a formatted table and plot.
 
 ``` r
-Comparison |> style_matrix(title = "Table 2: Means and Confidence Intervals for a Comparison", style = "apa")
+Comparison |> style_matrix(title = "Table 1b: Means and Confidence Intervals for a Comparison")
 ```
 
 
-    Table 2: Means and Confidence Intervals for a Comparison 
+    Table 1b: Means and Confidence Intervals for a Comparison 
 
-    ----------------------------------------------------------------- 
-                      Est         SE         df         LL         UL 
-    ----------------------------------------------------------------- 
-    Level1          8.000      0.447      9.000      6.988      9.012
-    Level2         11.000      0.699      9.000      9.418     12.582
-    Comparison      3.000      0.830     15.308      1.234      4.766 
-    ----------------------------------------------------------------- 
+                      Est         SE         df         LL         UL
+    Level 1         8.000      0.447      9.000      6.988      9.012
+    Level 2        11.000      0.699      9.000      9.418     12.582
+    Comparison      3.000      0.830     15.308      1.234      4.766
 
 ``` r
-Comparison |> plot_comparison(title = "Figure 2: Means and Confidence Intervals for a Comparison", values = TRUE)
+Comparison |> plot_comparison(title = "Figure 1b: Means and Confidence Intervals for a Comparison")
 ```
 
 ![](figures/easi-case1-comparison-1.png)<!-- -->
@@ -92,28 +86,25 @@ construct(Level1, Level2, Level3, class = "bsm") -> IndependentSummary
 Estimate condition intervals from summary statistics.
 
 ``` r
-IndependentSummary |> estimateMeans() -> Conditions
+IndependentSummary |> estimateMeans() |> name_rows(c("Level 1", "Level 2", "Level 3")) -> Conditions
 ```
 
 Format and visualize the condition intervals.
 
 ``` r
-Conditions |> style_matrix(title = "Table 3: Means and Confidence Intervals for Conditions", style = "apa")
+Conditions |> style_matrix(title = "Table 2a: Means and Confidence Intervals for Conditions")
 ```
 
 
-    Table 3: Means and Confidence Intervals for Conditions 
+    Table 2a: Means and Confidence Intervals for Conditions 
 
-    ------------------------------------------------------------- 
-                  Est         SE         df         LL         UL 
-    ------------------------------------------------------------- 
-    Level1      8.000      0.447      9.000      6.988      9.012
-    Level2     11.000      0.699      9.000      9.418     12.582
-    Level3     12.000      0.774      9.000     10.248     13.752 
-    ------------------------------------------------------------- 
+                   Est         SE         df         LL         UL
+    Level 1      8.000      0.447      9.000      6.988      9.012
+    Level 2     11.000      0.699      9.000      9.418     12.582
+    Level 3     12.000      0.774      9.000     10.248     13.752
 
 ``` r
-Conditions |> plot_conditions(title = "Figure 3: Means and Confidence Intervals for Conditions", values = TRUE)
+Conditions |> plot_conditions(title = "Figure 2a: Means and Confidence Intervals for Conditions")
 ```
 
 ![](figures/easi-case2-conditions-1.png)<!-- -->
@@ -121,28 +112,25 @@ Conditions |> plot_conditions(title = "Figure 3: Means and Confidence Intervals 
 Compute the comparison interval for the summary-input workflow.
 
 ``` r
-construct(Level1, Level2, class = "bsm") |> estimateComparison() -> Comparison
+construct(Level1, Level2, class = "bsm") |> estimateComparison() |> name_rows(c("Level 1", "Level 2", "Comparison")) -> Comparison
 ```
 
 Present the comparison in a formatted table and plot.
 
 ``` r
-Comparison |> style_matrix(title = "Table 4: Means and Confidence Intervals for a Comparison", style = "apa")
+Comparison |> style_matrix(title = "Table 2b: Means and Confidence Intervals for a Comparison")
 ```
 
 
-    Table 4: Means and Confidence Intervals for a Comparison 
+    Table 2b: Means and Confidence Intervals for a Comparison 
 
-    ----------------------------------------------------------------- 
-                      Est         SE         df         LL         UL 
-    ----------------------------------------------------------------- 
-    Level1          8.000      0.447      9.000      6.988      9.012
-    Level2         11.000      0.699      9.000      9.418     12.582
-    Comparison      3.000      0.830     15.307      1.234      4.766 
-    ----------------------------------------------------------------- 
+                      Est         SE         df         LL         UL
+    Level 1         8.000      0.447      9.000      6.988      9.012
+    Level 2        11.000      0.699      9.000      9.418     12.582
+    Comparison      3.000      0.830     15.307      1.234      4.766
 
 ``` r
-Comparison |> plot_comparison(title = "Figure 4: Means and Confidence Intervals for a Comparison", values = TRUE)
+Comparison |> plot_comparison(title = "Figure 2b: Means and Confidence Intervals for a Comparison")
 ```
 
 ![](figures/easi-case2-comparison-1.png)<!-- -->

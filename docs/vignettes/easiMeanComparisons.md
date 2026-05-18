@@ -35,10 +35,13 @@ Conditions |> style_matrix(title = "Table 1a: Means and Confidence Intervals for
 
     Table 1a: Means and Confidence Intervals for Conditions 
 
-                   Est         SE         df         LL         UL
+    -------------------------------------------------------------- 
+                   Est         SE         df         LL         UL 
+    -------------------------------------------------------------- 
     Level 1      8.000      0.447      9.000      6.988      9.012
     Level 2     11.000      0.699      9.000      9.418     12.582
-    Level 3     12.000      0.775      9.000     10.248     13.752
+    Level 3     12.000      0.775      9.000     10.248     13.752 
+    -------------------------------------------------------------- 
 
 ``` r
 Conditions |> plot_conditions(title = "Figure 1a: Means and Confidence Intervals for Conditions")
@@ -61,10 +64,13 @@ Comparison |> style_matrix(title = "Table 1b: Means and Confidence Intervals for
 
     Table 1b: Means and Confidence Intervals for a Comparison 
 
-                      Est         SE         df         LL         UL
+    ----------------------------------------------------------------- 
+                      Est         SE         df         LL         UL 
+    ----------------------------------------------------------------- 
     Level 1         8.000      0.447      9.000      6.988      9.012
     Level 2        11.000      0.699      9.000      9.418     12.582
-    Comparison      3.000      0.830     15.308      1.234      4.766
+    Comparison      3.000      0.830     15.308      1.234      4.766 
+    ----------------------------------------------------------------- 
 
 ``` r
 Comparison |> plot_comparison(title = "Figure 1b: Means and Confidence Intervals for a Comparison")
@@ -98,10 +104,13 @@ Conditions |> style_matrix(title = "Table 2a: Means and Confidence Intervals for
 
     Table 2a: Means and Confidence Intervals for Conditions 
 
-                   Est         SE         df         LL         UL
+    -------------------------------------------------------------- 
+                   Est         SE         df         LL         UL 
+    -------------------------------------------------------------- 
     Level 1      8.000      0.447      9.000      6.988      9.012
     Level 2     11.000      0.699      9.000      9.418     12.582
-    Level 3     12.000      0.774      9.000     10.248     13.752
+    Level 3     12.000      0.774      9.000     10.248     13.752 
+    -------------------------------------------------------------- 
 
 ``` r
 Conditions |> plot_conditions(title = "Figure 2a: Means and Confidence Intervals for Conditions")
@@ -124,10 +133,13 @@ Comparison |> style_matrix(title = "Table 2b: Means and Confidence Intervals for
 
     Table 2b: Means and Confidence Intervals for a Comparison 
 
-                      Est         SE         df         LL         UL
+    ----------------------------------------------------------------- 
+                      Est         SE         df         LL         UL 
+    ----------------------------------------------------------------- 
     Level 1         8.000      0.447      9.000      6.988      9.012
     Level 2        11.000      0.699      9.000      9.418     12.582
-    Comparison      3.000      0.830     15.307      1.234      4.766
+    Comparison      3.000      0.830     15.307      1.234      4.766 
+    ----------------------------------------------------------------- 
 
 ``` r
 Comparison |> plot_comparison(title = "Figure 2b: Means and Confidence Intervals for a Comparison")

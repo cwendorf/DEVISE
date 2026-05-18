@@ -39,10 +39,13 @@ Conditions |> style_matrix(title = "Table 1a: Means and Parametric Confidence In
 
     Table 1a: Means and Parametric Confidence Intervals for Conditions 
 
-              Estimate         LL         UL
+    ---------------------------------------- 
+              Estimate         LL         UL 
+    ---------------------------------------- 
     Level 1      8.000      6.988      9.012
     Level 2     11.000      9.418     12.582
-    Level 3     12.000     10.248     13.752
+    Level 3     12.000     10.248     13.752 
+    ---------------------------------------- 
 
 ``` r
 Conditions |> plot_conditions(title = "Figure 1a: Means and Parametric Confidence Intervals for Conditions")
@@ -66,10 +69,13 @@ Comparison |> style_matrix(title = "Table 1b: Means and Parametric Confidence In
 
     Table 1b: Means and Parametric Confidence Intervals for a Comparison 
 
-                 Estimate         LL         UL
+    ------------------------------------------- 
+                 Estimate         LL         UL 
+    ------------------------------------------- 
     Level 1         8.000      6.988      9.012
     Level 2        11.000      9.418     12.582
-    Comparison      3.000      1.234      4.766
+    Comparison      3.000      1.234      4.766 
+    ------------------------------------------- 
 
 ``` r
 Comparison |> plot_comparison(title = "Figure 1b: Means and Parametric Confidence Intervals for a Comparison")
@@ -97,10 +103,13 @@ Conditions |> style_matrix(title = "Table 2a: Means and Bootstrap Confidence Int
 
     Table 2a: Means and Bootstrap Confidence Intervals for Conditions 
 
-              Estimate         LL         UL
-    Level 1      8.000      6.994      9.000
-    Level 2     11.000      9.077     12.397
-    Level 3     12.000     10.340     13.996
+    ---------------------------------------- 
+              Estimate         LL         UL 
+    ---------------------------------------- 
+    Level 1      8.000      6.994      9.006
+    Level 2     11.000      8.968     12.373
+    Level 3     12.000     10.321     14.032 
+    ---------------------------------------- 
 
 ``` r
 Conditions |> plot_conditions(title = "Figure 2a: Means and Bootstrap Confidence Intervals for Conditions")
@@ -124,10 +133,13 @@ Comparison |> style_matrix(title = "Table 2b: Means and Bootstrap Confidence Int
 
     Table 2b: Means and Bootstrap Confidence Intervals for a Comparison 
 
-                 Estimate         LL         UL
-    Level 1         8.000      6.994      9.000
-    Level 2        11.000      9.077     12.397
-    Comparison      3.000      1.050      4.643
+    ------------------------------------------- 
+                 Estimate         LL         UL 
+    ------------------------------------------- 
+    Level 1         8.000      6.994      9.006
+    Level 2        11.000      8.968     12.373
+    Comparison      3.000      1.041      4.622 
+    ------------------------------------------- 
 
 ``` r
 Comparison |> plot_comparison(title = "Figure 2b: Means and Bootstrap Confidence Intervals for a Comparison")

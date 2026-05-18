@@ -6,7 +6,7 @@ This vignette demonstrates two approaches: `statpsych` functions alone,
 and a combined `statpsych` + `spTools` workflow. Each approach computes
 condition intervals and then a direct comparison.
 
-- [Confidence Intervals from Summary Statistics Input Using `statpsych`] (#confidence-intervals-from-summary-statistics-input-using-%60statpsych%60)
+- [Confidence Intervals from Summary Statistics Input Using `statpsych`](#confidence-intervals-from-summary-statistics-input-using-%60statpsych%60)
 - [Confidence Intervals from Summary Statistics Input Using `statpsych` and `spTools`](#confidence-intervals-from-summary-statistics-input-using-%60statpsych%60-and-%60sptools%60)
 
 ------------------------------------------------------------------------
@@ -31,10 +31,13 @@ Conditions |> style_matrix(title = "Table 1a: Means and Confidence Intervals for
 
     Table 1a: Means and Confidence Intervals for Conditions 
 
-              Estimate         LL         UL
+    ---------------------------------------- 
+              Estimate         LL         UL 
+    ---------------------------------------- 
     Level 1      8.000      6.988      9.012
     Level 2     11.000      9.418     12.582
-    Level 3     12.000     10.248     13.752
+    Level 3     12.000     10.248     13.752 
+    ---------------------------------------- 
 
 ``` r
 Conditions |> plot_conditions(title = "Figure 1a: Means and Confidence Intervals for Conditions")
@@ -58,10 +61,13 @@ Comparison |> style_matrix(title = "Table 1b: Means and Confidence Intervals for
 
     Table 1b: Means and Confidence Intervals for a Comparison 
 
-                 Estimate         LL         UL
+    ------------------------------------------- 
+                 Estimate         LL         UL 
+    ------------------------------------------- 
     Level 1         8.000      6.988      9.012
     Level 2        11.000      9.418     12.582
-    Comparison      3.000      1.256      4.744
+    Comparison      3.000      1.256      4.744 
+    ------------------------------------------- 
 
 ``` r
 Comparison |> plot_comparison(title = "Figure 1b: Means and Confidence Intervals for a Comparison")
@@ -87,10 +93,13 @@ Conditions |> style_matrix(title = "Table 2a: Means and Confidence Intervals for
 
     Table 2a: Means and Confidence Intervals for Conditions 
 
-              Estimate         LL         UL
+    ---------------------------------------- 
+              Estimate         LL         UL 
+    ---------------------------------------- 
     Level 1      8.000      6.988      9.012
     Level 2     11.000      9.418     12.582
-    Level 3     12.000     10.248     13.752
+    Level 3     12.000     10.248     13.752 
+    ---------------------------------------- 
 
 ``` r
 Conditions |> plot_conditions(title = "Figure 2a: Means and Confidence Intervals for Conditions")
@@ -114,10 +123,13 @@ Comparison |> style_matrix(title = "Table 2b: Means and Confidence Intervals for
 
     Table 2b: Means and Confidence Intervals for a Comparison 
 
-                 Estimate         LL         UL
+    ------------------------------------------- 
+                 Estimate         LL         UL 
+    ------------------------------------------- 
     Level 1         8.000      6.988      9.012
     Level 2        11.000      9.418     12.582
-    Comparison      3.000      1.256      4.744
+    Comparison      3.000      1.256      4.744 
+    ------------------------------------------- 
 
 ``` r
 Comparison |> plot_comparison(title = "Figure 2b: Means and Confidence Intervals for a Comparison")

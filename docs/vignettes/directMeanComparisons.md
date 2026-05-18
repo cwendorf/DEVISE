@@ -34,10 +34,13 @@ Conditions |> style_matrix(title = "Table 1a: Means and Confidence Intervals for
 
     Table 1a: Means and Confidence Intervals for Conditions 
 
-              Estimate         LL         UL
+    ---------------------------------------- 
+              Estimate         LL         UL 
+    ---------------------------------------- 
     Level 1      8.000      6.988      9.012
     Level 2     11.000      9.418     12.582
-    Level 3     12.000     10.248     13.752
+    Level 3     12.000     10.248     13.752 
+    ---------------------------------------- 
 
 ``` r
 Conditions |> plot_conditions(title = "Figure 1a: Means and Confidence Intervals for Conditions")
@@ -61,10 +64,13 @@ Comparison |> style_matrix(title = "Table 1b: Means and Confidence Intervals for
 
     Table 1b: Means and Confidence Intervals for a Comparison 
 
-                 Estimate         LL         UL
+    ------------------------------------------- 
+                 Estimate         LL         UL 
+    ------------------------------------------- 
     Level 1         8.000      6.988      9.012
     Level 2        11.000      9.418     12.582
-    Comparison      3.000      1.234      4.766
+    Comparison      3.000      1.234      4.766 
+    ------------------------------------------- 
 
 ``` r
 Comparison |> plot_comparison(title = "Figure 1b: Means and Confidence Intervals for a Comparison")
@@ -93,10 +99,13 @@ Studies |> style_matrix(title = "Table 2: Means and Confidence Intervals Across 
 
     Table 2: Means and Confidence Intervals Across Studies 
 
-              Estimate         LL         UL
+    ---------------------------------------- 
+              Estimate         LL         UL 
+    ---------------------------------------- 
     Study 1     11.000      9.418     12.582
     Study 2     10.800      9.234     12.366
-    Study 3     11.200      9.654     12.746
+    Study 3     11.200      9.654     12.746 
+    ---------------------------------------- 
 
 ``` r
 Studies |> plot_conditions(title = "Figure 2: Means and Confidence Intervals Across Studies")

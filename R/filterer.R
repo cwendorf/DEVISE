@@ -357,11 +357,18 @@ extract_intervals <- function(x) {
   }
 
   if (is.na(est_idx)) {
-    est_idx <- 1  # Default to first column if no estimate found
+    # Fallback for pairwise outputs such as statpsych::ci.median2
+    # where the estimate column may be named like "Median1-Median2".
+    est_idx <- which(grepl("[a-z]+\\d*\\s*[-/]\\s*[a-z]+\\d*|diff|difference|contrast|delta", colnames_x))[1]
+  }
+
+  if (is.na(est_idx)) {
+    est_idx <- 1  # Final fallback if no estimate-like column is found
   }
 
   result <- x[, c(est_idx, ll_idx, ul_idx), drop = FALSE]
   result <- as.matrix(result)
+  colnames(result) <- c("Estimate", "LL", "UL")
   if (!is.null(rownames(x))) {
     rownames(result) <- rownames(x)
   }

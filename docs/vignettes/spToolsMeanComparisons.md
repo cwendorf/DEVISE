@@ -107,11 +107,10 @@ Conditions |> plot_conditions(title = "Figure 2a: Means and Confidence Intervals
 
 ![](figures/sp-case2-conditions-1.png)<!-- -->
 
-Compute the comparison interval between two conditions.
+Compute the comparison intervals between two conditions.
 
 ``` r
-ci.mean2.vec(alpha = .05, m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() |> extract_rows(1) -> Difference
-rbind(Conditions[1,], Conditions[2,], Difference) |> name_rows(c("Level 1", "Level 2", "Comparison")) -> Comparison
+ci.mean2.compare(alpha = .05, m = c(5.2, 6.1), sd = c(1.1, 1.3), n = c(30, 28)) |> extract_intervals() |> name_rows(c("Level 1", "Level 2", "Comparison")) -> Comparison
 ```
 
 Present the comparison in a formatted table and plot.
@@ -126,9 +125,9 @@ Comparison |> style_matrix(title = "Table 2b: Means and Confidence Intervals for
     ------------------------------------------- 
                  Estimate         LL         UL 
     ------------------------------------------- 
-    Level 1         8.000      6.988      9.012
-    Level 2        11.000      9.418     12.582
-    Comparison      3.000      1.256      4.744 
+    Level 1         5.200      4.789      5.611
+    Level 2         6.100      5.596      6.604
+    Comparison      0.900      0.268      1.532 
     ------------------------------------------- 
 
 ``` r

@@ -81,11 +81,10 @@ Conditions |> style_matrix(title = "Table 2a: Means and Confidence Intervals for
 Conditions |> plot_conditions(title = "Figure 2a: Means and Confidence Intervals for Conditions")
 ```
 
-Compute the comparison interval between two conditions.
+Compute the comparison intervals between two conditions.
 
 ```{r}
-ci.mean2.vec(alpha = .05, m = c(11.000, 8.000), sd = c(2.211, 1.414), n = c(10, 10)) |> extract_intervals() |> extract_rows(1) -> Difference
-rbind(Conditions[1,], Conditions[2,], Difference) |> name_rows(c("Level 1", "Level 2", "Comparison")) -> Comparison
+ci.mean2.compare(alpha = .05, m = c(5.2, 6.1), sd = c(1.1, 1.3), n = c(30, 28)) |> extract_intervals() |> name_rows(c("Level 1", "Level 2", "Comparison")) -> Comparison
 ```
 
 Present the comparison in a formatted table and plot.

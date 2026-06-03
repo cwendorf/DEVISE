@@ -1,0 +1,96 @@
+---
+title: "Median Comparisons with backcalc"
+output:
+  github_document:
+    preserve_yaml: FALSE
+vignette: >
+  %\VignetteIndexEntry{Median Comparisons with backcalc}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(fig.width = 7, fig.height = 5, fig.path = "figures/", echo = TRUE, warning = FALSE, message = FALSE, comment = NA)
+devtools::source_gist("8e6e5dc401e3fc1042ef7a030f9d19c7", filename = "revised_toc.R")
+```
+
+```{r, include=FALSE}
+if (!require(remotes)) install.packages("remotes")
+if (!require(DEVISE)) {remotes::install_github("cwendorf/DEVISE")}
+library(DEVISE)
+if (!require(backcalc)) {remotes::install_github("cwendorf/backcalc")}
+library(backcalc)
+```
+
+## Median Comparisons with `backcalc`
+
+This vignette demonstrates a median comparison workflow using `backcalc` to derive interval estimates and `DEVISE` to format and plot the results. 
+
+```{r toc, echo=FALSE}
+knitr::current_input() |> revised_toc(base_level = 3, toc_depth = 1)
+```
+
+---
+
+### Calculate Confidence Intervals from Medians, IQRs, and Sample Sizes
+
+Use backcalc to compute confidence intervals for each condition from median-based summary statistics.
+
+```{r}
+backcalc_medians(mdn = 7.800, iqr = 2.400, n = 24) |> extract_intervals() -> Level1
+backcalc_medians(mdn = 9.100, iqr = 2.800, n = 24) |> extract_intervals() -> Level2
+backcalc_medians(mdn = 10.400, iqr = 3.000, n = 24) |> extract_intervals() -> Level3
+rbind(Level1, Level2, Level3) |> name_rows(c("Level 1", "Level 2", "Level 3")) -> Conditions
+```
+
+Format and visualize the condition intervals.
+
+```{r,bc-med-case1-conditions}
+Conditions |> style_matrix(title = "Table 1a: Medians and Confidence Intervals for Conditions")
+Conditions |> plot_conditions(title = "Figure 1a: Medians and Confidence Intervals for Conditions")
+```
+
+Compute the comparison interval between two selected conditions.
+
+```{r}
+backcalc_medians(mdn = c(10.400, 7.800), iqr = c(3.000, 2.400), n = c(24, 24)) |> extract_intervals() -> Difference
+rbind(Level1, Level3, Difference) |> name_rows(c("Level 1", "Level 3", "Comparison")) -> Comparison
+```
+
+Present the comparison in a formatted table and plot.
+
+```{r,bc-med-case1-comparison}
+Comparison |> style_matrix(title = "Table 1b: Medians and Confidence Intervals for a Comparison")
+Comparison |> plot_comparison(title = "Figure 1b: Medians and Confidence Intervals for a Comparison")
+```
+
+### Reconstruct Confidence Intervals from Rank-Test Statistics
+
+Suppose a study reports two one-sample rank-test statistics against zero for two conditions but does not report confidence intervals. The study reports medians and resulting z statistics.
+
+```{r}
+backcalc_medians(mdn = 4.20, statistic = 2.10) |> extract_intervals() -> Level1
+backcalc_medians(mdn = 6.10, statistic = 2.85) |> extract_intervals() -> Level2
+rbind(Level1, Level2) |> name_rows(c("Level 1", "Level 2")) -> Conditions
+```
+
+Format and visualize the condition intervals.
+
+```{r,bc-med-case2-conditions}
+Conditions |> style_matrix(title = "Table 2a: Medians and Confidence Intervals for the Conditions")
+Conditions |> plot_conditions(title = "Figure 2a: Medians and Confidence Intervals for the Conditions")
+```
+
+To reconstruct the confidence interval for the difference between the two medians, use the z statistic from the comparison.
+
+```{r}
+backcalc_medians(mdn = c(6.10, 4.20), statistic = 1.72) |> extract_intervals() -> Difference
+rbind(Level1, Level2, Difference) |> name_rows(c("Level 1", "Level 2", "Comparison")) -> Comparison
+```
+
+Present the comparison in a formatted table and plot.
+
+```{r,bc-med-case2-comparison}
+Comparison |> style_matrix(title = "Table 2b: Medians and Confidence Intervals for the Comparison")
+Comparison |> plot_comparison(title = "Figure 2b: Medians and Confidence Intervals for the Comparison")
+```

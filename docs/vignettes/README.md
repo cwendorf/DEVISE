@@ -23,3 +23,8 @@ One main purpose of `DEVISE` is to aid in the presentation of a mean comparison 
 - [Mean Comparisons with statpsych and spTools](./spToolsMeanComparisons.md): Uses `statpsych` and `spTools` to calculate confidence intervals from summary statistics.
 - [Mean Comparisons with backcalc](./backcalcMeanComparisons.md): Uses `backcalc` to infer confidence intervals from incomplete summary statistics.
 - [Mean Comparisons with confintr](./confintrMeanComparisons.md): Uses `confintr` to calculate parametric and bootstrapped confidence intervals from data.
+
+### Median Comparisons
+
+- [Median Comparisons with statpsych](./statpsychMedianComparisons.md): Uses `statpsych` to calculate median confidence intervals from data.
+- [Median Comparisons with backcalc](./backcalcMedianComparisons.md): Uses `backcalc` to infer median confidence intervals from summary and other statistics in published sources.

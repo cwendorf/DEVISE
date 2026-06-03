@@ -36,4 +36,3 @@ df |> name_rows(c("A", "B", "C")) -> df  # Must assign back to df
 data.frame(c(10, 0, 5), c(8, -1, 4), c(12, 1, 6)) -> df
 df |> name_rows(c("Group1", "Group2", "Group3")) -> Results
 ```
-

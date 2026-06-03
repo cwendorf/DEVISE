@@ -35,4 +35,3 @@ style_matrix(
 ### Value
 
 Returns the formatted character matrix.
-

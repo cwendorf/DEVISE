@@ -27,4 +27,3 @@ The filtered object with only the specified columns. The output type matches the
 data.frame(Estimate = 1:3, SE = 0.1, Extra = 4:6) -> df
 df |> extract_columns(c("Estimate", "SE"))
 ```
-

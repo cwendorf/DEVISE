@@ -27,4 +27,3 @@ The filtered object with only the specified rows. The output type matches the in
 data.frame(A = 1:5, B = letters[1:5]) -> df
 df |> extract_rows(c(1, 3))
 ```
-

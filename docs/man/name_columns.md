@@ -36,4 +36,3 @@ df |> name_columns(c("First", "Second")) -> df  # Must assign back to df
 data.frame(c(10, 0, 5), c(8, -1, 4), c(12, 1, 6)) -> df
 df |> name_columns(c("Estimate", "LL", "UL")) -> Results
 ```
-

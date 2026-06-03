@@ -31,4 +31,3 @@ df |> extract_intervals()
 set.seed(1); rnorm(20, 10, 2) -> x
 t.test(x) |> extract_intervals()
 ```
-

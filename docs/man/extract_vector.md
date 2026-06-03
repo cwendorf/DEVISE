@@ -37,4 +37,3 @@ data.frame(
 df |> extract_vector("M")
 df |> extract_vector("Group2")
 ```
-

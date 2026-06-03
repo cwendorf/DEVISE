@@ -23,9 +23,10 @@ If provided, an `SGPV` column is added.
 
 ### Value
 
-A data frame identical to input, with additional columns: Width: The width of the confidence interval (UL - LL).
-MoE: The margin of error (Width / 2). RW: The relative width of the interval (Width / abs(Estimate)). Returns NA if Estimate is zero.
-SGPV: If rope is provided, the proportion of CI overlap with the ROPE (|CI ∩ ROPE| / |CI|).
+A data frame identical to input, with additional columns: 
+- **Width:** The width of the confidence interval (UL - LL).
+- **MoE:** The margin of error (Width / 2). RW: The relative width of the interval (Width / abs(Estimate)). Returns NA if Estimate is zero.
+- **SGPV:** If rope is provided, the proportion of CI overlap with the ROPE (|CI ∩ ROPE| / |CI|).
 
 ### Examples
 
@@ -35,4 +36,3 @@ c("A", "B", "C") -> rownames(df)
 df |> compute_metrics()
 df |> compute_metrics(rope = c(-1, 1))
 ```
-

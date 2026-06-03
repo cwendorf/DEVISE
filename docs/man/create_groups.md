@@ -36,4 +36,3 @@ create_groups(k = 3, n = c(2, 5, 5), labels = c("GroupA", "GroupB", "GroupC"))
 # Example 3: Default labels when none supplied
 create_groups(k = 3, n = c(4, 6, 2))
 ```
-

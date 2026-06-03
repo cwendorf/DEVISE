@@ -41,4 +41,3 @@ df |> summarize_descriptives(x, y)
 df |> summarize_descriptives(x ~ Group)
 df |> summarize_descriptives(c(x,y) ~ Group)
 ```
-

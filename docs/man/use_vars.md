@@ -44,4 +44,3 @@ df |> use_vars(x3)
 # Use multiple variables
 df |> use_vars(x1, x2) |> cor()
 ```
-

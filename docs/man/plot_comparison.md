@@ -56,4 +56,3 @@ plot_comparison(
 ### Value
 
 Invisibly returns the modified results object.
-

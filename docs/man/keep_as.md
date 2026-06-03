@@ -46,4 +46,3 @@ mtcars |>
   transform(kpl = mpg * 0.425) |>
   head()
 ```
-

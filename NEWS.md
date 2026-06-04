@@ -2,7 +2,7 @@
 
 ## Next Release
 
-- Added support SGPV and ROPE interpretations
+- Added support for SGPV and ROPE interpretations
 - Improved and expanded descriptive statistics
 - Added support for median-based confidence intervals
 - Better handling of output from other packages

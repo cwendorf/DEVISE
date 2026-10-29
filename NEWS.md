@@ -1,6 +1,6 @@
 # DEVISE
 
-## DEVISE 1.260605
+## DEVISE 0.2.260605
 
 - Added support for SGPV and ROPE interpretations
 - Improved and expanded descriptive statistics
@@ -8,7 +8,7 @@
 - Better handling of output from other packages
 - Elaborated data and pipeline helper functions
 
-## DEVISE 0.251231
+## DEVISE 0.1.251231
 
 - Initial release
 - Basic examples included

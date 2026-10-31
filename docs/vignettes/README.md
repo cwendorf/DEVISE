@@ -26,7 +26,7 @@ One main purpose of `DEVISE` is to aid in the presentation of a mean comparison 
 
 ### Median Comparisons
 
-Like it does for mean comparisons, `DEVISE` also aids in the presentation of median comparisons.
+Similarly, `DEVISE` can aid in the calculation and presentation of a median comparison derived from other packages.
 
 - [Median Comparisons with statpsych](./statpsychMedianComparisons.md): Uses `statpsych` to calculate median confidence intervals from data.
 - [Median Comparisons with backcalc](./backcalcMedianComparisons.md): Uses `backcalc` to infer median confidence intervals from summary and other statistics in published sources.

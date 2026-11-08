@@ -35,7 +35,7 @@ This package includes the following documentation:
 
 ### Contact
 
-- GitHub Issues: [https://github.com/cwendorf/DEVISE/issues](https://github.com/cwendorf/DEVISE/issues) 
+- GitHub Issues: [https://github.com/cwendorf/DEVISE/issues](https://github.com/cwendorf/DEVISE/issues)
 - Author Email: [cwendorf@uwsp.edu](mailto:cwendorf@uwsp.edu)
 - Author Homepage: [https://github.com/cwendorf](https://github.com/cwendorf)
 

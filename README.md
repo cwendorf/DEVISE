@@ -33,13 +33,6 @@ This package includes the following documentation:
 - [Reference](./docs/man/README.md): Documentation for all exported functions, including usage, arguments, return values, and examples.
 - [Articles](./docs/vignettes/README.md): Examples demonstrating how to use `DEVISE` directly and in conjunction with other packages.
 
-### Contact
-
-- GitHub Issues: [https://github.com/cwendorf/DEVISE/issues](https://github.com/cwendorf/DEVISE/issues)
-- Author Email: [cwendorf@uwsp.edu](mailto:cwendorf@uwsp.edu)
-- Author Homepage: [https://github.com/cwendorf](https://github.com/cwendorf)
-
 ### Citation
 
 Wendorf, C.A. (2025). *DEVISE: Data Exploration, Visualization, and Inference with Statistical Estimation* [R Package]. [https://github.com/cwendorf/DEVISE](https://github.com/cwendorf/DEVISE)
-

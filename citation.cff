@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "DEVISE: Data Exploration, Visualization, and Inference with Statistical Estimation"
+authors:
+  - family-names: "Wendorf"
+    given-names: "Craig A."
+    email: "cwendorf@uwsp.edu"
+version: "0.260605"
+license: "MIT"
+repository-code: "https://github.com/cwendorf/DEVISE"
+url: "https://github.com/cwendorf/DEVISE"
+abstract: >-
+  DEVISE is a companion package for working with other statistical packages.
+  Where other packages provide high-accuracy confidence intervals for a wide
+  variety of statistics, DEVISE handles the pre-processing of data and
+  post-processing of results into more accessible and readable formats.

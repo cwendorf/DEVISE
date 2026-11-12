@@ -4,6 +4,13 @@
 
 This section is the reference for `DEVISE`. Each page documents one exported function, including usage, arguments, return values, and examples.
 
+- [Setup](#setup)
+- [Selection](#selection)
+- [Computation](#computation)
+- [Output](#output)
+
+---
+
 ### Setup
 
 - [create_groups](./create_groups.md): Create grouping vectors.

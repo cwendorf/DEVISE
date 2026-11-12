@@ -2,7 +2,13 @@
 
 ## Articles
 
-This section contains vignettes for `DEVISE`. Each page demonstrates a workflow using real or simulated data, including setup, computation, formatting, and visualization.
+This section contains articles for `DEVISE`. They demonstrate workflows for organizing data, computing and formatting results, and presenting mean or median comparisons with several statistical tools.
+
+- [Core Operations](#core-operations)
+- [Mean Comparisons](#mean-comparisons)
+- [Median Comparisons](#median-comparisons)
+
+---
 
 ### Core Operations
 
